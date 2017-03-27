@@ -4,7 +4,7 @@ const express = require('express'),
   mongoose = require('mongoose')
 
 let app = express();
-app.set('port', (process.env.PORT || 3000))
+app.set('port', (process.env.PORT || 8080))
 app.set('mongodbURI', (process.env.MONGODB_URI || 'mongodb://localhost/mflores'))
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
