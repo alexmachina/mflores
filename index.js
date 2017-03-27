@@ -24,9 +24,9 @@ mongoose.connect(app.get('mongodbURI'))
 
 app.use(router)
 
-app.listen(3000, err => err ? 
+app.listen(app.get('port'), err => err ? 
   console.log(err) : 
-  console.log("Running: 3000")
+  console.log("Running: " + app.get(port))
 );
 
 
