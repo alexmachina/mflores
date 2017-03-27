@@ -10764,7 +10764,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var config = {
-  url: 'http://localhost:3000'
+  url: 'https://limitless-hamlet-76018.herokuapp.com'
 };
 
 exports.default = config;
@@ -43469,6 +43469,11 @@ var LoginPage = (0, _mobxReact.observer)(_class = function (_React$Component) {
           _react2.default.createElement(
             _reactBootstrap.Col,
             { xs: 12, md: 3, mdOffset: 4, id: 'login-form-container' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              'Mirian Flores'
+            ),
             _react2.default.createElement(
               'form',
               { onSubmit: this.onSubmit.bind(this) },
