@@ -31,7 +31,8 @@ export default class ImagemForm extends React.Component {
               this.store.showModal = true
               this.store.imagem = {}
             }}
-            bsSize="lg" bsStyle="primary">
+            className="table-button"
+            bsStyle="primary">
             Adicionar Imagem
           </Button>
         </Col>
@@ -39,7 +40,7 @@ export default class ImagemForm extends React.Component {
       <Row>
         <Col xs={12} md={8} mdOffset={2}>
           {this.store.imagens.map(i => (
-            <Col xs={12} sm={6} md={4} >
+            <Col className="image-block" xs={12} sm={6} md={4} >
               <Image src={'/img/imoveis/'+i.arquivo} responsive onClick={() => {
                 this.store.showModal = true
                 this.store.imagem = i

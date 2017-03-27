@@ -1,13 +1,10 @@
 let mongoose = require('mongoose'),
   enderecoModel = require('./enderecoModel'),
   metragemModel = require('./metragemModel'),
-//despesaModel = require('./despesaModel'),
+  despesaModel = require('./despesaModel'),
   imagemModel = require('./imagemModel'),
   locatarioModel = require('./locatarioModel')
   proprietarioModel = require('./proprietarioModel')
-
-  
-
 
 let schema = new mongoose.Schema({
   titulo: {type: String, default: ''},
@@ -23,7 +20,8 @@ let schema = new mongoose.Schema({
   locatario: {type: locatarioModel, default: locatarioModel},
   proprietario: {type: proprietarioModel, default: proprietarioModel},
   metragem: {type: metragemModel, default: metragemModel},
-  imagens: [imagemModel]
+  imagens: [imagemModel],
+  despesas: [despesaModel]
 
 })
 

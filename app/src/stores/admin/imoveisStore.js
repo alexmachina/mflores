@@ -7,6 +7,9 @@ export default class ImoveisStore {
   @observable imoveis = []
   @observable titulo = ''
   @observable message = ''
+  @observable activePage = 1
+  @observable items = 0
+  @observable search = ''
 
   @action saveImovel() {
     postJson(config.url + '/imovel', {titulo: this.titulo})
@@ -15,8 +18,10 @@ export default class ImoveisStore {
       }).catch(err => this.message = err)
   }
   @action getImoveis() {
-    getJson(config.url + '/imoveis').then(imoveis => {
-      this.imoveis = imoveis
+    getJson(config.url + '/imoveis?page=' + this.activePage + '&search=' + this.search).then(res => {
+      this.imoveis = res.imoveis
+      this.items = Math.ceil(res.count /10)
     })
   }
+
 }

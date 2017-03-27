@@ -19,6 +19,9 @@ export default class LocatarioStore {
     dataVencimentoSeguro: ''
   }
 
+  @observable buttonText = "Salvar"
+  @observable buttonStyle = {}
+
   @action getLocatario(id) {
     getJson(config.url + '/imovel/' + id).then(imovel => {
       imovel.locatario.dataInicioContrato = moment(imovel.locatario.dataInicioContrato)
@@ -30,7 +33,13 @@ export default class LocatarioStore {
 
   @action saveLocatario(id) {
     putJson(config.url + '/imovel/' + id, {locatario: this.locatario}).then(() => {
-      alert('OK')
+      this.buttonText = 'Salvo com sucesso'
+      this.buttonStyle= {backgroundColor: '#7fc857', color: 'white'}
+
+      setTimeout(() => {
+        this.buttonText = 'Salvar'
+        this.buttonStyle = {}
+      }, 3000)
     })
   }
 }

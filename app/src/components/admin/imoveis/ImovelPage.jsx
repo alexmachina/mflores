@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Row, Tabs, Tab} from 'react-bootstrap'
+import {Col, Row, Tabs, Tab, Jumbotron} from 'react-bootstrap'
 import ImovelStore from '../../../stores/admin/imovelStore.js'
 import {observer} from 'mobx-react'
 import ImovelForm from './ImovelForm.jsx'
@@ -7,6 +7,7 @@ import EnderecoForm from './EnderecoForm.jsx'
 import LocatarioForm from './LocatarioForm.jsx'
 import ProprietarioForm from './ProprietarioForm.jsx'
 import ImagensForm from './ImagensForm.jsx'
+import DespesasPage from './DespesasPage.jsx'
 import "./styles/formStyles.scss"
 
 @observer
@@ -21,9 +22,11 @@ export default class ImovelPage extends React.Component{
   render() {
     return (
       <div>
+        <Jumbotron className="text-center admin-jumbotron">
         <h2>
           {this.store.imovel.titulo}
         </h2>
+      </Jumbotron>
         <Tabs id="tabs" 
           activeKey={this.store.tabIndex} 
           onSelect={this.handleTabSelect.bind(this)}>
@@ -41,6 +44,9 @@ export default class ImovelPage extends React.Component{
           </Tab>
           <Tab eventKey={5} title="Imagens">
             <ImagensForm id={this.props.params.id} />
+          </Tab>
+          <Tab eventKey={6} title="Despesas">
+            <DespesasPage id={this.props.params.id} />
           </Tab>
         </Tabs>
       </div>

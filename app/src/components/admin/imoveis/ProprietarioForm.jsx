@@ -76,8 +76,8 @@ export default class ProprietarioForm extends React.Component {
                 onChange={this.onPontoDeReferenciaChange.bind(this)}
               />
 
-            <Button type="submit" className="save-button">
-              Salvar
+            <Button type="submit" style={this.store.buttonStyle} className="save-button">
+              {this.store.buttonText}
             </Button>
             </form>
           </Col>

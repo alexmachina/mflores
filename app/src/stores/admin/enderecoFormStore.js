@@ -14,11 +14,20 @@ export default class EnderecoFormStore {
     pontoDeReferencia: '',
     cep: ''
   }
+  @observable buttonText = 'Salvar'
+  @observable buttonStyle = {}
 
   @action save(id) {
     putJson(config.url + '/imovel/' + id, {endereco: toJS(this.endereco)})
       .then(() => {
-        alert("OK")
+        this.buttonText = 'Salvo'
+        this.buttonStyle = {backgroundColor: '#7fc857', color:'white'}
+
+        setTimeout(() => {
+          this.buttonText = 'Salvar'
+          this.buttonStyle= {}
+        },3000)
+
       })
   }
 

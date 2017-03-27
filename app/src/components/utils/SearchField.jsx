@@ -1,7 +1,7 @@
 import React from 'react';
 import {FormGroup, InputGroup, Glyphicon, FormControl} from 'react-bootstrap';
 
-export class SearchField extends React.Component {
+export default class SearchField extends React.Component {
   render(){
     return (
       <FormGroup>

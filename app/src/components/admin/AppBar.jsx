@@ -1,6 +1,7 @@
 import React from 'react'
 import {Button, Row, Col, Navbar, Nav, NavItem, MenuItem} from 'react-bootstrap'
 import LoginStore from '../../stores/admin/loginStore.js'
+import './styles/appBar.scss'
 
 import DevTool, {configureDevTool} from 'mobx-react-devtools'
 export default class AppBar extends React.Component {
@@ -13,11 +14,12 @@ export default class AppBar extends React.Component {
       <div>
         <Row>
           <Col xs={12}>
-            <Navbar>
+            <Navbar id="navbar">
               <Navbar.Header>
                 <Navbar.Brand>
                   <a href="#">MFlores</a>
                 </Navbar.Brand>
+                <Navbar.Toggle />
               </Navbar.Header>
               <Navbar.Collapse>
                 <Nav>
@@ -25,8 +27,8 @@ export default class AppBar extends React.Component {
                 </Nav>
                 <Nav pullRight>
                   <NavItem eventKey={2} href="#">
-                    <Button onClick={this.onLogoutClick.bind(this)}>Logout
-                    </Button>
+                    <span onClick={this.onLogoutClick.bind(this)}>
+                      Logout</span>
                   </NavItem>
                 </Nav>
               </Navbar.Collapse>

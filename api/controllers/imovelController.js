@@ -15,12 +15,20 @@ class ImovelController {
      return res.json(imovel)
     }
     )
-  }
-
+  } 
   getImoveis(req, res){ 
-    let findAll = imovelModel.find({}).exec()
-    findAll.then(imoveis => res.json(imoveis))
-    findAll.catch(err => res.status(500).send(err))
+    let search = req.param('search')
+    let query = search ? {'titulo' : new RegExp(search, 'i')} : {}
+    let findCount = imovelModel.count(query)
+    findCount.then(count => {
+
+      let findAll = imovelModel.find(query)
+        .limit(10).skip((req.param('page') -1) * 10)
+        .exec()
+      findAll.then(imoveis => res.json({imoveis, count}))
+      findAll.catch(err => res.status(500).send(err))
+
+    })
   }
 
   updateImovel(req, res) {
@@ -31,15 +39,20 @@ class ImovelController {
   }
 
   addImage(req, res) {
-    let imagem = req.body
-    let arquivo = req.file.filename
-    imagem.arquivo = arquivo
+    if(req.file) {
+      let imagem = req.body
+      let arquivo = req.file.filename
+      imagem.arquivo = arquivo
 
-    imovelModel.findByIdAndUpdate(req.params.id, 
-      {$push: {'imagens' : imagem}},
-      {safe: true, upsert: true}).then(() => {
-        return res.send()
-      })
+
+      imovelModel.findByIdAndUpdate(req.params.id, 
+        {$push: {'imagens' : imagem}},
+        {safe: true, upsert: true}).then(() => {
+          return res.send()
+        })
+    } else {
+      return res.send()
+    }
 
   }
 
@@ -57,17 +70,52 @@ class ImovelController {
       .then(imovel => {
         let imagem = imovel.imagens.id(req.params.imageId)
 
-        debugger
-       imagem = Object.assign({}, imagem, req.body)
-        if(req.file)
+        if(req.file) {
           imagem.arquivo = req.file.filename
+        } else {
+          delete req.body.arquivo
+        }
+
+        Object.assign(imagem, req.body)
         imovel.markModified('imagens')
-      debugger
         imovel.save().then(i => {
           console.log('OK')
           res.send()
         })
       })
+  }
+
+  addDespesa(req, res) {
+    let despesa = req.body
+    imovelModel.findByIdAndUpdate(req.params.id,
+      {$push: {'despesas' : despesa}})
+      .then(() => {
+        res.send()
+      }).catch(err => res.status(500).send(err))
+
+  }
+
+  getDespesas(req, res) {
+    let page = req.param('page') ? req.param('page') : 0
+    imovelModel.findOne({'_id':req.params.id}, {despesas: {$slice: [((page-1) * 10), 10]}})
+      .exec().then(imovel => {
+        imovelModel.findById(req.params.id).exec().then(imovelCount => {
+          res.json({
+            despesas: imovel.despesas,
+            count: imovelCount.despesas.length
+          })
+        })
+      })
+
+  }
+  updateDespesa(req, res) {
+    let despesa = req.body
+    console.log(despesa)
+    imovelModel.update({'_id': req.params.id, 'despesas._id' : req.params.despesaId},
+      {'$set' : {'despesas.$' : despesa}}).then(() => {
+        res.send()
+      })
+
   }
 }
 

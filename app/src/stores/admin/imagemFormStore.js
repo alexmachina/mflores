@@ -43,7 +43,7 @@ export default class ImagemFormStore {
   }
 
   @action getImagens(id) {
-    let url = config.url + '/imovel/' + id
+    let url = config.url + '/imovel/' + id 
     getJson(url).then(imovel => {
       this.imagens = imovel.imagens
     })

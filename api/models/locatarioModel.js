@@ -7,8 +7,8 @@ let schema = new mongoose.Schema({
   telefone: {type: String, default: ''},
   celular: {type: String, default: ''},
   email: {type: String, default: ''},
-  dataInicioContrato: {type: Date, default: ''},
-  dataFimContrato: {type: Date, default: ''},
+  dataInicioContrato: {type: Date, default: new Date()},
+  dataFimContrato: {type: Date, default: new Date()},
   valor: {type:Number, default: ''},
   seguro: {type: Boolean, default: ''},
   dataVencimentoSeguro: {type:Date, default:''}

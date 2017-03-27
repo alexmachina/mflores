@@ -17,13 +17,22 @@ export default class ImovelFormStore {
       areaConstruida: '',
       capacidade: ''
     },
-    zoneamento: false
+    zoneamento: false,
   }
+  
+  @observable buttonText = 'Salvar'
+  @observable buttonStyle: { backgroundColor: 'blue'}
 
   @action save(id) {
+    this.buttonText = 'Salvando...'
     putJson(config.url + '/imovel/'+id,
       toJS(this.imovel)).then(() => {
-        alert('OK')
+        this.buttonText = 'Salvo!'
+        this.buttonStyle = {backgroundColor: '#7fc857', color:'white'}
+        setTimeout(() => {
+          this.buttonStyle = {backgroundColor: '#005e9e', color: 'white'}
+          this.buttonText = "Salvar"
+        }, 3000)
       })
   }
 

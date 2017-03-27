@@ -23,6 +23,9 @@ export default class ProprietarioFormStore {
     }
   }
 
+  @observable buttonText = 'Salvar'
+  @observable buttonStyle = {}
+
   @action getProprietario(id) {
     getJson(config.url + '/imovel/' + id).then(
       imovel => {
@@ -34,7 +37,13 @@ export default class ProprietarioFormStore {
   @action saveProprietario(id) {
       putJson(config.url + '/imovel/' + id, {proprietario: toJS(this.proprietario)}).then(
       () => {
-        alert("OK")
+        this.buttonText = 'Salvo com sucesso!'
+        this.buttonStyle = {backgroundColor: '#7fc857', color: 'white'}
+
+        setTimeout(() => {
+          this.buttonText = 'Salvar'
+          this.buttonStyle = {}
+        }, 3000)
 
       })
   }

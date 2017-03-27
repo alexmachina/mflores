@@ -81,11 +81,11 @@ export default class EnderecoForm extends React.Component {
               <Input label="Ponto de Referência"
                 value={this.store.endereco.pontoDeReferencia}
                 onChange={this.onPontoDeReferenciaChange.bind(this)}
-                 />
-                 <Button type="submit" 
-                   className="save-button"
-                 >Salvar</Button>
-                 
+              />
+              <Button style={this.store.buttonStyle} type="submit" 
+                className="save-button"
+              >{this.store.buttonText}</Button>
+
 
           </form>
         </Col>

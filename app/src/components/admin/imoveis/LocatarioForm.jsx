@@ -79,8 +79,8 @@ moment.locale('pt-BR')
                   onChange={this.onDataVencimentoSeguroChange.bind(this)}
                  />
 
-                <Button type="submit" className="save-button">
-                  Salvar
+                <Button type="submit" style={this.store.buttonStyle} className="save-button">
+                  {this.store.buttonText}
                 </Button>
             </form>
           </Col>

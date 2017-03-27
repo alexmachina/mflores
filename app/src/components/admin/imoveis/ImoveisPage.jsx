@@ -1,10 +1,11 @@
 import React from 'react'
-import {Modal, Row, Jumbotron, Col, Button, Table, Glyphicon} from 'react-bootstrap'
+import {Pagination, Modal, Row, Jumbotron, Col, Button, Table, Glyphicon} from 'react-bootstrap'
 import { Link } from 'react-router'
 import uiStore from '../../../stores/admin/uiStore.js'
 import ImoveisStore from '../../../stores/admin/imoveisStore.js'
 import {observer} from 'mobx-react'
 import Input from '../../utils/Input.jsx'
+import SearchField from '../../utils/SearchField.jsx'
 import validator from 'validator'
 
 
@@ -25,7 +26,7 @@ export default class ImoveisPage extends React.Component {
       <div>
         <Row>
           <Col>
-        <Jumbotron>
+        <Jumbotron className="text-center admin-jumbotron">
           <h1>Imóveis</h1>
             <Button 
               onClick={this.onNovoImovelClick.bind(this)}>
@@ -36,6 +37,27 @@ export default class ImoveisPage extends React.Component {
     </Row>
     <Row>
       <Col xs={12} md={6} mdOffset={3}>
+        <Col xs={12} md={6}>
+        <Pagination
+          prev
+          next
+          ellipsis
+          boundaryLinks
+          items={this.store.items}
+          maxButtons={5}
+          activePage={this.store.activePage}
+          onSelect={(e) => {
+            this.store.activePage = e
+            this.store.getImoveis()
+          }} />
+      </Col>
+      <Col xs={12} md={6}>
+        <SearchField search={this.store.search}
+          handleSearchChange={(e) => {
+            this.store.search = e.target.value
+            this.store.getImoveis()
+          }} />
+      </Col>
         <Table>
           <thead>
             <tr>
@@ -51,10 +73,10 @@ export default class ImoveisPage extends React.Component {
                 </td>
                 <td>
                   <Link to={'/admin/imovel/'+i._id}>
-                  <Button>
-                    <Glyphicon glyph="edit" />
-                  </Button>
-                </Link>
+                    <Button>
+                      <Glyphicon glyph="edit" />
+                    </Button>
+                  </Link>
                 </td>
 
 
@@ -65,30 +87,38 @@ export default class ImoveisPage extends React.Component {
       </Col>
     </Row>
 
-        <Modal show={this.uiStore.showModal} onHide={() => this.uiStore.showModal = false}>
-          <Modal.Header closeButton>
-            <Modal.Title>Novo Imóvel</Modal.Title>
-          </Modal.Header>
+    <Modal show={this.uiStore.showModal} onHide={() => this.uiStore.showModal = false}>
+      <Modal.Header closeButton>
+        <Modal.Title>Novo Imóvel</Modal.Title>
+      </Modal.Header>
 
-          <Modal.Body>
-            
-            <Input
-              label="Titulo do Imóvel"
-              onChange={this.onTituloChange.bind(this)}
-              validationMessage="Titulo invalido"
-              value={this.store.titulo}
-              validationFunction={validator.isAlphaNumeric}
-            />
+      <Modal.Body>
 
-          </Modal.Body>
+        <Input
+          label="Titulo do Imóvel"
+          onChange={this.onTituloChange.bind(this)}
+          validationMessage="Titulo invalido"
+          value={this.store.titulo}
+          validationFunction={(e) => {
+            if(e) {
+              return true
+            }
+            else{
+              return false
+            }
+          }}
+          ref="tituloInput"
+        />
 
-          <Modal.Footer>
-            <Button onClick={() => this.store.showModal = false}>Cancelar</Button>
-            <Button onClick={this.onTituloSubmit.bind(this)}bsStyle="primary">Salvar</Button>
-          </Modal.Footer>
+    </Modal.Body>
 
-        </Modal>
-      </div>
+    <Modal.Footer>
+      <Button onClick={() => this.uiStore.showModal = false}>Cancelar</Button>
+      <Button onClick={this.onTituloSubmit.bind(this)}bsStyle="primary">Salvar</Button>
+    </Modal.Footer>
+
+  </Modal>
+</div>
 
     )
   }
@@ -103,6 +133,9 @@ export default class ImoveisPage extends React.Component {
   }
 
   onTituloSubmit() {
+    this.refs.tituloInput.onBlur()
+    if(this.store.titulo) {
     this.store.saveImovel()
+    }
   }
 }

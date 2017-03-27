@@ -95,9 +95,11 @@ export default class ImovelForm extends React.Component {
             className="form-control"
           />
             
-            <Button className="save-button" type="submit">
-              Salvar
+            <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
+              {this.store.buttonText}
             </Button>
+            <div className="text-center">
+            </div>
 
           </form>
         </Col>
