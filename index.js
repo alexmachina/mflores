@@ -26,7 +26,7 @@ app.use(router)
 
 app.listen(app.get('port'), err => err ? 
   console.log(err) : 
-  console.log("Running: " + app.get(port))
+  console.log("Running: " + app.get('port'))
 );
 
 
