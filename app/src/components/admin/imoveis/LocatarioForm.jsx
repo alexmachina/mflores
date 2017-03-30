@@ -1,6 +1,7 @@
 import React from 'react'
 import LocatarioFormStore from '../../../stores/admin/locatarioFormStore'
 import Input from '../../utils/Input.jsx'
+import Select from '../../utils/Select.jsx'
 import {Row, Col, Button} from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -79,6 +80,33 @@ moment.locale('pt-BR')
                   onChange={this.onDataVencimentoSeguroChange.bind(this)}
                  />
 
+                  <Select label="Garantia"
+                    options={[
+                      {option: 'Fiança'},
+                      {option: 'Caução'},
+                      {option: 'Hipoteca'},
+                      {option: 'Seguro Fiança'}
+                    ]}
+                    value={this.store.locatario.garantia}
+                    onChange={this.onGarantiaChange.bind(this)}
+                  />
+                  <Input label="Descrição da Garantia" 
+                    onChange={this.onDescricaoGarantiaChange.bind(this)}
+                    value={this.store.locatario.descricaoGarantia}
+                />
+                <label>Data de inicio da garantia</label>
+                <DatePicker
+                  className="date-picker"
+                  selected={this.store.locatario.dataInicioValidadeGarantia}
+                  onChange={this.onDataInicioGarantiaChange.bind(this)}
+                />
+                <label> Data de fim da garantia</label>
+                <DatePicker 
+                  className="date-picker"
+                  selected={this.store.locatario.dataFimValidadeGarantia}
+                  onChange={this.onDataFimGarantiaChange.bind(this)}
+                />
+
                 <Button type="submit" style={this.store.buttonStyle} className="save-button">
                   {this.store.buttonText}
                 </Button>
@@ -126,5 +154,21 @@ moment.locale('pt-BR')
   }
   onDataVencimentoSeguroChange(e) {
     this.store.locatario.dataVencimentoSeguro = e
+  }
+
+  onGarantiaChange(e) {
+    this.store.locatario.garantia = e.target.value
+  }
+
+  onDescricaoGarantiaChange(e) {
+    this.store.locatario.descricaoGarantia = e.target.value
+  }
+
+  onDataInicioGarantiaChange(e) {
+    this.store.locatario.dataInicioValidadeGarantia = e
+  }
+
+  onDataFimGarantiaChange(e) {
+    this.store.locatario.dataFimValidadeGarantia = e
   }
 }

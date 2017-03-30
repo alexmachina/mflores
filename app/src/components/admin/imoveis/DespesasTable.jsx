@@ -19,7 +19,7 @@ export default class DespesasTable extends React.Component {
             Adicionar Despesa
           </Button>
         </Col>
-        <Col xs={12} md={1} mdOffset={5} className="text-right">
+        <Col xs={12} md={2} mdOffset={4} className="text-right">
           <form onSubmit={this.props.onSearchFormSubmit}>
             <Select 
               onChange={this.props.onMesChange.bind(this)}

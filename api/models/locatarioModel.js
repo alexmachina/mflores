@@ -7,11 +7,15 @@ let schema = new mongoose.Schema({
   telefone: {type: String, default: ''},
   celular: {type: String, default: ''},
   email: {type: String, default: ''},
-  dataInicioContrato: {type: Date, default: new Date()},
-  dataFimContrato: {type: Date, default: new Date()},
+  dataInicioContrato: {type: Date, default:null},
+  dataFimContrato: {type: Date, default: null},
   valor: {type:Number, default: ''},
   seguro: {type: Boolean, default: ''},
-  dataVencimentoSeguro: {type:Date, default:''}
+  garantia: {type: String, default: ''},
+  descricaoGarantia:{type:String, default: ''},
+  dataInicioValidadeGarantia: {type: Date, default: null },
+  dataFimValidadeGarantia: {type: Date, default:null },
+  dataVencimentoSeguro: {type:Date, default:null}
 })
 
 module.exports = schema
