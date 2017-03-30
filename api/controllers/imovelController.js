@@ -32,6 +32,7 @@ class ImovelController {
   }
 
   updateImovel(req, res) {
+    console.log(req.body)
     let update = imovelModel.findByIdAndUpdate(req.params.id,
       {$set : req.body})
     update.then(() => res.send())
@@ -128,6 +129,25 @@ class ImovelController {
     let find = imovelModel.find({destaqueWebsite: true, disponivelWebsite: true})
 
     find.then(imoveis => res.json(imoveis))
+    find.catch(err => res.status(500).send(err))
+  }
+
+  getCarrossel(req, res) {
+    let find = imovelModel.find({'website.carrossel':true, 'website.disponivel':true})
+    find.then(imoveis => {
+      res.json(imoveis)
+    })
+    find.catch(err => res.status(500).send(err))
+  }
+
+  getHomepage(req, res){
+    let find = imovelModel.find({'website.homepage':true, 'website.disponivel':true})
+    find.then(imoveis => res.json(imoveis))
+    find.catch(err => res.send(err))
+  }
+  getPrincipal(req, res) {
+    let find = imovelModel.findOne({'website.principal': true, 'website.disponivel':true})
+    find.then(imovel => res.json(imovel))
     find.catch(err => res.status(500).send(err))
   }
 }

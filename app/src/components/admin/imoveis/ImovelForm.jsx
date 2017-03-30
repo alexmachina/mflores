@@ -80,31 +80,6 @@ export default class ImovelForm extends React.Component {
             onChange={this.onInstalacaoChange.bind(this)}
           />
 
-          <label>Disponível para Website?</label>
-          <input type="checkbox"
-            label="Disponivel no Website?"
-            checked={this.store.imovel.disponivelWebsite}
-            onChange={this.onDisponivelWebsiteChange.bind(this)}
-            className="form-control"
-          />
-          <label>Destaque no Website?</label>
-          <input type="checkbox"
-            checked={this.store.imovel.destaqueWebsite}
-            onChange={this.onDestaqueWebsiteChange.bind(this)}
-            className="form-control"
-          />
-          <Input label="Subtitulo Website"
-            value={this.store.imovel.subtituloWebsite}
-            onChange={this.onSubtituloWebsiteChange.bind(this)}
-          />
-          <label>Principal Website?</label>
-
-          <input type="checkbox"
-            checked={this.store.imovel.principalWebsite}
-            onChange={this.onPrincipalWebsiteChange.bind(this)}
-            className="form-control"
-          />
-
           <label>Zoneamento?</label>
           <input type="checkbox"
             checked={this.store.imovel.zoneamento}
@@ -161,21 +136,6 @@ export default class ImovelForm extends React.Component {
     this.store.imovel.instalacao = e.target.value
   }
 
-  onDisponivelWebsiteChange(e) {
-    this.store.imovel.disponivelWebsite = e.target.checked
-  }
-
-  onDestaqueWebsiteChange(e) {
-    this.store.imovel.destaqueWebsite = e.target.checked
-  }
-
-  onPrincipalWebsiteChange(e) {
-      this.store.imovel.principalWebsite = e.target.checked
-  }
-
-  onSubtituloWebsiteChange(e) {
-    this.store.imovel.subtituloWebsite = e.target.value
-  }
 
   onZoneamentoChange(e) {
     this.store.imovel.zoneamento = e.target.checked

@@ -81,10 +81,10 @@ export default class HomePage extends React.Component {
                       <div className="container">
                         {this.store.imoveis.map(i => (
                           <section className="col-md-3 col-sm-6">
-                            <h2>{i.titulo}</h2>
-                            <img className="img-thumbnail" src={'/img/imoveis/'+i.imagemPrincipal} alt="Foto inicial imóvel 1" className="img-responsive" /><br/>
-                            <h4 className="h4-center">{i.subtituloWebsite}</h4>
-                            <p className="text-center">{i.observacaoWebsite}</p>
+                            <h2>{i.website.titulo}</h2>
+                            <img className="img-thumbnail" src={'/img/imoveis/'+i.website.imagemPrincipal} alt="Foto inicial imóvel 1" className="img-responsive" /><br/>
+                            <h4 className="h4-center">{i.website.subtituloWebsite}</h4>
+                            <p className="text-center">{i.website.observacaoWebsite}</p>
                             <p><a className="btn btn-default" href="imovelVenda/index.html">Veja mais &raquo;</a></p>
                           </section>
                         ))}
