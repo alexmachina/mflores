@@ -2,6 +2,7 @@ const express = require('express');
 let router = new express.Router();
 let imovelController = require('./controllers/imovelController')
 let loginController = require('./controllers/loginController')
+let despesaController = require('./controllers/despesaController')
 let multer = require('multer')
 let upload = multer({dest: 'app/img/imoveis'})
 
@@ -11,14 +12,17 @@ router.get('/imovel/:id', imovelController.getImovel)
 router.put('/imovel/:id', imovelController.updateImovel)
 router.get('/imoveis', imovelController.getImoveis)
 router.post('/imovel', imovelController.addImovel)
+router.get('/imoveisEmDestaque', imovelController.getDestaques)
 
 router.post('/imovel/:id/addImage', upload.single('arquivo'), imovelController.addImage)
 router.delete('/imovel/:id/deleteImage/:imageId', imovelController.deleteImage)
 router.put('/imovel/:id/image/:imageId', upload.single('arquivo'), imovelController.updateImage)
+router.put('/imovel/:id/imagemPrincipal', upload.single('arquivo'), imovelController.updateImagemPrincipal)
 
-router.post('/imovel/:id/despesa', imovelController.addDespesa)
-router.put('/imovel/:id/despesa/:despesaId', imovelController.updateDespesa)
-router.get('/imovel/:id/despesas', imovelController.getDespesas)
+router.post('/imovel/:id/despesa', despesaController.addDespesa)
+router.put('/imovel/:imovelId/despesa/:id', despesaController.updateDespesa)
+router.get('/imovel/:imovelId/despesas', despesaController.getDespesas)
+router.get('/imovel/:imovelId/despesas/:ano/:mes', despesaController.getDespesasByAnoMes)
 
 
 

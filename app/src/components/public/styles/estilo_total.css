@@ -1,0 +1,149 @@
+﻿.rodape{
+	background: #005e9e;	
+	box-shadow: #000 0px 0.5px .8em;
+	margin-top: 25px;
+}
+.rodape h4{
+	/*color:#fff;*/
+	text-align: center;
+}
+.rodape a{
+	text-decoration: none;
+	color: #f1f1f1;
+}
+.rodape p{
+	color: #f1f1f1;
+}
+.rodape a:hover{
+	border-bottom: 1px solid #f1f1f1;
+}
+
+.desativado li{
+	color: #f1f1f1;
+}
+
+
+.rodape-mobile{
+	background: #005e9e;	
+	box-shadow: #000 0px 0.5px .8em;
+	margin-top: 25px;
+}
+.rodape-mobile a{
+	text-decoration: none;
+	color: #f1f1f1;
+}
+.rodape-mobile h4{
+	background-color: rgba(255,255,255,0.4);
+	text-align: center;
+}
+
+/* LOGO */
+.img-home
+{
+	margin:10px 0px 10px 10px;
+}
+.white, .white a {
+	color: #fff;
+}
+/*nav volta*/
+nav
+{
+	width:100%;
+	background:#005e9e;
+	height:55px;
+	padding:6px;
+}
+/*dando uma margin*/
+.cima{
+	margin-top:60px;
+}
+/*cor da li*/
+ul.menu li a
+{
+	color:#fff;
+}
+/* hover da li*/
+ul.menu li a:hover
+{
+	color:#495f2e;
+	background:#f1f1f1;
+}
+ul.cor-menu li a
+{
+	color:#495f2e;
+}
+
+/* carrorsel teste */
+.carousel-caption{
+	margin:0 auto;
+	padding-top: 500px;
+	text-align:center;
+}
+
+.carousel-caption p{
+	text-align: center;
+	padding:10px;
+	background: rgba(0,0,0,0.8);
+}
+
+h2.h2-dstq
+{
+	color:#c8002d;
+	border-bottom: 4px solid;
+}
+h4.h4-center{
+	color: #c8002d;
+	text-align: center;
+}
+.setinha{
+	background:red;
+	margin:-30px 0px 0px 0px;
+}
+/* solange */
+#navcontainer { /* none needed */ } ul#navlist { margin: 0; padding: 0; list-style-type: none; white-space: nowrap; } ul#navlist li { float: left; font-family: verdana, arial, sans-serif; font-size: 15px; font-weight: bold; margin: 0; padding: 7px 0 6px 0; background-color: #666; border-top: 1px solid #e0ede9; border-bottom: 1px solid #e0ede9; } #navlist a, #navlist a:link { margin: 0; padding: 5px 9px 4px 9px; color: #fff; border-right: 1px solid #d1e3db; text-decoration: none; } ul#navlist li#active { color: #95bbae; background-color: #d1e3db; } 
+#dropmenu
+{
+	text-align: right;
+	font-size:20px;
+	margin-top:-3px;
+	color:#fff;
+}
+
+.cor-menu-li a
+{
+	color:#fff;
+	background:#60a00c;
+}
+/*cor da li*/
+ul.menu2 li a
+{
+	color:#495f2e;
+	background:#fff;
+	padding:10px;
+	font-size: 17px;
+}
+/* hover da li*/
+ul.menu2 li a:hover
+{
+	color:#374426;
+	
+}
+
+.btn-menu
+{
+	font-size:20px;
+}
+
+.click a.thumbnail img
+{
+	cursor:pointer;
+}
+
+.footerbackground{	
+	background-color: black;
+	background: url(/img/bg-footer.jpg) no-repeat;
+	
+}
+.footer a:hover{
+	text-decoration: nome;
+}

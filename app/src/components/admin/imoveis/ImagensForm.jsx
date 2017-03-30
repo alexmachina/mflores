@@ -25,84 +25,108 @@ export default class ImagemForm extends React.Component {
     return (
       <div className="container-fluid">
         <Row>
-          <Col xs={12} md={8} mdOffset={2}>
-            {this.store.error}
-            <Button onClick={() =>{ 
-              this.store.showModal = true
-              this.store.imagem = {}
-            }}
-            className="table-button"
-            bsStyle="primary">
-            Adicionar Imagem
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} md={8} mdOffset={2}>
-          {this.store.imagens.map(i => (
-            <Col className="image-block" xs={12} sm={6} md={4} >
-              <Image src={'/img/imoveis/'+i.arquivo} responsive onClick={() => {
+          <Col className="text-center" xs={12} md={8} mdOffset={2}>
+            <form onSubmit={this.onCapaFormSubmit.bind(this)}>
+              <h3>Capa</h3>
+              <Col xs={12} md={6}>
+                <Image src={'/img/imoveis/'+this.store.capa} responsive/>
+              </Col>
+              <input type="file" onChange={this.onCapaChange.bind(this)} />
+              <Button type="Submit">
+                Enviar
+              </Button>
+            </form>
+            </Col>
+
+          </Row>
+          <Row>
+            <Col xs={12} md={8} mdOffset={2}>
+              {this.store.error}
+              <Button onClick={() =>{ 
                 this.store.showModal = true
-                this.store.imagem = i
-              }}/>
-          </Col>
-          ))}
-        </Col>
-      </Row>
-
-      <Modal show={this.store.showModal} onHide={() => this.store.showModal = false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Nova Imagem</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <label>Imagem</label>
-          <form onSubmit={this.onSubmit.bind(this)}>
-            <input type="file" 
-              onChange={this.onImagensChange.bind(this)}
-              name="Imagens"
-            />
-            <Input label="Titulo"
-              value={this.store.imagem.titulo}
-              onChange={this.onTituloChange.bind(this)}
-            />
-            <Input label="Descrição"
-              value={this.store.imagem.descricao}
-              onChange={this.onDescricaoChange.bind(this)}
-            />
-            <Button type="submit" className="save-button">
-              Salvar
+                this.store.imagem = {}
+              }}
+              className="table-button"
+              bsStyle="primary">
+              Adicionar Imagem
             </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={8} mdOffset={2}>
+            {this.store.imagens.map(i => (
+              <Col className="image-block" xs={12} sm={6} md={4} >
+                <Image src={'/img/imoveis/'+i.arquivo} responsive onClick={() => {
+                  this.store.showModal = true
+                  this.store.imagem = i
+                }}/>
+            </Col>
+            ))}
+          </Col>
+        </Row>
 
-          </form>
+        <Modal show={this.store.showModal} onHide={() => this.store.showModal = false}>
+          <Modal.Header closeButton>
+            <Modal.Title>Nova Imagem</Modal.Title>
+          </Modal.Header>
 
-        </Modal.Body>
+          <Modal.Body>
+            <label>Imagem</label>
+            <form onSubmit={this.onSubmit.bind(this)}>
+              <input type="file" 
+                onChange={this.onImagensChange.bind(this)}
+                name="Imagens"
+              />
+              <Input label="Titulo"
+                value={this.store.imagem.titulo}
+                onChange={this.onTituloChange.bind(this)}
+              />
+              <Input label="Descrição"
+                value={this.store.imagem.descricao}
+                onChange={this.onDescricaoChange.bind(this)}
+              />
+              <Button type="submit" className="save-button">
+                Salvar
+              </Button>
 
-        <Modal.Footer>
-          <Button onClick={() => this.store.showModal = false}>Cancelar</Button>
-          {deleteButton}
-        </Modal.Footer>
+            </form>
 
-      </Modal>
+          </Modal.Body>
 
-    </div>
-    )
-  }
-  onSubmit(e) {
-    e.preventDefault()
-    this.store.saveImagem(this.props.id)
-  }
-  onTituloChange(e){
-    this.store.imagem.titulo = e.target.value
-  }
-  onDescricaoChange(e) {
-    this.store.imagem.descricao = e.target.value
-  }
+          <Modal.Footer>
+            <Button onClick={() => this.store.showModal = false}>Cancelar</Button>
+            {deleteButton}
+          </Modal.Footer>
 
-  onImagensChange(e) {
-    this.store.imagem.arquivo = e.target.files[0]
-  }
-  onImageClick(e) {
+        </Modal>
 
-  }
-}
+      </div>
+      )
+      }
+      onSubmit(e) {
+        e.preventDefault()
+        this.store.saveImagem(this.props.id)
+      }
+      onTituloChange(e){
+        this.store.imagem.titulo = e.target.value
+      }
+      onDescricaoChange(e) {
+        this.store.imagem.descricao = e.target.value
+      }
+
+      onImagensChange(e) {
+        this.store.imagem.arquivo = e.target.files[0]
+      }
+
+      onCapaChange(e) {
+        this.store.capa = e.target.files[0]
+      }
+
+      onCapaFormSubmit(e) {
+        e.preventDefault()
+        this.store.submitCapa(this.props.id)
+      }
+      onImageClick(e) {
+
+      }
+      }

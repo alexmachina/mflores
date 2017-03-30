@@ -13,15 +13,19 @@ let schema = new mongoose.Schema({
   observacaoGestor: {type: String, default: ''},
   observacaoWebsite: {type: String, default: ''},
   disponivelWebsite: {type: Boolean, default: false},
+  principalWebsite: {type: Boolean, default: false},
   zoneamento: {type: Boolean, default: false},
   tipo:{type: {type: String, default: ''}},
+  destaqueWebsite:{type: Boolean, default: false},
+  subtituloWebsite:{type: String, default: ''},
+  imagemPrincipal: {type:String, default: ''},
 
   endereco: {type: enderecoModel, default:enderecoModel},
   locatario: {type: locatarioModel, default: locatarioModel},
   proprietario: {type: proprietarioModel, default: proprietarioModel},
   metragem: {type: metragemModel, default: metragemModel},
   imagens: [imagemModel],
-  despesas: [despesaModel]
+  despesas:[{type: mongoose.Schema.Types.ObjectId, ref: 'Despesa'}] 
 
 })
 

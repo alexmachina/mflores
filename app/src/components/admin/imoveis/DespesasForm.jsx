@@ -22,11 +22,13 @@ export default class DespesasForm extends React.Component {
             value={this.props.selectedDespesa.valor}
             onChange={this.props.onValorChange}
           />
-          <label>Data</label>
-          <DatePicker 
-            className="date-picker"
-            selected={this.props.selectedDespesa.data}
-            onChange={this.props.onDataChange}
+          <Input label="Mes"
+            value={this.props.selectedDespesa.mes}
+            onChange={this.props.onMesChange}
+          />
+          <Input label="Ano"
+            value={this.props.selectedDespesa.ano}
+            onChange={this.props.onAnoChange}
           />
           <Button className="save-button" type="submit">
             Salvar

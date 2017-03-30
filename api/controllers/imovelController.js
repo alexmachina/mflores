@@ -97,7 +97,8 @@ class ImovelController {
 
   getDespesas(req, res) {
     let page = req.param('page') ? req.param('page') : 0
-    imovelModel.findOne({'_id':req.params.id}, {despesas: {$slice: [((page-1) * 10), 10]}})
+    imovelModel.findOne({'_id':req.params.id}, {despesas: {$slice: [((page-1) * 10), 10]}},
+      {sort: '-despesas.date'})
       .exec().then(imovel => {
         imovelModel.findById(req.params.id).exec().then(imovelCount => {
           res.json({
@@ -106,7 +107,6 @@ class ImovelController {
           })
         })
       })
-
   }
   updateDespesa(req, res) {
     let despesa = req.body
@@ -116,6 +116,19 @@ class ImovelController {
         res.send()
       })
 
+  }
+  updateImagemPrincipal(req, res) {
+    let update = imovelModel.findByIdAndUpdate(req.params.id,
+      {$set: {imagemPrincipal: req.file.filename}})
+
+    update.then(() => res.send())
+    update.catch(err => res.status(500).send(err))
+  }
+  getDestaques(req, res) {
+    let find = imovelModel.find({destaqueWebsite: true, disponivelWebsite: true})
+
+    find.then(imoveis => res.json(imoveis))
+    find.catch(err => res.status(500).send(err))
   }
 }
 

@@ -3,8 +3,7 @@ import DespesasPageStore from '../../../stores/admin/despesasPageStore.js'
 import DespesasForm from './DespesasForm.jsx'
 import DespesasTable from './DespesasTable.jsx'
 import { observer } from 'mobx-react'
-import {Row,Pagination, Col, Button, Modal} from 'react-bootstrap'
-
+import {Row,Pagination, Col, Button, Modal} from 'react-bootstrap' 
 @observer
 export default class DespesasPage extends React.Component {
   constructor(props) {
@@ -30,6 +29,12 @@ export default class DespesasPage extends React.Component {
               despesas={this.store.despesas} 
               onEditClick={this.onEditClick.bind(this)}
               onNewClick={this.onNewClick.bind(this)}
+              ano={this.store.search.ano}
+              mes={this.store.search.mes}
+              onAnoChange={this.onSearchAnoChange.bind(this)}
+              onMesChange={this.onSearchMesChange.bind(this)}
+              onSearchFormSubmit={this.onSearchFormSubmit.bind(this)}
+              totalDespesas={this.store.totalDespesas}
             />
             <div>
             <Modal show={this.store.showModal} onHide={() => {
@@ -43,7 +48,8 @@ export default class DespesasPage extends React.Component {
                 <DespesasForm  
                   onDescricaoChange={this.onDescricaoChange.bind(this)} 
                   onValorChange={this.onValorChange.bind(this)}
-                  onDataChange={this.onDataChange.bind(this)}
+                  onAnoChange={this.onAnoChange.bind(this)}
+                  onMesChange={this.onMesChange.bind(this)}
                   selectedDespesa={this.store.selectedDespesa} 
                   onSubmit={this.onSubmit.bind(this)} />
               </Modal.Body>
@@ -62,6 +68,19 @@ export default class DespesasPage extends React.Component {
   onEditClick(despesa) {
     this.store.selectedDespesa = despesa
     this.store.showModal = true
+  }
+
+  onSearchAnoChange(e) {
+    this.store.search.ano = e.target.value
+  }
+
+  onSearchMesChange(e) {
+    this.store.search.mes = e.target.value
+  }
+
+  onSearchFormSubmit(e) {
+    e.preventDefault()
+    this.store.getDespesasByAnoMes(this.props.id)
   }
 
   onNewClick() {
@@ -85,8 +104,12 @@ export default class DespesasPage extends React.Component {
     this.store.selectedDespesa.valor = e.target.value
   }
 
-  onDataChange(e) {
-    this.store.selectedDespesa.data = e
+  onAnoChange(e) {
+    this.store.selectedDespesa.ano = e.target.value
+  }
+
+  onMesChange(e) {
+    this.store.selectedDespesa.mes = e.target.value
   }
 
   onSelectDespesa(despesa) {

@@ -11,7 +11,18 @@ export default class ImagemFormStore {
     arquivo: ''
   }
   @observable error = ''
+  @observable capa = ''
 
+  @action submitCapa(id) {
+    let form_data = new FormData()
+    form_data.append('arquivo', this.capa, 'arquivo')
+
+    fetch(config.url + '/imovel/' + id + '/imagemPrincipal', {
+      method:'PUT',
+      body: form_data
+    }).then(() => this.getImagens(id))
+      .catch(err => this.erro = err)
+  }
   @action saveImagem(id) {
     let url = config.url + '/imovel/' + id + '/addImage'
     let form_data = new FormData()
@@ -46,6 +57,7 @@ export default class ImagemFormStore {
     let url = config.url + '/imovel/' + id 
     getJson(url).then(imovel => {
       this.imagens = imovel.imagens
+      this.capa = imovel.imagemPrincipal
     })
   }
 

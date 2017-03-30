@@ -1,0 +1,236 @@
+.imgculturajovem:hover{
+	box-shadow: 5px 1px 1px #888888;
+
+}
+section.sizetitle{
+	width: 250px;
+	box-shadow: 10px 10px 5px #888888;
+}
+.titlehome{
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.h2cultura{
+	text-align: center;
+	color: #473C8B;
+	font-size: 27px;
+	font-weight: bold;
+	background: url(/img/gradiente.png) no-repeat right 0px;	
+}
+a.semlinha{
+	text-decoration: none;
+}
+.h2cultura:hover{
+	 background-position: right -300px; 
+}
+.estbtn{
+	font-size: 22px;
+	color:#4876FF;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Espaçamento de texto e imgs dentro do thumbnail à direita do site COSPLAY*/
+
+div.espaco{
+	margin-top: 14px;
+}
+img.imghilda{
+	margin-right: 30px;
+	margin-left: 18px;
+	margin-top: 10px;
+    margin-bottom: 20px;
+}
+img.imghilda:hover{
+    box-shadow:  1px 1px 2px #888888;
+}
+p img.imghilda a{
+    text-align:center;
+    margin: solid black 2px;
+    background-color: red;
+}       
+div.brincar{
+	margin-right: 40px;
+}
+
+/*FIM DO ESPAÇAMENTO*/
+
+/*Estilizando as fontes do site COSPLAY*/
+.h1cosplay{
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 14px;
+}
+
+.h1cosplay:hover{
+	color: black;
+}
+.h3cosplay{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	color: #473C8B;	
+}
+.h2cosplay{
+	color: #473C8B;
+	font-size: 27px;
+	font-weight: bold;
+}
+.h2cosplay:hover{
+	box-shadow: 5px 5px 2px #888888;
+}
+.h3-cosplayer{
+	color: #c8002d;
+	font-family: Times, Times New Roman;
+	font-weight: bold;
+	font-size: 32px;
+	text-align: center;
+	box-shadow: 10px 10px 5px #888888;
+}
+.h3-cosplayer:hover{
+	border-bottom: 2px solid;
+}
+/*FIM DA ESTILIZAÇÃO DAS FONTES*/
+
+/*descrição no modal página COSPLAY*/
+.descricao{
+    background-color: rgba(0, 0, 0, 0.3); 
+    text-align: center;
+}
+h4.descricao{
+    color: black;
+    
+}
+
+/*fim da pag cosplay*/
+
+/* Página ANIMES E MANGÁS*/
+
+
+.h1animes{
+	text-align: center;
+	margin-bottom: 15px;
+	font-family: Times, Times New Roman;
+	font-weight: bold;
+	color: #c8002d;
+	font-size: 42px;
+}
+.panimes{
+	margin-left: 20px;
+	margin-right: 13px;
+}
+
+.uuu{
+	border-left: solid #D3D3D3 1px;
+}
+.h2-animes{
+	color: #473C8B;
+	font-family: Times, Times New Roman;
+	font-weight: bold;
+	font-size: 32px;
+	
+}
+
+em.anime{
+	font-size: 1.6em;
+	font-weight: bold;
+	
+}
+.sessao{
+	margin-top: 25px;
+	}
+
+.separar{
+    border-top: solid #D3D3D3 1px;
+    margin-top: 28px;
+}
+
+.anuncioanime{
+    margin-top: 32px;
+}
+
+/*Fim da página animes e mangás */
+
+/*Página Grafites*/
+.h2grafite{
+	text-align: center;
+	font-weight: bold;
+	border-bottom: solid #D3D3D3 1px;
+}
+
+/**.menuinterno{
+    margin-left: 40px;   
+}**/
+
+.h1grafite{
+    text-align: center;
+	font-weight: bold; 
+    color: #473C8B;
+    font-size: 38px;
+    
+}
+/*fim da página grafites*/
+
+/*img-media-object index */
+
+.imgpqnindex{
+    border: none;
+    width:230px;
+}
+/*Titulo index cultura jovem*/
+.tipoone{
+    color: #473C8B;
+    text-align: center;
+	font-family: Times, Times New Roman;
+	font-weight: bold;
+    font-size: 38px;
+}
+
+/*fim do título*/
+
+/*Collapse da pagina index TEEN NEWS*/
+div.titi{
+    border: none;   
+    margin-top: 15px;
+}
+/*Fim do collapse*/
+
+/*página cosplay, estilando fontes*/
+.estil{
+    font-size:1.2em;
+}   
+.otaku{
+    color: #473C8B;
+	font-size: 18px;
+	font-weight: bold;
+    text-align: center;
+   
+}
+/*fim da estilização*/
+
+/*COMEÇO DA PAG ESPAÇO NERD*/
+
+a img.headernerd{
+    border: none;
+}   
+.editado{
+    border:none;
+   }
+
+.nerdrow{
+  border-bottom:  solid #D3D3D3 1px;   
+}
+
+.vejatbnerd{
+    border: none;
+    margin-top: 25px;
+}
+.bordanerd{
+    border-right: solid #D3D3D3 1px; 
+}
+
+.applenerd{
+    margin-left: 100px;
+}
+
