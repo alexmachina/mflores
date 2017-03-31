@@ -9,7 +9,10 @@ export default class HomePage extends React.Component {
     this.store = new HomePageStore()
   }
   componentDidMount() {
-    this.store.getImoveis()
+    this.store.getImoveisCarrossel()
+    this.store.getImoveisHomepage()
+    this.store.getImovelPrincipal()
+
   }
   render() {
     return (
@@ -26,7 +29,8 @@ export default class HomePage extends React.Component {
                   <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                 </ol>
                 <div className="carousel-inner">
-                  {this.store.imoveis.map((imovel, i) => {
+                  {this.store.imoveisCarrossel.map((imovel, i) => {
+                    console.log("aaaaaaa")
                     let active = 'item'
                     if(i == 0){ 
                       active = 'item active'
@@ -35,7 +39,7 @@ export default class HomePage extends React.Component {
                       <div className={active}>
                         <img src={'/img/imoveis/'+imovel.imagemPrincipal} />
                           <div className="carousel-caption">
-                            <p>{imovel.titulo}</p>
+                            <p>{imovel.website.titulo}</p>
                             <a className="btn btn-large btn-primary" href="#">Veja mais >></a>
                           </div>
                           </div> )
@@ -53,36 +57,19 @@ export default class HomePage extends React.Component {
 
                   </section>
                   <aside className="col-md-4 col-sm-4">
-                    <h2 >CHÁCARA PAISAGEM</h2>
-                    <a href="#"><img className="img-thumbnail" src="img/tres.jpg" alt="" class="img-responsive" /></a>
-                    <h4 className="h4-center"> Linda Chácara para Locação ou venda</h4>
+                    <h2>{this.store.imovelPrincipal.website.titulo}</h2>
+                    <a href="#"><img className="img-thumbnail" src={'/img/imoveis/' +this.store.imovelPrincipal.imagemPrincipal} alt="" class="img-responsive" /></a>
+                    <h4 className="h4-center">{this.store.imovelPrincipal.website.subtitulo}</h4>
 
-                    <p>Rua Gallo da Serra   , 1065 - das Lages - Próximo ao Condomínio Paisagem -
-                      3,5 k da Raposo Tavares
-
-                      03 dormitórios - sendo 01 suíte
-                      03 banheiros internos
-                      cozinha completa
-                      sala de jantar
-                      sala de estar com lareira
-                      área de churrasqueira com forno de pizza
-                      geladeira
-                      fogão a lenha
-                      mesa de sinuca
-                      mesa de pebolim
-                      piscina adulto e infantil
-                      banheiros área externa
-                      quadra de volei de areia
-                      campo de futebol
-                      caseiro 24 horas</p>
+                    <p>{this.store.imovelPrincipal.website.descricao}</p>
                     <p><a className="btn btn-default" href="imovelVenda/index.html">Veja mais &raquo;</a></p>
                   </aside>
                       </div>
                       <div className="container">
-                        {this.store.imoveis.map(i => (
+                        {this.store.imoveisHomepage.map(i => (
                           <section className="col-md-3 col-sm-6">
                             <h2>{i.website.titulo}</h2>
-                            <img className="img-thumbnail" src={'/img/imoveis/'+i.website.imagemPrincipal} alt="Foto inicial imóvel 1" className="img-responsive" /><br/>
+                            <img className="img-thumbnail" src={'/img/imoveis/'+i.imagemPrincipal} alt="Foto inicial imóvel 1" className="img-responsive" /><br/>
                             <h4 className="h4-center">{i.website.subtituloWebsite}</h4>
                             <p className="text-center">{i.website.observacaoWebsite}</p>
                             <p><a className="btn btn-default" href="imovelVenda/index.html">Veja mais &raquo;</a></p>

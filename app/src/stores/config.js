@@ -1,6 +1,6 @@
+let url = process.env.PORT ? 'https://limitless-hamlet-76018.herokuapp.com' : 'http://localhost:3000'
 let config = {
-  //url: 'https://limitless-hamlet-76018.herokuapp.com'
-  url: 'https://limitless-hamlet-76018.herokuapp.com'
+  url: url
 }
 
 export default config

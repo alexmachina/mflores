@@ -30,14 +30,14 @@ export default class ImovelForm extends React.Component {
       <div className="container-fluid">
         <Row>
           <Col xs={12} md={8} mdOffset={2}>
-          <form onSubmit={this.onSubmit.bind(this)}>
-            <Input 
-              label="RGI"
-              validationMessage="Campo invalido"
-              validationFunction={validator.isInt}
-              value={this.store.imovel.rgi}
-              onChange={this.onRgiChange.bind(this)}
-            />
+            <form onSubmit={this.onSubmit.bind(this)}>
+              <Input 
+                label="RGI"
+                validationMessage="Campo invalido"
+                validationFunction={validator.isInt}
+                value={this.store.imovel.rgi}
+                onChange={this.onRgiChange.bind(this)}
+              />
 
             <Select label="Tipo"
               options={TipoOptions}
@@ -52,10 +52,6 @@ export default class ImovelForm extends React.Component {
               label="Observação (Gestor)"
               value={this.store.imovel.observacaoGestor}
               onChange={this.onObservacaoGestorChange.bind(this)}
-            />
-            <Input label="Observação (Website)"
-              value={this.store.imovel.observacaoWebsite}
-              onChange={this.onObservacaoWebsiteChange.bind(this)}
             />
             <Input label="Area Construída (em metros)"
               value={this.store.imovel.metragem.areaConstruida}
@@ -75,28 +71,28 @@ export default class ImovelForm extends React.Component {
             onChange={this.onCapacidadeChange.bind(this)}
           />
 
-          <Input label="Instalação"
-            value={this.store.imovel.instalacao}
-            onChange={this.onInstalacaoChange.bind(this)}
-          />
+        <Input label="Instalação"
+          value={this.store.imovel.instalacao}
+          onChange={this.onInstalacaoChange.bind(this)}
+        />
 
-          <label>Zoneamento?</label>
-          <input type="checkbox"
-            checked={this.store.imovel.zoneamento}
-            onChange={this.onZoneamentoChange.bind(this)}
-            className="form-control"
-          />
-            
-            <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
-              {this.store.buttonText}
-            </Button>
-            <div className="text-center">
-            </div>
+      <label>Zoneamento?</label>
+      <input type="checkbox"
+        checked={this.store.imovel.zoneamento}
+        onChange={this.onZoneamentoChange.bind(this)}
+        className="form-control"
+      />
 
-          </form>
-        </Col>
-      </Row>
+    <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
+      {this.store.buttonText}
+    </Button>
+    <div className="text-center">
     </div>
+
+  </form>
+</Col>
+    </Row>
+  </div>
     )
   }
 
