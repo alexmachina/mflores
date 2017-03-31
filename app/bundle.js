@@ -10684,17 +10684,18 @@ module.exports = ReactComponentTreeHook;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var url = process.env.PORT ? 'https://limitless-hamlet-76018.herokuapp.com' : 'http://localhost:3000';
 var config = {
-  //url: 'https://limitless-hamlet-76018.herokuapp.com'
-  url: 'https://limitless-hamlet-76018.herokuapp.com'
+  url: url
 };
 
 exports.default = config;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
 /* 29 */
@@ -41232,7 +41233,9 @@ var HomePage = (0, _mobxReact.observer)(_class = function (_React$Component) {
   _createClass(HomePage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.store.getImoveis();
+      this.store.getImoveisCarrossel();
+      this.store.getImoveisHomepage();
+      this.store.getImovelPrincipal();
     }
   }, {
     key: 'render',
@@ -41272,7 +41275,8 @@ var HomePage = (0, _mobxReact.observer)(_class = function (_React$Component) {
                 _react2.default.createElement(
                   'div',
                   { className: 'carousel-inner' },
-                  this.store.imoveis.map(function (imovel, i) {
+                  this.store.imoveisCarrossel.map(function (imovel, i) {
+                    console.log("aaaaaaa");
                     var active = 'item';
                     if (i == 0) {
                       active = 'item active';
@@ -41287,7 +41291,7 @@ var HomePage = (0, _mobxReact.observer)(_class = function (_React$Component) {
                         _react2.default.createElement(
                           'p',
                           null,
-                          imovel.titulo
+                          imovel.website.titulo
                         ),
                         _react2.default.createElement(
                           'a',
@@ -41316,22 +41320,22 @@ var HomePage = (0, _mobxReact.observer)(_class = function (_React$Component) {
               _react2.default.createElement(
                 'h2',
                 null,
-                'CH\xC1CARA PAISAGEM'
+                this.store.imovelPrincipal.website.titulo
               ),
               _react2.default.createElement(
                 'a',
                 { href: '#' },
-                _react2.default.createElement('img', { className: 'img-thumbnail', src: 'img/tres.jpg', alt: '', 'class': 'img-responsive' })
+                _react2.default.createElement('img', { className: 'img-thumbnail', src: '/img/imoveis/' + this.store.imovelPrincipal.imagemPrincipal, alt: '', 'class': 'img-responsive' })
               ),
               _react2.default.createElement(
                 'h4',
                 { className: 'h4-center' },
-                ' Linda Ch\xE1cara para Loca\xE7\xE3o ou venda'
+                this.store.imovelPrincipal.website.subtitulo
               ),
               _react2.default.createElement(
                 'p',
                 null,
-                'Rua Gallo da Serra   , 1065 - das Lages - Pr\xF3ximo ao Condom\xEDnio Paisagem - 3,5 k da Raposo Tavares 03 dormit\xF3rios - sendo 01 su\xEDte 03 banheiros internos cozinha completa sala de jantar sala de estar com lareira \xE1rea de churrasqueira com forno de pizza geladeira fog\xE3o a lenha mesa de sinuca mesa de pebolim piscina adulto e infantil banheiros \xE1rea externa quadra de volei de areia campo de futebol caseiro 24 horas'
+                this.store.imovelPrincipal.website.descricao
               ),
               _react2.default.createElement(
                 'p',
@@ -41347,7 +41351,7 @@ var HomePage = (0, _mobxReact.observer)(_class = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'container' },
-            this.store.imoveis.map(function (i) {
+            this.store.imoveisHomepage.map(function (i) {
               return _react2.default.createElement(
                 'section',
                 { className: 'col-md-3 col-sm-6' },
@@ -41356,7 +41360,7 @@ var HomePage = (0, _mobxReact.observer)(_class = function (_React$Component) {
                   null,
                   i.website.titulo
                 ),
-                _react2.default.createElement('img', _defineProperty({ className: 'img-thumbnail', src: '/img/imoveis/' + i.website.imagemPrincipal, alt: 'Foto inicial im\xF3vel 1' }, 'className', 'img-responsive')),
+                _react2.default.createElement('img', _defineProperty({ className: 'img-thumbnail', src: '/img/imoveis/' + i.imagemPrincipal, alt: 'Foto inicial im\xF3vel 1' }, 'className', 'img-responsive')),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement(
                   'h4',
@@ -44813,10 +44817,6 @@ var ImovelForm = (0, _mobxReact.observer)(_class = function (_React$Component) {
                 value: this.store.imovel.observacaoGestor,
                 onChange: this.onObservacaoGestorChange.bind(this)
               }),
-              _react2.default.createElement(_Input2.default, { label: 'Observa\xE7\xE3o (Website)',
-                value: this.store.imovel.observacaoWebsite,
-                onChange: this.onObservacaoWebsiteChange.bind(this)
-              }),
               _react2.default.createElement(_Input2.default, { label: 'Area Constru\xEDda (em metros)',
                 value: this.store.imovel.metragem.areaConstruida,
                 onChange: this.onAreaConstruidaChange.bind(this),
@@ -47521,7 +47521,7 @@ var homePageStore = (_class = function () {
       var _this = this;
 
       (0, _fetch.getJson)(_config2.default.url + '/imoveisCarrossel').then(function (json) {
-        _this.imoveis = json;
+        _this.imoveisCarrossel = json;
       });
     }
   }, {
@@ -47558,7 +47558,15 @@ var homePageStore = (_class = function () {
 }), _descriptor3 = _applyDecoratedDescriptor(_class.prototype, 'imovelPrincipal', [_mobx.observable], {
   enumerable: true,
   initializer: function initializer() {
-    return {};
+    return {
+      imagemPrincipal: '',
+      website: {
+        titulo: '',
+        subtitulo: '',
+        capa: '',
+        descricao: ''
+      }
+    };
   }
 }), _applyDecoratedDescriptor(_class.prototype, 'getImoveisCarrossel', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'getImoveisCarrossel'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'getImoveisHomepage', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'getImoveisHomepage'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'getImovelPrincipal', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'getImovelPrincipal'), _class.prototype)), _class);
 exports.default = homePageStore;
