@@ -2,7 +2,7 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import { Jumbotron, Row, Col } from 'react-bootstrap'
 import RelatorioImovelStore from '../../../stores/admin/relatorios/relatorioImovelStore.js'
-import pdfMake from 'pdfmake'
+
 @observer
 export default class RelatorioImovelPage extends React.Component {
   constructor(props) {
