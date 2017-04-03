@@ -24,6 +24,7 @@ export default class AppBar extends React.Component {
               <Navbar.Collapse>
                 <Nav>
                   <NavItem eventKey={1} href="/#/admin/imoveis">Imoveis</NavItem>
+                  <NavItem eventKey={2} href="/#/admin/relatorios">Relatorios</NavItem>
                 </Nav>
                 <Nav pullRight>
                   <NavItem eventKey={2} href="#">

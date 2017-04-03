@@ -11,9 +11,7 @@ export default class ImovelStore {
   @observable tabIndex = 1
 
   @action getImovel(id) {
-    console.log(id)
     let url = config.url+'/imovel/'+id
-    console.log(url)
     getJson(url).then(imovel =>{ 
       this.imovel = imovel
     }

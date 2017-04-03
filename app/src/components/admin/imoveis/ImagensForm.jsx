@@ -32,7 +32,7 @@ export default class ImagemForm extends React.Component {
                 <Image src={'/img/imoveis/'+this.store.capa} responsive/>
               </Col>
               <input type="file" onChange={this.onCapaChange.bind(this)} />
-              <Button type="Submit">
+              <Button type="submit">
                 Enviar
               </Button>
             </form>
@@ -55,7 +55,7 @@ export default class ImagemForm extends React.Component {
         <Row>
           <Col xs={12} md={8} mdOffset={2}>
             {this.store.imagens.map(i => (
-              <Col className="image-block" xs={12} sm={6} md={4} >
+              <Col  key={i._id} className="image-block" xs={12} sm={6} md={4} >
                 <Image src={'/img/imoveis/'+i.arquivo} responsive onClick={() => {
                   this.store.showModal = true
                   this.store.imagem = i

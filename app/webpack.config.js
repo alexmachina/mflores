@@ -4,6 +4,9 @@ let path = require('path');
 module.exports = {
   entry:'./main.js',
   output: {path: __dirname, filename:'bundle.js'},
+  node: {
+    fs: "empty"
+  },
   module:{
     loaders:[{
       test: /.jsx?$/,

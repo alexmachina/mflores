@@ -12,15 +12,15 @@ export default class LocatarioStore {
     telefone: '',
     celular: '',
     email: '',
-    dataInicioContrato: null,
-    dataFimContrato: null,
-    valor: 0,
+    dataInicioContrato: '',
+    dataFimContrato: '',
+    valor: '',
     seguro: false,
-    dataVencimentoSeguro: null,
+    dataVencimentoSeguro: '',
     garantia: '',
     descricaoGarantia: '',
-    dataInicioValidadeGarantia: null,
-    dataFimValidadeGarantia: null
+    dataInicioValidadeGarantia: '',
+    dataFimValidadeGarantia:'' 
   }
 
   @observable buttonText = "Salvar"
@@ -45,21 +45,23 @@ export default class LocatarioStore {
         imovel.locatario.dataInicioValidadeGarantia ? 
         moment(imovel.locatario.dataInicioValidadeGarantia) : '' 
 
-          imovel.locatario.dataFimValidadeGarantia = 
-          imovel.locatario.dataFimValidadeGarantia ? moment(imovel.locatario.dataFimValidadeGarantia) : ''
-          this.locatario = observable(imovel.locatario)
-        })
+      imovel.locatario.dataFimValidadeGarantia = 
+        imovel.locatario.dataFimValidadeGarantia ?
+        moment(imovel.locatario.dataFimValidadeGarantia) : ''
+
+      this.locatario = observable(imovel.locatario)
+    })
   }
 
-    @action saveLocatario(id) {
-      putJson(config.url + '/imovel/' + id, {locatario: this.locatario}).then(() => {
-        this.buttonText = 'Salvo com sucesso'
-        this.buttonStyle= {backgroundColor: '#7fc857', color: 'white'}
+  @action saveLocatario(id) {
+    putJson(config.url + '/imovel/' + id, {locatario: this.locatario}).then(() => {
+      this.buttonText = 'Salvo com sucesso'
+      this.buttonStyle= {backgroundColor: '#7fc857', color: 'white'}
 
-        setTimeout(() => {
-          this.buttonText = 'Salvar'
-          this.buttonStyle = {}
-        }, 3000)
-      })
-    }
+      setTimeout(() => {
+        this.buttonText = 'Salvar'
+        this.buttonStyle = {}
+      }, 3000)
+    })
+  }
 }

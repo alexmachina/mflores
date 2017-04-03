@@ -62,7 +62,7 @@ export default class DespesasTable extends React.Component {
         </thead>
         <tbody>
           {this.props.despesas.map(d => (
-            <tr>
+            <tr key={d._id}>
               <td>{d.descricao}</td>
               <td>{d.mes}/{d.ano}</td>
               <td>{d.valor}</td>

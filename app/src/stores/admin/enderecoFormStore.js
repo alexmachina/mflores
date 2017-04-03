@@ -34,7 +34,6 @@ export default class EnderecoFormStore {
   @action getEndereco(id) {
     getJson(config.url + '/imovel/' + id).then(imovel => {
       this.endereco = observable(imovel.endereco)
-      console.log(this.endereco)
     })
   }
 }

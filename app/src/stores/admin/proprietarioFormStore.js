@@ -30,7 +30,6 @@ export default class ProprietarioFormStore {
     getJson(config.url + '/imovel/' + id).then(
       imovel => {
       this.proprietario = observable(imovel.proprietario)
-      console.log(imovel)
       }
     )
     }

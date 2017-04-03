@@ -33,9 +33,9 @@ export default class Select extends React.Component{
         >
 
         <option value="">--- Select ---</option>
-        {this.props.options.map(o => {
+        {this.props.options.map((o,i) => {
           o.option = o.option ? o.option : o.value 
-         return <option key={o.value} value={o.value}>{o.option}</option>
+         return <option key={i} value={o.value}>{o.option}</option>
         })}
       </select>
       <div>
