@@ -1,5 +1,7 @@
 let imovelModel = require('../models/imovelModel')
 let imagemModel = require('../models/imagemModel')
+let fs = require('fs')
+let path = require('path')
 
 class ImovelController {
   addImovel(req, res) {
@@ -149,6 +151,20 @@ class ImovelController {
     let find = imovelModel.findOne({'website.principal': true, 'website.disponivel':true})
     find.then(imovel => res.json(imovel))
     find.catch(err => res.status(500).send(err))
+  }
+
+  getRelatorioImovel(req, res) {
+    let find = imovelModel.findById(req.params.id).exec()
+    find.then(imovel => {
+      let docDefinition = {content: 'Hello PDF'}
+      let stream = fs.createWriteStream('public/temp.txt')
+      stream.once('open', () => {
+      stream.write("Hello")
+      stream.end()
+        res.sendFile('temp.txt', {root: './public'})
+      })
+
+    })
   }
 }
 

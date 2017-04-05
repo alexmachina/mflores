@@ -12,7 +12,7 @@ export default class RelatorioImovelPage extends React.Component {
 
   componentDidMount() {
     this.store.getImovel(this.props.params.id)
-    this.store.generatePdf()
+    this.store.generatePdf(this.props.params.id)
   }
 
   render() {

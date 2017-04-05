@@ -1,6 +1,7 @@
 import React from 'react'
 import {Row, Pagination, Col, Button, Jumbotron, Table} from 'react-bootstrap'
 import RelatorioImoveisStore from '../../../stores/admin/relatorios/relatorioImoveisStore.js'
+import RelatorioImovelStore from '../../../stores/admin/relatorios/relatorioImovelStore.js'
 import { observer } from 'mobx-react'
 import { Link } from 'react-router'
 @observer
@@ -8,6 +9,7 @@ export default class RelatorioImoveisPage extends React.Component {
   constructor(props) {
     super(props)
     this.store = new RelatorioImoveisStore()
+    this.imovelStore = new RelatorioImovelStore()
   }
   
   componentDidMount() {
@@ -40,10 +42,11 @@ export default class RelatorioImoveisPage extends React.Component {
               <tbody>
                 {this.store.imoveis.map(i => (
                   <tr key={i._id}>
-                    <td>
-                      <Link to={'/relatorios/imovel/'+i._id}>
+                    <td onClick={() => {
+                      this.imovelStore.generatePdf(i._id)
+                    
+                    }}>
                     {i.titulo}
-                  </Link>
                   </td>
                   </tr>
                 ))}

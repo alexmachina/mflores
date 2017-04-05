@@ -16,6 +16,7 @@ router.get('/imoveisEmDestaque', imovelController.getDestaques)
 router.get('/imoveisCarrossel',imovelController.getCarrossel)
 router.get('/imoveisHomepage', imovelController.getHomepage)
 router.get('/imovelPrincipal', imovelController.getPrincipal)
+router.get('/relatorioImovel/:id', imovelController.getRelatorioImovel)
 
 router.post('/imovel/:id/addImage', upload.single('arquivo'), imovelController.addImage)
 router.delete('/imovel/:id/deleteImage/:imageId', imovelController.deleteImage)
