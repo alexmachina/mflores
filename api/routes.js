@@ -3,6 +3,7 @@ let router = new express.Router();
 let imovelController = require('./controllers/imovelController')
 let loginController = require('./controllers/loginController')
 let despesaController = require('./controllers/despesaController')
+let receitaController = require('./controllers/receitaController')
 let multer = require('multer')
 let upload = multer({dest: 'app/img/imoveis'})
 
@@ -26,7 +27,11 @@ router.put('/imovel/:id/imagemPrincipal', upload.single('arquivo'), imovelContro
 router.post('/imovel/:id/despesa', despesaController.addDespesa)
 router.put('/imovel/:imovelId/despesa/:id', despesaController.updateDespesa)
 router.get('/imovel/:imovelId/despesas', despesaController.getDespesas)
-router.get('/imovel/:imovelId/despesas/:ano/:mes', despesaController.getDespesasByAnoMes)
+router.get('/imovel/:imovelId/despesas/:dataInicial/:dataFinal', despesaController.getDespesasByData)
+
+router.post('/imovel/:imovelId/receita', receitaController.addReceita)
+router.put('/imovel/:imovelId/receita/:receitaId', receitaController.updateReceita)
+router.get('/imovel/:imovelId/receitas', receitaController.getReceitas)
 
 
 

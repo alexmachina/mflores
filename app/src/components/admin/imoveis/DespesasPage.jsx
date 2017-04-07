@@ -27,12 +27,12 @@ export default class DespesasPage extends React.Component {
             />
             <DespesasTable
               despesas={this.store.despesas} 
+              dataInicial = {this.store.search.dataInicial}
+              dataFinal = {this.store.search.dataFinal}
               onEditClick={this.onEditClick.bind(this)}
               onNewClick={this.onNewClick.bind(this)}
-              ano={this.store.search.ano}
-              mes={this.store.search.mes}
-              onAnoChange={this.onSearchAnoChange.bind(this)}
-              onMesChange={this.onSearchMesChange.bind(this)}
+              onDataInicialChange={this.onDataInicialChange.bind(this)}
+              onDataFinalChange={this.onDataFinalChange.bind(this)}
               onSearchFormSubmit={this.onSearchFormSubmit.bind(this)}
               totalDespesas={this.store.totalDespesas}
             />
@@ -48,8 +48,7 @@ export default class DespesasPage extends React.Component {
                 <DespesasForm  
                   onDescricaoChange={this.onDescricaoChange.bind(this)} 
                   onValorChange={this.onValorChange.bind(this)}
-                  onAnoChange={this.onAnoChange.bind(this)}
-                  onMesChange={this.onMesChange.bind(this)}
+                  onDataChange={this.onDataChange.bind(this)}
                   selectedDespesa={this.store.selectedDespesa} 
                   onSubmit={this.onSubmit.bind(this)} />
               </Modal.Body>
@@ -70,17 +69,17 @@ export default class DespesasPage extends React.Component {
     this.store.showModal = true
   }
 
-  onSearchAnoChange(e) {
-    this.store.search.ano = e.target.value
+  onDataInicialChange(e) {
+    this.store.search.dataInicial = e
   }
 
-  onSearchMesChange(e) {
-    this.store.search.mes = e.target.value
+  onDataFinalChange(e) {
+    this.store.search.dataFinal = e
   }
 
   onSearchFormSubmit(e) {
     e.preventDefault()
-    this.store.getDespesasByAnoMes(this.props.id)
+    this.store.getDespesasByData(this.props.id)
   }
 
   onNewClick() {
@@ -103,14 +102,11 @@ export default class DespesasPage extends React.Component {
   onValorChange(e) {
     this.store.selectedDespesa.valor = e.target.value
   }
-
-  onAnoChange(e) {
-    this.store.selectedDespesa.ano = e.target.value
+  onDataChange(e) {
+    this.store.selectedDespesa.data = e
   }
 
-  onMesChange(e) {
-    this.store.selectedDespesa.mes = e.target.value
-  }
+ 
 
   onSelectDespesa(despesa) {
     this.store.selectedDespesa = despesa

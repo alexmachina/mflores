@@ -12,49 +12,44 @@ class DespesaController {
     find.catch(err => res.status(500).send(err))
   }
 
-  getDespesasByAnoMes(req, res) {
-    let find = despesaModel.find({
+  getDespesasByData(req, res) {
+    let dataInicial = new Date(parseInt(req.params.dataInicial))
+    let dataFinal = new Date(parseInt(req.params.dataFinal))
+    let query = { 
       imovel: req.params.imovelId,
-      ano: req.params.ano,
-      mes: req.params.mes
-    }).exec()
+      data: {$gte: dataInicial, $lte: dataFinal}
+    }
+
+    let find = despesaModel.find(query).exec()
 
     let count = despesaModel.aggregate([
-      {$match: { mes: parseInt(req.params.mes),
-        ano: parseInt(req.params.ano),
-        imovel: 
-        mongoose.Types.ObjectId(req.params.imovelId)
-                 }},
+      {$match: {'data': {$gte: dataInicial, $lte: dataFinal}}},
+      {$group: {_id: null, count: {$sum: '$valor'}}}
+    ])
 
-      {$group: {
-        _id: {'ano': '$ano',
-              'mes': '$mes'},
-        count: {$sum: '$valor'}
-      }}]).exec()
-      
-
-    let operations = [find, count]
-    Promise.all(operations).then(results => {
-      res.json({
-        totalDespesas: results[1],
-        despesas: results[0]
+      let operations = [find, count]
+      Promise.all(operations).then(results => {
+        debugger
+        res.json({
+          totalDespesas: results[1][0].count,
+          despesas: results[0]
+        })
       })
-    })
+    }
+
+      addDespesa(req, res) {
+        let despesa = new despesaModel(req.body)
+        despesa.imovel = req.params.id
+        despesa.save(() => res.send()).catch(err => res.status(500).send(err))
+      }
+
+      updateDespesa(req, res) {
+        let  update = despesaModel.findByIdAndUpdate(req.params.id, 
+          {$set: req.body})
+
+        update.then(() => res.send())
+        update.catch(err => res.status(500).send(err))
+      }
   }
 
-  addDespesa(req, res) {
-    let despesa = new despesaModel(req.body)
-    despesa.imovel = req.params.id
-    despesa.save(() => res.send()).catch(err => res.status(500).send(err))
-  }
-
-  updateDespesa(req, res) {
-    let  update = despesaModel.findByIdAndUpdate(req.params.id, 
-      {$set: req.body})
-
-    update.then(() => res.send())
-    update.catch(err => res.status(500).send(err))
-  }
-}
-
-module.exports = new DespesaController()
+    module.exports = new DespesaController()

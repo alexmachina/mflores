@@ -9,6 +9,7 @@ import ProprietarioForm from './ProprietarioForm.jsx'
 import ImagensForm from './ImagensForm.jsx'
 import DespesasPage from './DespesasPage.jsx'
 import WebsiteForm from './WebsiteForm.jsx'
+import ReceitasPage from './receitas/ReceitasPage.jsx'
 import "./styles/formStyles.scss"
 
 @observer
@@ -51,6 +52,9 @@ export default class ImovelPage extends React.Component{
           </Tab>
           <Tab eventKey={7} title="Website">
             <WebsiteForm id={this.props.params.id} />
+          </Tab>
+          <Tab eventKey={8} title="Receitas">
+            <ReceitasPage id={this.props.params.id} />
           </Tab>
         </Tabs>
       </div>

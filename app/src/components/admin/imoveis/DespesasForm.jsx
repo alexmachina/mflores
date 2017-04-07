@@ -1,5 +1,4 @@
 import React from 'react'
-import DespesasFormStore from '../../../stores/admin/despesasFormStore.js'
 import Input from '../../utils/Input.jsx'
 import Select from '../../utils/Select.jsx'
 import DatePicker from 'react-datepicker'
@@ -23,28 +22,8 @@ export default class DespesasForm extends React.Component {
             value={this.props.selectedDespesa.valor}
             onChange={this.props.onValorChange}
           />
-          <Select 
-            onChange={this.props.onMesChange}
-            value={this.props.selectedDespesa.mes}
-            options={[
-              {option: 'Janeiro', value:1},
-              {option: 'Fevereiro', value:2},
-              {option: 'Março', value: 3},
-              {option: 'Abril', value: 4},
-              {option: 'Maio', value:5},
-              {option: 'Junho', value:6},
-              {option: 'Julho', value:7},
-              {option: 'Agosto', value:8},
-              {option: 'Setembro', value: 9},
-              {option: 'Outubro', value: 10},
-              {option: 'Novembro', value: 11},
-              {option: 'Dezembro', value: 12}
-            ]
-            } />
-
-          <Input label="Ano"
-            value={this.props.selectedDespesa.ano}
-            onChange={this.props.onAnoChange}
+          <DatePicker selected={this.props.selectedDespesa.data}
+            onChange={this.props.onDataChange}
           />
           <Button className="save-button" type="submit">
             Salvar
