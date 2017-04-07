@@ -31,7 +31,9 @@ router.get('/imovel/:imovelId/despesas/:dataInicial/:dataFinal', despesaControll
 
 router.post('/imovel/:imovelId/receita', receitaController.addReceita)
 router.put('/imovel/:imovelId/receita/:receitaId', receitaController.updateReceita)
+router.get('/imovel/:imovelId/receita/:receitaId', receitaController.getReceita)
 router.get('/imovel/:imovelId/receitas', receitaController.getReceitas)
+router.get('/imovel/:imovelId/receitas/:dataInicial/:dataFinal', receitaController.getReceitasByData)
 
 
 

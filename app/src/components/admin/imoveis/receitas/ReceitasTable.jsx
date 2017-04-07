@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Col, Button, Table} from 'react-bootstrap'
+import {Glyphicon, Row, Col, Button, Table} from 'react-bootstrap'
 import { observer } from 'mobx-react'
 import Input from '../../../utils/Input.jsx'
 import DatePicker from 'react-datepicker'
@@ -49,6 +49,7 @@ export default class ReceitasTable extends React.Component {
                   <td>Valor</td>
                   <td>Data</td>
                   <td>Observação</td>
+                  <td>Ações</td>
                 </tr>
               </thead>
               <tbody>
@@ -58,10 +59,16 @@ export default class ReceitasTable extends React.Component {
                     <td>{r.valor}</td>
                     <td>{moment(r.data).format('DD/MM/YYYY')}</td>
                     <td>{r.observacao}</td>
+                    <td>
+                      <Button onClick={() => {this.props.onEditClick(r._id)}}>
+                        <Glyphicon glyph="edit" />
+                      </Button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </Table>
+            <span>Total: {this.props.totalReceitas} </span>
           </Col>
         </Row>
       </div>

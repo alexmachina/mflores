@@ -1,4 +1,5 @@
 let despesaModel = require('../models/despesaModel')
+let ObjectId = require('mongoose').Types.ObjectId
 
 let mongoose = require('mongoose')
 class DespesaController {
@@ -23,7 +24,11 @@ class DespesaController {
     let find = despesaModel.find(query).exec()
 
     let count = despesaModel.aggregate([
-      {$match: {'data': {$gte: dataInicial, $lte: dataFinal}}},
+      {$match: {$and : [
+        {'data': {$gte: dataInicial, $lte: dataFinal}},
+        {'imovel': new ObjectId(req.params.imovelId)}
+      ]}
+      },
       {$group: {_id: null, count: {$sum: '$valor'}}}
     ])
 

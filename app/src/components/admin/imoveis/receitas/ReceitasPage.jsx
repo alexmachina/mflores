@@ -26,6 +26,8 @@ export default class ReceitasPage extends React.Component {
               onSearchFormSubmit={this.onSearchSubmit.bind(this)}
               onDataInicialChange={this.onDataInicialChange.bind(this)}
               onDataFinalChange={this.onDataFinalChange.bind(this)}
+              onEditClick={this.onEditClick.bind(this)}
+              totalReceitas={this.store.totalReceitas}
             />
               
           </Col>
@@ -83,10 +85,16 @@ export default class ReceitasPage extends React.Component {
   }
   onSearchSubmit(e) {
     e.preventDefault()
+    this.store.searchByDate(this.props.id)
   }
 
   onObservacaoChange(e) {
     this.store.selectedReceita.observacao = e.target.value
+  }
+
+  onEditClick(receitaId) {
+    this.store.getReceita(receitaId, this.props.id)
+    this.store.showModal = true
   }
 }
 

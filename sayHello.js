@@ -9,7 +9,7 @@ let cutoff = new Date()
 today = new Date()
 cutoff.setDate(cutoff.getDate() + 30)
 
-imovelModel.find({'locatario.dataVencimentoSeguro': {$lt:cutoff, $gt:today}}).exec().then(imoveis => {
+imovelModel.find({'locatario.dataFimValidadeGarantia': {$lt:cutoff, $gt:today}}).exec().then(imoveis => {
   console.log("found")
   try{
 
