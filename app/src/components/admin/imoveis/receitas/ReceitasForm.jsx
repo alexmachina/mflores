@@ -31,6 +31,10 @@ export default class ReceitasForm extends React.Component {
               onChange={this.props.onObservacaoChange}
               value={this.props.selectedReceita.observacao}
             />
+            <Input label="Modo de Pagamento"
+              onChange={this.props.onModoPagamentoChange}
+              value={this.props.selectedReceita.modoPagamento}
+            />
 
           <Button className="save-button" type="submit">
             Salvar

@@ -9,6 +9,7 @@ export default class ReceitasPageStore {
     data: '',
     valor: '',
     observacao: '',
+    modoPagamento: '',
     imovel: ''
   }
 

@@ -49,6 +49,7 @@ export default class ReceitasTable extends React.Component {
                   <td>Valor</td>
                   <td>Data</td>
                   <td>Observação</td>
+                  <td>Modo de Pagamento</td>
                   <td>Ações</td>
                 </tr>
               </thead>
@@ -59,6 +60,7 @@ export default class ReceitasTable extends React.Component {
                     <td>{r.valor}</td>
                     <td>{moment(r.data).format('DD/MM/YYYY')}</td>
                     <td>{r.observacao}</td>
+                    <td>{r.modoPagamento}</td>
                     <td>
                       <Button onClick={() => {this.props.onEditClick(r._id)}}>
                         <Glyphicon glyph="edit" />

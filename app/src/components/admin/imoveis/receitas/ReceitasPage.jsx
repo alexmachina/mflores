@@ -44,6 +44,7 @@ export default class ReceitasPage extends React.Component {
                 onDescricaoChange={this.onDescricaoChange.bind(this)}
                 onDataChange={this.onDataChange.bind(this)}
                 onValorChange={this.onValorChange.bind(this)}
+                onModoPagamentoChange={this.onModoPagamentoChange.bind(this)}
                 onObservacaoChange={this.onObservacaoChange.bind(this)}
                 selectedReceita={this.store.selectedReceita}
                 onSubmit={this.onSubmit.bind(this)}
@@ -90,6 +91,10 @@ export default class ReceitasPage extends React.Component {
 
   onObservacaoChange(e) {
     this.store.selectedReceita.observacao = e.target.value
+  }
+
+  onModoPagamentoChange(e) {
+    this.store.selectedReceita.modoPagamento = e.target.value
   }
 
   onEditClick(receitaId) {

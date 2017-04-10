@@ -4,6 +4,7 @@ let schema = new mongoose.Schema({
   descricao: String,
   valor: Number,
   data: Date,
+  modoPagamento: String,
   imovel: {type: mongoose.Schema.Types.ObjectId, ref:'Imovel'},
   observacao: String
 })
