@@ -5,7 +5,7 @@ const express = require('express'),
 
 let app = express();
 app.set('port', (process.env.PORT || 3000))
-app.set('mongodbURI', (process.env.MONGODB_URI || 'mongodb://mflores:*Cthulhu1@mflores.mongodb.uhserver.com/mflores'))
+app.set('mongodbURI', ('mongodb://admin:*Cthulhu1@cluster0-shard-00-00-qzghe.mongodb.net:27017,cluster0-shard-00-01-qzghe.mongodb.net:27017,cluster0-shard-00-02-qzghe.mongodb.net:27017/mflores?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'))
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 corsMiddleware = function (req, res, next) {
