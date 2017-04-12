@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 
 let schema = new mongoose.Schema({
   cpfCnpj: {type: String, default: ''},
+  nome:{type: String, default: ''},
   rgInscricao: {type: String, default: ''},
   responsavel: {type: String, default: ''},
   telefone: {type: String, default: ''},

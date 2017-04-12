@@ -61,7 +61,7 @@ export default class DespesasTable extends React.Component {
           </tbody>
         </Table>
         <Row>
-          <span>Total mensal: {this.props.totalDespesas}</span>
+          <span>Total mensal: {Intl.NumberFormat('pt-BR').format(this.props.totalDespesas)}</span>
       </Row>
       </div>)
   }

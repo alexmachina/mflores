@@ -57,7 +57,7 @@ export default class ReceitasTable extends React.Component {
                 {this.props.receitas.map(r => (
                   <tr key={r._id}>
                     <td>{r.descricao}</td>
-                    <td>{r.valor}</td>
+                    <td>{Intl.NumberFormat('pt-BR').format(r.valor)}</td>
                     <td>{moment(r.data).format('DD/MM/YYYY')}</td>
                     <td>{r.observacao}</td>
                     <td>{r.modoPagamento}</td>
@@ -70,7 +70,7 @@ export default class ReceitasTable extends React.Component {
                 ))}
               </tbody>
             </Table>
-            <span>Total: {this.props.totalReceitas} </span>
+            <span>Total: {Intl.NumberFormat('pt-BR').format(this.props.totalReceitas)} </span>
           </Col>
         </Row>
       </div>

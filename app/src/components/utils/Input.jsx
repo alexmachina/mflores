@@ -17,14 +17,26 @@ export default class Input extends React.Component{
   }
   render() {
     let message = this.state.message;
+    let inputClassName = null
+    let divClassName = null
+    let divStyle = {}
+    if(this.props.align == 'horizontal') {
+      inputClassName= ''
+      divClassName = ''
+      divStyle = { display: 'inline' }
+    }
+    else {
+      divClassName='form-group'
+      inputClassName= 'form-control'
+    }
 
     return(
-      <div className="form-group">
+      <div className={divClassName} style={divStyle}>
         <label>{this.props.label}</label>
         <input type={this.props.type ? this.props.type : "text"}
           value={this.props.value}
           onChange={this.props.onChange}
-          className={'form-control'}
+          className={inputClassName}
           onBlur={(e) => { this.onBlur(e.target.value); }}
 
         />

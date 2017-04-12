@@ -10,6 +10,8 @@ export default class ImovelFormStore {
     rgi: '',
     instalacao: '',
     observacaoGestor: '',
+    precoVenda: null,
+    precoLocacao: null,
     metragem : {
       areaTotal: '',
       areaConstruida: '',

@@ -20,7 +20,11 @@ export default class ReceitasPageStore {
     dataInicial: '',
     dataFinal: ''
   }
-
+ parseComma2Dot(value) {
+    value = value.replace(',','.')
+    value = parseFloat(value)
+    return value
+  }
   @observable showModal = false
 
   @action getReceitas(imovelId) {
@@ -29,6 +33,7 @@ export default class ReceitasPageStore {
   }
 
   @action saveReceita(imovelId) {
+    this.selectedReceita.valor = this.parseComma2Dot(this.selectedReceita.valor)
     this.selectedReceita.imovel = imovelId
     if(this.selectedReceita._id) {
       putJson(config.url+'/imovel/'+imovelId+'/receita/'+this.selectedReceita._id, this.selectedReceita).then(() =>{

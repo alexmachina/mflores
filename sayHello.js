@@ -25,7 +25,7 @@ imovelModel.find({'locatario.dataFimValidadeGarantia': {$lt:cutoff, $gt:today}})
     let mailOptions = {
       from: 'notificacao@webyang.com.br',
       to: 'alex.xmde@gmail.com',
-      subject: 'Aviso: Vencimento de seguro',
+      subject: 'Aviso: Vencimento de garantia',
       html: createHtml(imoveis)
     }
     transporter.sendMail(mailOptions, err => {
@@ -44,16 +44,16 @@ function createHtml(imoveis) {
   imoveis.forEach(i => {
     tbody += `<tr>
     <td>${i.titulo}</td>
-    <td>${moment(i.locatario.dataVencimentoSeguro).format('DD/MM/YYYY')}</td>
+    <td>${moment(i.locatario.dataFimValidadeGarantia).format('DD/MM/YYYY')}</td>
     </tr>`
   })
   let html = `<div>
-  <span>Aviso: Próximos vencimentos de seguros
+  <span>Aviso: Próximos vencimentos de Garantias
   <table>
     <thead>
     <tr>
       <th>Imovel</th>
-      <th>Vencimento do seguro</th>
+      <th>Vencimento da garantia</th>
     </tr>
     </thead>
     <tbody>

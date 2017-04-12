@@ -24,6 +24,10 @@ moment.locale('pt-BR')
           <Row>
             <Col xs={12} md={8} mdOffset={2}>
               <form onSubmit={this.onSubmit.bind(this)}>
+                <Input label="Nome"
+                  value={this.store.locatario.nome}
+                  onChange={this.onNomeChange.bind(this)}
+                />
                 <Input label="CPF/CNPJ"
                   value={this.store.locatario.cpfCnpj}
                   onChange={this.onCpfCnpjChange.bind(this)}
@@ -120,6 +124,10 @@ moment.locale('pt-BR')
   onSubmit(e) {
     e.preventDefault()
       this.store.saveLocatario(this.props.id)
+  }
+
+  onNomeChange(e) {
+    this.store.locatario.nome = e.target.value
   }
 
   onCpfCnpjChange(e) {

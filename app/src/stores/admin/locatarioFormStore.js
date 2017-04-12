@@ -7,6 +7,7 @@ moment.locale('br')
 export default class LocatarioStore {
   @observable locatario = {
     cpfCnpj: '',
+    nome: '',
     rgInscricao: '',
     responsavel: '',
     telefone: '',

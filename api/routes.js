@@ -4,6 +4,7 @@ let imovelController = require('./controllers/imovelController')
 let loginController = require('./controllers/loginController')
 let despesaController = require('./controllers/despesaController')
 let receitaController = require('./controllers/receitaController')
+let contactController = require('./controllers/contactController')
 let multer = require('multer')
 let upload = multer({dest: 'app/img/imoveis'})
 
@@ -17,7 +18,8 @@ router.get('/imoveisEmDestaque', imovelController.getDestaques)
 router.get('/imoveisCarrossel',imovelController.getCarrossel)
 router.get('/imoveisHomepage', imovelController.getHomepage)
 router.get('/imovelPrincipal', imovelController.getPrincipal)
-router.get('/relatorioImovel/:id', imovelController.getRelatorioImovel)
+router.get('/imoveisByPriceRange/:from/:to', imovelController.getImoveisByPriceRange)
+
 
 router.post('/imovel/:id/addImage', upload.single('arquivo'), imovelController.addImage)
 router.delete('/imovel/:id/deleteImage/:imageId', imovelController.deleteImage)
@@ -34,6 +36,8 @@ router.put('/imovel/:imovelId/receita/:receitaId', receitaController.updateRecei
 router.get('/imovel/:imovelId/receita/:receitaId', receitaController.getReceita)
 router.get('/imovel/:imovelId/receitas', receitaController.getReceitas)
 router.get('/imovel/:imovelId/receitas/:dataInicial/:dataFinal', receitaController.getReceitasByData)
+
+router.post('/contact/sendMessage', contactController.sendMessage)
 
 
 

@@ -82,6 +82,14 @@ export default class ImovelForm extends React.Component {
         onChange={this.onZoneamentoChange.bind(this)}
         className="form-control"
       />
+      <Input label="Preço de venda"
+        onChange={this.onPrecoVendaChange.bind(this)}
+        value={this.store.imovel.precoVenda}
+      />
+      <Input label="Preço de locação"
+        onChange={this.onPrecoLocacaoChange.bind(this)}
+        value={this.store.imovel.precoLocacao}
+      />
 
     <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
       {this.store.buttonText}
@@ -135,5 +143,12 @@ export default class ImovelForm extends React.Component {
 
   onZoneamentoChange(e) {
     this.store.imovel.zoneamento = e.target.checked
+  }
+  onPrecoVendaChange(e) {
+    this.store.imovel.precoVenda = e.target.value
+  }
+
+  onPrecoLocacaoChange(e) {
+    this.store.imovel.precoLocacao = e.target.value
   }
 }

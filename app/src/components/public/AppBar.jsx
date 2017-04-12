@@ -15,8 +15,8 @@ import './styles/estilo_total.css'
                 <ul className="dropdown-menu menu2 " role="menu" aria-labelledby="menu">
                   <li><a href="imovelLocacao/index.html"> Imóvel locação</a></li>
                   <li><a href="imovelVenda/index.html"> Imóvel venda</a></li>
-                  <li><a href="empresa/index.html"> Empresa</a></li>
-                  <li><a href="contato/index.html"> Contato</a></li>
+                  <li><a href="/#/empresa"> Empresa</a></li>
+                  <li><a href="/#/contato"> Contato</a></li>
                 </ul>
               </li>
             </ul>
@@ -26,8 +26,8 @@ import './styles/estilo_total.css'
               <li className="active"><a  href="index.html"> Início</a></li>
               <li><a href="imovelLocacao/index.html"> Imóvel locação</a></li>
               <li><a href="imovelVenda/index.html"> Imóvel venda</a></li>
-              <li><a href="empresa/index.html"> Empresa</a></li>
-              <li><a href="contato/index.html"> Contato</a></li>
+              <li><a href="/#/empresa"> Empresa</a></li>
+              <li><a href="/#/contato"> Contato</a></li>
             </ul>
           </div>
         </div>
@@ -35,7 +35,7 @@ import './styles/estilo_total.css'
       <div className="container">
         <header className="row cima">
           <header className="col-md-12">
-            <a href="index.html" title="atalho para a home"><img  src="/img/tb_logo.png" width="320" alt="Logo Miria Flores" class="img-responsive pull-left img-home" /></a>
+            <a href="index.html" title="atalho para a home"><img  src="/img/tb_logo.png" width="320" alt="Logo Miria Flores" className="img-responsive pull-left img-home" /></a>
           </header>
         </header>
       </div>

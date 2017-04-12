@@ -153,19 +153,15 @@ class ImovelController {
     find.catch(err => res.status(500).send(err))
   }
 
-  getRelatorioImovel(req, res) {
-    let find = imovelModel.findById(req.params.id).exec()
-    find.then(imovel => {
-      let docDefinition = {content: 'Hello PDF'}
-      let stream = fs.createWriteStream('public/temp.txt')
-      stream.once('open', () => {
-      stream.write("Hello")
-      stream.end()
-        res.sendFile('temp.txt', {root: './public'})
-      })
+getImoveisByPriceRange(req, res) {
+    let from = req.params.from
+    let to = req.params.to
 
-    })
+    let find = imovelModel.find({$and: [{ preco: { $gte: from} }, { preco : {$lte: to} } ]}).exec()
+    find.then(imoveis => res.json(imoveis))
+    find.catch(err => res.send(err))
   }
+  
 }
 
 module.exports = new ImovelController()
