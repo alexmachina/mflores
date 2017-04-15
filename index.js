@@ -1,4 +1,4 @@
-let devEnv = 'development'
+let devEnv = 'production'
 const express = require('express'),
       bodyParser = require('body-parser'),
   router = require('./api/routes'),
