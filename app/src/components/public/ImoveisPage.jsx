@@ -25,15 +25,17 @@ export default class ImoveisPage extends React.Component {
         <Row>
           <Col className="search-bar text-center" xs={12} md={12}>
             <Col xs={12} md={6}>
+              <Col xs={12}>
               <span>Faixa de Preço de Venda</span>
               <Range
                 step={5000}
                 min={5000}
                 max={1000000}
-                defaultValue={this.store.precoVendaRange}
+                defaultValue={[5000, 1000000]}
                 onChange={this.onPrecoVendaRangeChange.bind(this)}
                 style={{marginBottom: '20px'}}
               />
+            </Col>
             </Col>
             <Col xs={12} md={6}>
               <span>Faixaa de Preço de Locação</span>
@@ -41,7 +43,7 @@ export default class ImoveisPage extends React.Component {
                   step={100}
                   min={100}
                   max={100000}
-                  defaultValue={this.store.precoLocacaoRange}
+                  defaultValue={[100, 10000]}
                   onChange={this.onPrecoLocacaoRangeChange.bind(this)}
                   style={{marginBottom: '20px'}}
                 />
@@ -52,11 +54,14 @@ export default class ImoveisPage extends React.Component {
           <Col className="imoveis">
             <Row>
             {this.store.imoveis.map(i => (
-            <Col xs={12} md={4}>
-              <Image src={'/img/imoveis/'+i.imagemPrincipal} responsive/>
+              <Col xs={12} md={3} style={{}}>
               <h3>{i.website.titulo}</h3>
-              <h4>{i.website.subtitulo}</h4>
-
+                <Image src={'/img/imoveis/'+i.imagemPrincipal}  style={{height:'175px'}} responsive/>
+              <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
+              <p>{i.website.descricao}</p>
+              <Button bsSize="lg" bsStyle="default">
+                Veja mais >>
+              </Button>
             </Col>
             ))}
           </Row>
