@@ -1,4 +1,5 @@
 let nodemailer = require('nodemailer')
+let config = require('../../config.js')
 
 class ContactController {
  
@@ -21,14 +22,13 @@ class ContactController {
       port: 465,
       auth:{
         user:'notificacao@webyang.com.br',
-        pass: 'cthulhu1'
+        pass: config.emailPassword
       }
     })
-    console.log('transport created')
     let mailOptions = {
       from: 'notificacao@webyang.com.br',
-      to: 'alex.xmde@gmail.com',
-      subject: 'Mensagem de contato',
+      //      to: 'miriaflores@creci.org.br',
+      subject: 'Mensagem do Website',
       html: createHtml(req.body)
     }
     transporter.sendMail(mailOptions, err => {

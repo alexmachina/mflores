@@ -19,6 +19,7 @@ router.get('/imoveisCarrossel',imovelController.getCarrossel)
 router.get('/imoveisHomepage', imovelController.getHomepage)
 router.get('/imovelPrincipal', imovelController.getPrincipal)
 router.get('/imoveisByPriceRange/:from/:to', imovelController.getImoveisByPriceRange)
+router.get('/searchImoveis/:search', imovelController.searchImoveis)
 
 
 router.post('/imovel/:id/addImage', upload.single('arquivo'), imovelController.addImage)

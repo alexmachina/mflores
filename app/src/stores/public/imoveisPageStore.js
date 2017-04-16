@@ -11,8 +11,13 @@ export default class ImoveisPageStore {
   @observable items = 0
   
 
-  @action getImoveis() {
-    getJson(config.url+'/imoveis?page='+this.activePage).then(
+  @action getImoveis(search) {
+    let url = config.url+'/imoveis?page='+this.activePage
+
+    if (this.search) {
+      url = config.url+'/searchImoveis/'+this.search+'?page='+this.activePage
+    }
+    getJson(url).then(
       res => {
         this.imoveis = res.imoveis
         this.items = Math.ceil(res.count/10)

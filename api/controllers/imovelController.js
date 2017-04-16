@@ -132,6 +132,7 @@ class ImovelController {
 
     find.then(imoveis => res.json(imoveis))
     find.catch(err => res.status(500).send(err))
+  find.catch(err => res.send(err))
   }
 
   getCarrossel(req, res) {
@@ -160,8 +161,28 @@ getImoveisByPriceRange(req, res) {
     let find = imovelModel.find({$and: [{ preco: { $gte: from} }, { preco : {$lte: to} } ]}).exec()
     find.then(imoveis => res.json(imoveis))
     find.catch(err => res.send(err))
-  }
-  
 }
+searchImoveis(req, res) {
+  let query = { $or: [
+    {'website.titulo' : {$regex: new RegExp(req.params.search, 'i')}},
+    {'website.subtitulo': {$regex: req.params.search}}
+  ]}
+
+  let page = req.param('page')
+
+  let findCount = imovelModel.count(query)
+
+  let find = imovelModel.find(query).skip((page -1)*12).limit(12).exec()
+  let operations = [find, findCount]
+
+  Promise.all(operations).then(result => {
+    console.log(result)
+    let [imoveis, count] = result
+    res.json({count,imoveis})
+  }).catch(err => res.status(500).send(err))
+}
+}
+
+
 
 module.exports = new ImovelController()

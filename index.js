@@ -1,4 +1,4 @@
-let devEnv = 'production'
+let config = require('./config.js')
 const express = require('express'),
       bodyParser = require('body-parser'),
   router = require('./api/routes'),
@@ -6,14 +6,8 @@ const express = require('express'),
 
 let app = express();
 app.set('port', (process.env.PORT || 3000))
-switch(devEnv) {
-  case 'development': 
-    app.set('mongodbURI', 'mongodb://localhost/mflores')
-    break
-  case 'production':
-    app.set('mongodbURI', ('mongodb://admin:*Cthulhu1@cluster0-shard-00-00-qzghe.mongodb.net:27017,cluster0-shard-00-01-qzghe.mongodb.net:27017,cluster0-shard-00-02-qzghe.mongodb.net:27017/mflores?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'))
-    break
-}
+console.log(config.mongoDbConString)
+let conString = config.mongoDbConString
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 corsMiddleware = function (req, res, next) {
@@ -29,7 +23,8 @@ corsMiddleware = function (req, res, next) {
 app.use('/', corsMiddleware, express.static('app'));
 app.use(corsMiddleware);
 
-mongoose.connect(app.get('mongodbURI'))
+console.log(app.get('mongodbURI'))
+mongoose.connect(conString)
 
 app.use(router)
 
