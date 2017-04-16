@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Col, Row, FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
+import {Image, Button, Col, Row, FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
 import LoginStore from '../../stores/admin/loginStore.js'
 import {observer} from 'mobx-react'
 import './styles/login.scss'
@@ -15,7 +15,7 @@ export default class LoginPage extends React.Component {
       <div className="container-fluid">
         <Row>
           <Col xs={12} md={3} mdOffset={4} id="login-form-container">
-          <h1>Mirian Flores</h1>
+            <Image src="/img/tb_logo.png" responsive />
             <form onSubmit={this.onSubmit.bind(this)}>
               <FormGroup>
                 <ControlLabel>Usuário</ControlLabel>

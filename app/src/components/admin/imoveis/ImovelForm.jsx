@@ -90,7 +90,6 @@ export default class ImovelForm extends React.Component {
         onChange={this.onPrecoLocacaoChange.bind(this)}
         value={this.store.imovel.precoLocacao}
       />
-
     <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
       {this.store.buttonText}
     </Button>

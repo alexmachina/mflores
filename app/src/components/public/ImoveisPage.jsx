@@ -7,20 +7,19 @@ import { observer } from 'mobx-react'
 import Slider, { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css';
 import './styles/imoveis.scss'
+import { Link } from 'react-router'
 
 @observer
 export default class ImoveisPage extends React.Component {
   constructor(props) {
     super(props)
     this.store = new ImoveisPageStore()
-    
+
   }
   componentDidMount() {
     this.store.getImoveis()
   }
   render() {
-    const createSliderWithTooltip = Slider.createSliderWithTooltip;
-    const Range = createSliderWithTooltip(Slider.Range);
     return (
       <div className="container">
       <header className="row cima">
@@ -41,73 +40,111 @@ export default class ImoveisPage extends React.Component {
         <Col className="search-bar text-center" xs={12} md={12}>
           <Col xs={12} md={6}>
             <Col xs={12}>
-              <span>Faixa de Preço de Venda</span>
-              <Range
-                step={5000}
-                min={5000}
-                max={1000000}
-                defaultValue={[5000, 1000000]}
-                onChange={this.onPrecoVendaRangeChange.bind(this)}
-                style={{marginBottom: '20px'}}
-              />
+              <h3>Faixa de Preço de Venda</h3>
+              <form onSubmit={this.onPrecoVendaSubmit.bind(this)} >
+                <Input label="De"
+                  onChange={this.onPrecoVendaDeChange.bind(this)}
+                  value={this.store.precoVendaDe}
+                />
+                <Input label="Até"
+                  onChange={this.onPrecoVendaAteChange.bind(this)}
+                  value={this.store.precoVendaAte}
+                />
+                <Button type="submit">
+                  Pesquisar
+                </Button>
+              </form>
             </Col>
           </Col>
           <Col xs={12} md={6}>
-            <span>Faixaa de Preço de Locação</span>
-            <Range
-              step={100}
-              min={100}
-              max={100000}
-      defaultValue={[100, 10000]}
-      onChange={this.onPrecoLocacaoRangeChange.bind(this)}
-      style={{marginBottom: '20px'}}
-    />
-  </Col>
-</Col>
-        </Row>
-        <Row>
-          <Col className="imoveis">
-            <Row>
-      {this.store.imoveis.map(i => (
-        <Col xs={12} md={3} style={{minHeight:'450px'}}>
-        <h3>{i.website.titulo}</h3>
-        <Image src={'/img/imoveis/'+i.imagemPrincipal} className="imovel-image" responsive/>
-        <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
-        <p>{i.website.descricao}</p>
-        <Button bsSize="lg" bsStyle="default">
-          Veja mais >>
-        </Button>
-      </Col>
-      ))}
-    </Row>
+            <h3>Faixa de Preço de Locação</h3>
+            <form onSubmit={this.onPrecoLocacaoSubmit.bind(this)}>
+              <Input label="De"
+                onChange={this.onPrecoLocacaoDeChange.bind(this)}
+                value={this.store.precoLocacaoDe}
+              />
+              <Input label="Até" 
+                onChange={this.onPrecoLocacaoAteChange.bind(this)}
+                value={this.store.precoLocacaoAte}
+              />
+              <Button type="submit">
+                Pesquisar
+              </Button>
+            </form>
+          </Col>
+        </Col>
+      </Row>
       <Row>
-        <Col xs={12}>
-      <Pagination
-      activePage={this.store.activePage}
-      items={this.store.items}
-      onSelect={(e) => {
-        this.store.activePage = e
-        this.store.getImoveis()
-      }}
-      />
-    </Col>
-  </Row>
+        <Col className="imoveis">
+          <Row>
+            {this.store.imoveis.map(i => (
+              <Col key={i._id} xs={12} md={3} style={{minHeight:'450px'}}>
+                <h3>{i.website.titulo}</h3>
+                <Image src={'/img/imoveis/'+i.imagemPrincipal} className="imovel-image" responsive/>
+                <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
+                <p>{i.website.descricao}</p>
+                <Link to={`/imovel/${i._id}`}>
+                  <Button bsSize="lg" bsStyle="default">
+                    Veja mais >>
+                  </Button>
+                </Link>
+              </Col>
+            ))}
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Pagination
+                activePage={this.store.activePage}
+                items={this.store.items}
+                onSelect={(e) => {
+                  this.store.activePage = e
+                  this.store.getImoveis()
+                }}
+              />
+            </Col>
+          </Row>
 
-      </Col>
+        </Col>
       </Row>
     </div>
     )
-    }
+  }
 
   onSearchChange(e) {
     this.store.search = e.target.value
     this.store.activePage = 1
-    this.store.getImoveis()
+    this.store.getImoveis('search')
 
   }
 
+  onPrecoVendaDeChange(e) {
+    this.store.precoVendaDe = e.target.value
+  }
+  onPrecoVendaAteChange(e) {
+    this.store.precoVendaAte = e.target.value
+  }
+
+  onPrecoVendaSubmit(e) {
+    e.preventDefault()
+    this.store.search = ''
+    this.store.getImoveis('precoVenda')
+  }
+
+  onPrecoLocacaoDeChange(e) {
+    this.store.precoLocacaoDe = e.target.value
+  }
+  onPrecoLocacaoAteChange(e) {
+    this.store.precoLocacaoAte = e.target.value
+  }
+
+  onPrecoLocacaoSubmit(e) {
+    e.preventDefault()
+    this.store.search = ''
+    this.store.getImoveis('precoLocacao')
+  }
+
   onPrecoVendaRangeChange(e) {
-    this.store.precoVendaRange = e
+    this.setState({prevoVendaRange: e})
   }
 
   onPrecoLocacaoRangeChange(e) {

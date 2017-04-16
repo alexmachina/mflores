@@ -9,6 +9,8 @@ export default class EmpresaPage extends React.Component {
       zoom: 18
     };
 
+    let api_key = 'AIzaSyB15_zdGasATMD42y_x5uuqDvxiDjmB22g'
+
     return (
       <div className="container">
       <header className="row cima">
@@ -35,6 +37,9 @@ export default class EmpresaPage extends React.Component {
       style={{height: '350px'}}
       className="col-md-5">
       <GoogleMapReact 
+      bootstrapURLKeys={{
+        key: api_key
+      }}
       defaultCenter={defaultProps.center}
       defaultZoom={defaultProps.zoom}
       >

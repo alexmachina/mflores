@@ -8,6 +8,7 @@ import RelatorioImovelPage from './src/components/admin/relatorios/RelatorioImov
 import HomePage from './src/components/public/HomePage.jsx'
 import ContactPage from './src/components/public/ContactPage.jsx'
 import EmpresaPage from './src/components/public/EmpresaPage.jsx'
+import PublicImovelPage from './src/components/public/ImovelPage.jsx'
 import PublicImoveisPage from './src/components/public/ImoveisPage.jsx'
 import ReactDOM from 'react-dom'
 import React from 'react'
@@ -20,6 +21,7 @@ const rt = (
       <Route path="/contato" component={ContactPage} />
       <Route path="/empresa" component={EmpresaPage} />
       <Route path="/imoveis" component={PublicImoveisPage} />
+      <Route path="/imovel/:id" component={PublicImovelPage} />
     </Route>
     <Route path="/admin" component={AdminPage} >
       <Route path="/admin/imoveis" component={ImoveisPage} />

@@ -154,19 +154,43 @@ class ImovelController {
     find.catch(err => res.status(500).send(err))
   }
 
-getImoveisByPriceRange(req, res) {
-    let from = req.params.from
-    let to = req.params.to
+buscarImoveisPorPrecoDeVenda(req, res) {
+  let from = req.params.from,
+    to = req.params.to,
+    query = {$and: [{ precoVenda: { $gte: from} }, { precoVenda : {$lte: to} }, {'website.disponivel':true}, {precoVenda: {$ne: 0 }}]},
+    findImoveis = imovelModel.find(query).exec(),
+    findCount = imovelModel.count(query),
+    operations = [findImoveis, findCount]
 
-    let find = imovelModel.find({$and: [{ preco: { $gte: from} }, { preco : {$lte: to} } ]}).exec()
-    find.then(imoveis => res.json(imoveis))
-    find.catch(err => res.send(err))
+    Promise.all(operations).then(results => {
+      let [imoveis, count] = results
+
+      res.json({imoveis, count})
+    }).catch(err => res.status(500).send(err))
+
+}
+
+buscarImoveisPorPrecoDeLocacao(req, res) {
+  let from = req.params.from,
+    to = req.params.to,
+    query = {$and: [{ precoLocacao: { $gte: from} }, { precoLocacao : {$lte: to} },{'website.disponivel':true} ]},
+    findImoveis = imovelModel.find(query).exec(),
+    findCount = imovelModel.count(query),
+    operations = [findImoveis, findCount]
+
+    Promise.all(operations).then(results => {
+      let [imoveis, count] = results
+
+      res.json({imoveis, count})
+    }).catch(err => res.status(500).send(err))
+
+
 }
 searchImoveis(req, res) {
   let query = { $or: [
     {'website.titulo' : {$regex: new RegExp(req.params.search, 'i')}},
     {'website.subtitulo': {$regex: req.params.search}}
-  ]}
+  ], 'website.disponivel': true}
 
   let page = req.param('page')
 
@@ -180,6 +204,19 @@ searchImoveis(req, res) {
     let [imoveis, count] = result
     res.json({count,imoveis})
   }).catch(err => res.status(500).send(err))
+}
+
+buscarImoveisDisponiveis(req, res) {
+  let query = {'website.disponivel' : true},
+    page = req.param('page'),
+    findImoveis = imovelModel.find(query).skip((page -1) * 12).limit(12).exec(),
+    findCount = imovelModel.count(query),
+    operations = [findImoveis, findCount]
+
+  Promise.all(operations).then(results => {
+    let [imoveis, count] = results
+    res.json({imoveis, count})
+  })
 }
 }
 

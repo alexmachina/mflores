@@ -18,8 +18,10 @@ router.get('/imoveisEmDestaque', imovelController.getDestaques)
 router.get('/imoveisCarrossel',imovelController.getCarrossel)
 router.get('/imoveisHomepage', imovelController.getHomepage)
 router.get('/imovelPrincipal', imovelController.getPrincipal)
-router.get('/imoveisByPriceRange/:from/:to', imovelController.getImoveisByPriceRange)
+router.get('/buscarImoveisPorPrecoDeVenda/:from/:to', imovelController.buscarImoveisPorPrecoDeVenda)
+router.get('/buscarImoveisPorPrecoDeLocacao/:from/:to', imovelController.buscarImoveisPorPrecoDeLocacao)
 router.get('/searchImoveis/:search', imovelController.searchImoveis)
+router.get('/buscarImoveisDisponiveis', imovelController.buscarImoveisDisponiveis)
 
 
 router.post('/imovel/:id/addImage', upload.single('arquivo'), imovelController.addImage)

@@ -6,17 +6,31 @@ export default class ImoveisPageStore {
   @observable imoveis = []
   @observable activePage = 1
   @observable search = ''
-  @observable precoVendaRange = [0, 1000]
-  @observable precoLocacaoRange = [0, 100000]
+  @observable precoVendaDe = 0
+  @observable precoVendaAte = 100000
+  @observable precoLocacaoDe = 0
+  @observable precoLocacaoAte = 100000
   @observable items = 0
   
 
-  @action getImoveis(search) {
-    let url = config.url+'/imoveis?page='+this.activePage
+  @action getImoveis(by) {
+    let url = '';
 
-    if (this.search) {
+    switch (by) {
+      case 'search':
       url = config.url+'/searchImoveis/'+this.search+'?page='+this.activePage
+        break
+      case 'precoVenda':
+        url = config.url+'/buscarImoveisPorPrecoDeVenda/'+this.precoVendaDe+'/'+this.precoVendaAte
+        break
+      case 'precoLocacao':
+        url = config.url +'/buscarImoveisPorPrecoDeLocacao/'+this.precoLocacaoDe+'/'+this.precoLocacaoAte
+        break
+      default:
+        url = config.url + '/buscarImoveisDisponiveis?page=' + this.activePage
+        break
     }
+
     getJson(url).then(
       res => {
         this.imoveis = res.imoveis
