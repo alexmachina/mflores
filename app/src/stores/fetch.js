@@ -39,6 +39,8 @@ export function putJson(url, json) {
 }
 
 export function postJson(url, json) {
+  console.log('Sending post to ' + url)
+  console.log(json)
   return new Promise((resolve, reject) => {
     fetch(url, {
       method:'POST',

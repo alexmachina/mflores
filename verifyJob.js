@@ -1,41 +1,42 @@
 let imovelModel = require('./api/models/imovelModel')
 let mongoose = require('mongoose')
-let mongo_uri = process.env.MONGODB_URI ? process.env.MONGODB_URI : 'mongodb://localhost/mflores'
-mongoose.connect(mongo_uri)
+let config = require('./config')
 let nodemailer = require('nodemailer')
 let moment = require('moment')
 
+module.exports = function verifyAndSendEmail() {
 let cutoff = new Date()
 today = new Date()
 cutoff.setDate(cutoff.getDate() + 30)
 
 imovelModel.find({'locatario.dataFimValidadeGarantia': {$lt:cutoff, $gt:today}}).exec().then(imoveis => {
-  console.log("found")
-  try{
+  if (imoveis.length) {
+    try{
 
-  let transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.com',
-    port: 465,
-    auth:{
-      user:'notificacao@webyang.com.br',
-      pass: 'cthulhu1'
-    }
-  })
-    console.log('transport created')
-    let mailOptions = {
-      from: 'notificacao@webyang.com.br',
-      to: 'alex.xmde@gmail.com',
-      subject: 'Aviso: Vencimento de garantia',
-      html: createHtml(imoveis)
-    }
-    transporter.sendMail(mailOptions, err => {
-      if(err)
-        return console.log(err)
+      let transporter = nodemailer.createTransport({
+        host: 'smtp.zoho.com',
+        port: 465,
+        auth:{
+          user:'notificacao@webyang.com.br',
+          pass: 'cthulhu1'
+        }
+      })
+      console.log('transport created')
+      let mailOptions = {
+        from: 'notificacao@webyang.com.br',
+        to: 'alex.xmde@gmail.com',
+        subject: 'Aviso: Vencimento de garantia',
+        html: createHtml(imoveis)
+      }
+      transporter.sendMail(mailOptions, err => {
+        if(err)
+          return console.log(err)
 
-      console.log('Email sent')
-    })
-  } catch(ex) {
-    console.log(ex)
+        console.log('Email sent')
+      })
+    } catch(ex) {
+      console.log(ex)
+    }
   }
 })
 
@@ -62,4 +63,5 @@ function createHtml(imoveis) {
   </table>
   </div>`
     return html
+}
 }

@@ -4,13 +4,15 @@ const express = require('express'),
   router = require('./api/routes'),
   mongoose = require('mongoose')
 
+let verifyAndSendEmail = require('./verifyJob')
+
 let app = express();
 app.set('port', (process.env.PORT || 3000))
-console.log(config.mongoDbConString)
 let conString = config.mongoDbConString
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 corsMiddleware = function (req, res, next) {
+  console.log('appending CORS')
   res.header('Access-Control-Allow-Origin', req.headers.origin || "*");
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, HEAD, DELETE, OPTIONS');
   res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
@@ -21,11 +23,10 @@ corsMiddleware = function (req, res, next) {
 }
 
 app.use('/', corsMiddleware, express.static('app'));
-app.use(corsMiddleware);
 
-console.log(app.get('mongodbURI'))
 mongoose.connect(conString)
 
+app.use(corsMiddleware);
 app.use(router)
 
 app.listen(app.get('port'), err => err ? 
@@ -34,3 +35,9 @@ app.listen(app.get('port'), err => err ?
 );
 
 
+var CronJob = require('cron').CronJob;
+new CronJob('00 55 10 * * *', function() {
+  verifyAndSendEmail()
+}, null, true, 'America/Sao_Paulo');
+
+console.log('CRON Job set')

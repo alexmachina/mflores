@@ -24,6 +24,10 @@ export default class ContactPageStore {
         this.buttonText = 'Enviado com sucesso!'
         this.buttonStyle = { backgroundColor: 'green', color:'white' }
         this.sent = true
+      }).catch(err => {
+        buttonText = 'Erro',
+        buttonStyle= {backgroundColor: 'red', color: 'white'}
+        console.log(err)
       })
     }
   }
