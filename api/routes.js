@@ -29,6 +29,8 @@ router.delete('/imovel/:id/deleteImage/:imageId', imovelController.deleteImage)
 router.put('/imovel/:id/image/:imageId', upload.single('arquivo'), imovelController.updateImage)
 router.put('/imovel/:id/imagemPrincipal', upload.single('arquivo'), imovelController.updateImagemPrincipal)
 
+router.delete('/imovel/:id', imovelController.removeImovel)
+
 router.post('/imovel/:id/despesa', despesaController.addDespesa)
 router.put('/imovel/:imovelId/despesa/:id', despesaController.updateDespesa)
 router.get('/imovel/:imovelId/despesas', despesaController.getDespesas)

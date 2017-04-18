@@ -15,8 +15,9 @@ let schema = new mongoose.Schema({
   zoneamento: {type: Boolean, default: false},
   tipo:{type: {type: String, default: ''}},
   imagemPrincipal: {type:String, default: ''},
-  precoVenda:{type:Number, default: 0},
-  precoLocacao: {type:Number, default: 0},
+  precoVenda:{type:Number, default:null },
+  precoLocacao: {type:Number, default: null},
+  valorCondominio: {type:Number, defaul: null},
 
   endereco: {type: enderecoModel, default:enderecoModel},
   locatario: {type: locatarioModel, default: locatarioModel},

@@ -80,9 +80,17 @@ export default class ImoveisPage extends React.Component {
             {this.store.imoveis.map(i => (
               <Col key={i._id} xs={12} md={3} style={{minHeight:'450px'}}>
                 <h3>{i.website.titulo}</h3>
-                <Image src={'/img/imoveis/'+i.imagemPrincipal} className="imovel-image" responsive/>
+                <Image src={'/img/imoveis/thumbnails/'+i.imagemPrincipal} className="imovel-image" responsive/>
                 <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
                 <p>{i.website.descricao}</p>
+                {i.precoVenda ? (
+                <p>Preço de venda: {this.formatToReal(i.precoVenda)}</p>
+                ) : <p></p>
+                }
+
+                {i.precoLocacao ?
+                (<p>Preço de locação: {this.formatToReal(i.precoLocacao)}</p>
+                ) : <p></p>}
                 <Link to={`/imovel/${i._id}`}>
                   <Button bsSize="lg" bsStyle="default">
                     Veja mais >>
@@ -105,8 +113,7 @@ export default class ImoveisPage extends React.Component {
           </Row>
 
         </Col>
-      </Row>
-    </div>
+      </Row> </div>
     )
   }
 
@@ -129,6 +136,9 @@ export default class ImoveisPage extends React.Component {
     this.store.search = ''
     this.store.getImoveis('precoVenda')
   }
+  formatToReal(valor) {
+    return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
+  }
 
   onPrecoLocacaoDeChange(e) {
     this.store.precoLocacaoDe = e.target.value
@@ -149,6 +159,13 @@ export default class ImoveisPage extends React.Component {
 
   onPrecoLocacaoRangeChange(e) {
     this.store.precoLocacaoRange = e
+  }
+
+  formatToReal(valor) {
+    if(valor)
+      return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
+    else
+      return ''
   }
 
 }

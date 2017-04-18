@@ -1,7 +1,7 @@
 import React from 'react'
 import ImovelFormStore from '../../../stores/admin/imovelFormStore'
 import { observer } from 'mobx-react'
-import {Row, Col, Button} from 'react-bootstrap'
+import {Row,Modal, Col, Button} from 'react-bootstrap'
 import Input from '../../utils/Input.jsx'
 import Select from '../../utils/Select.jsx'
 import validator from 'validator'
@@ -31,6 +31,11 @@ export default class ImovelForm extends React.Component {
         <Row>
           <Col xs={12} md={8} mdOffset={2}>
             <form onSubmit={this.onSubmit.bind(this)}>
+              <Input 
+                label="Titulo"
+                onChange={this.onTituloChange.bind(this)}
+                value={this.store.imovel.titulo}
+              />
               <Input 
                 label="RGI"
                 validationMessage="Campo invalido"
@@ -90,22 +95,51 @@ export default class ImovelForm extends React.Component {
         onChange={this.onPrecoLocacaoChange.bind(this)}
         value={this.store.imovel.precoLocacao}
       />
+      <Input label="Valor do Condominio"
+        onChange={this.onValorCondominioChange.bind(this)}
+        value={this.store.imovel.valorCondominio}
+      />
     <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
       {this.store.buttonText}
     </Button>
     <div className="text-center">
     </div>
+    <Button onClick={() => this.store.showDeleteModal = true} style={{marginTop:'30px',width:'100%'}} className="btn btn-danger">
+      Deletar
+    </Button>
+    <Modal show={this.store.showDeleteModal} onHide={() => this.store.showDeleteModal = false}>
+      <Modal.Header closeButton>
+        <Modal.Title>Deletar Imovel?</Modal.Title>
+      </Modal.Header>
 
+      <Modal.Body>
+      </Modal.Body>
+
+      <Modal.Footer>
+
+        <Button bsStyle="danger" onClick={this.onDeleteButtonClick.bind(this)}style={{}}>Sim</Button>
+        <Button onClick={() => this.store.showDeleteModal = false}>Cancelar</Button>
+      </Modal.Footer>
+
+    </Modal>
   </form>
-</Col>
+      </Col>
     </Row>
   </div>
     )
   }
 
+  onDeleteButtonClick(e) {
+    this.store.delete(this.props.id)
+  }
+
   onSubmit(e) {
     e.preventDefault()
     this.store.save(this.props.id)
+  }
+
+  onTituloChange(e) {
+    this.store.imovel.titulo = e.target.value
   }
 
   onRgiChange(e) {
@@ -149,5 +183,9 @@ export default class ImovelForm extends React.Component {
 
   onPrecoLocacaoChange(e) {
     this.store.imovel.precoLocacao = e.target.value
+  }
+
+  onValorCondominioChange(e) {
+    this.store.imovel.valorCondominio = e.target.value
   }
 }

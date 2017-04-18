@@ -47,11 +47,30 @@ export default class ImovelPage extends React.Component {
         </Col>
         <Col xs={12} md={6} className="text-center">
           <h1 style={{color:'#c8002d'}}>{this.store.imovel.website.subtitulo}</h1>
+          <Col className="text-left">
+            {this.store.imovel.precoVenda ?
+                (
+            <h3>Preço de venda:{this.formatToReal(this.store.imovel.precoVenda)}</h3>
+                ) : <h3></h3>
+            }
+
+            {this.store.imovel.precoLocacao ? (
+            <h3>Preço de Locação: {this.formatToReal(this.store.imovel.precoLocacao)}</h3>
+            ) : <h3></h3>
+            }
+          </Col>
           <p>{this.store.imovel.website.descricao}</p>
         </Col>
       </Row>
     </div>
     )
-  }
+}
+formatToReal(valor) {
+  if(valor)
+    return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
+  else
+    return ''
+}
+
 
 }

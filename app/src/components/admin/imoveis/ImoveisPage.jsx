@@ -133,9 +133,10 @@ export default class ImoveisPage extends React.Component {
   }
 
   onTituloSubmit() {
-    this.refs.tituloInput.onBlur()
     if(this.store.titulo) {
-    this.store.saveImovel()
+      this.store.saveImovel()
+    } else {
+      this.refs.tituloInput.onBlur()
     }
   }
 }

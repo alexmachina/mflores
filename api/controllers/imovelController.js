@@ -2,6 +2,7 @@ let imovelModel = require('../models/imovelModel')
 let imagemModel = require('../models/imagemModel')
 let fs = require('fs')
 let path = require('path')
+let sharp = require('sharp')
 
 class ImovelController {
   addImovel(req, res) {
@@ -34,11 +35,18 @@ class ImovelController {
   }
 
   updateImovel(req, res) {
-    console.log(req.body)
     let update = imovelModel.findByIdAndUpdate(req.params.id,
       {$set : req.body})
     update.then(() => res.send())
     update.catch(err => res.status(500).send(err))
+  }
+
+  removeImovel(req, res) {
+    let remove = imovelModel.remove({_id: req.params.id})
+
+    remove.then(() => res.send())
+    remove.catch(err => res.status(500).send(err))
+
   }
 
   addImage(req, res) {
@@ -46,6 +54,23 @@ class ImovelController {
       let imagem = req.body
       let arquivo = req.file.filename
       imagem.arquivo = arquivo
+      fs.readFile(req.file.path, (err, buf) => {
+        if (err) {
+          console.log(err)
+          return res.status(500).send(err)
+        }
+        sharp(buf)
+          .resize(350, 350)
+          .max()
+          .ignoreAspectRatio()
+          .toFile('app/img/imoveis/thumbnails/'+arquivo, 
+            (err,info) => {
+              if (err) {
+                console.log(err)
+                
+              }
+            })
+      })
 
 
       imovelModel.findByIdAndUpdate(req.params.id, 
@@ -77,6 +102,27 @@ class ImovelController {
           imagem.arquivo = req.file.filename
         } else {
           delete req.body.arquivo
+        }
+
+        if(req.body.arquivo) {
+
+          fs.readFile(req.file.path, (err, buf) => {
+            if (err) {
+              console.log(err)
+              return res.status(500).send(err)
+            }
+            sharp(buf)
+              .resize(350, 350)
+              .max()
+              .ignoreAspectRatio()
+              .toFile('app/img/imoveis/thumbnails/'+req.body.arquivo, 
+                (err,info) => {
+                  if (err) {
+                    console.log(err)
+
+                  }
+                })
+          })
         }
 
         Object.assign(imagem, req.body)
@@ -120,9 +166,30 @@ class ImovelController {
       })
 
   }
+  _generateThumbnailFrom(filepath) {
+
+  }
   updateImagemPrincipal(req, res) {
     let update = imovelModel.findByIdAndUpdate(req.params.id,
       {$set: {imagemPrincipal: req.file.filename}})
+
+    fs.readFile(req.file.path, (err, buf) => {
+      if (err) {
+        console.log(err)
+        return res.status(500).send(err)
+      }
+      sharp(buf)
+        .resize(350, 350)
+        .toFormat('jpeg')
+        .ignoreAspectRatio()
+        .toFile('app/img/imoveis/thumbnails/'+req.file.filename, 
+          (err,info) => {
+            if (err) {
+              console.log(err)
+
+            }
+          })
+    })
 
     update.then(() => res.send())
     update.catch(err => res.status(500).send(err))
@@ -132,7 +199,7 @@ class ImovelController {
 
     find.then(imoveis => res.json(imoveis))
     find.catch(err => res.status(500).send(err))
-  find.catch(err => res.send(err))
+    find.catch(err => res.send(err))
   }
 
   getCarrossel(req, res) {
@@ -154,13 +221,13 @@ class ImovelController {
     find.catch(err => res.status(500).send(err))
   }
 
-buscarImoveisPorPrecoDeVenda(req, res) {
-  let from = req.params.from,
-    to = req.params.to,
-    query = {$and: [{ precoVenda: { $gte: from} }, { precoVenda : {$lte: to} }, {'website.disponivel':true}, {precoVenda: {$ne: 0 }}]},
-    findImoveis = imovelModel.find(query).exec(),
-    findCount = imovelModel.count(query),
-    operations = [findImoveis, findCount]
+  buscarImoveisPorPrecoDeVenda(req, res) {
+    let from = req.params.from,
+      to = req.params.to,
+      query = {$and: [{ precoVenda: { $gte: from} }, { precoVenda : {$lte: to} }, {'website.disponivel':true}, {precoVenda: {$ne: 0 }}]},
+      findImoveis = imovelModel.find(query).exec(),
+      findCount = imovelModel.count(query),
+      operations = [findImoveis, findCount]
 
     Promise.all(operations).then(results => {
       let [imoveis, count] = results
@@ -168,15 +235,15 @@ buscarImoveisPorPrecoDeVenda(req, res) {
       res.json({imoveis, count})
     }).catch(err => res.status(500).send(err))
 
-}
+  }
 
-buscarImoveisPorPrecoDeLocacao(req, res) {
-  let from = req.params.from,
-    to = req.params.to,
-    query = {$and: [{ precoLocacao: { $gte: from} }, { precoLocacao : {$lte: to} },{'website.disponivel':true} ]},
-    findImoveis = imovelModel.find(query).exec(),
-    findCount = imovelModel.count(query),
-    operations = [findImoveis, findCount]
+  buscarImoveisPorPrecoDeLocacao(req, res) {
+    let from = req.params.from,
+      to = req.params.to,
+      query = {$and: [{ precoLocacao: { $gte: from} }, { precoLocacao : {$lte: to} },{'website.disponivel':true} ]},
+      findImoveis = imovelModel.find(query).exec(),
+      findCount = imovelModel.count(query),
+      operations = [findImoveis, findCount]
 
     Promise.all(operations).then(results => {
       let [imoveis, count] = results
@@ -185,39 +252,39 @@ buscarImoveisPorPrecoDeLocacao(req, res) {
     }).catch(err => res.status(500).send(err))
 
 
-}
-searchImoveis(req, res) {
-  let query = { $or: [
-    {'website.titulo' : {$regex: new RegExp(req.params.search, 'i')}},
-    {'website.subtitulo': {$regex: req.params.search}}
-  ], 'website.disponivel': true}
+  }
+  searchImoveis(req, res) {
+    let query = { $or: [
+      {'website.titulo' : {$regex: new RegExp(req.params.search, 'i')}},
+      {'website.subtitulo': {$regex: req.params.search}}
+    ], 'website.disponivel': true}
 
-  let page = req.param('page')
+    let page = req.param('page')
 
-  let findCount = imovelModel.count(query)
+    let findCount = imovelModel.count(query)
 
-  let find = imovelModel.find(query).skip((page -1)*12).limit(12).exec()
-  let operations = [find, findCount]
+    let find = imovelModel.find(query).skip((page -1)*12).limit(12).exec()
+    let operations = [find, findCount]
 
-  Promise.all(operations).then(result => {
-    console.log(result)
-    let [imoveis, count] = result
-    res.json({count,imoveis})
-  }).catch(err => res.status(500).send(err))
-}
+    Promise.all(operations).then(result => {
+      console.log(result)
+      let [imoveis, count] = result
+      res.json({count,imoveis})
+    }).catch(err => res.status(500).send(err))
+  }
 
-buscarImoveisDisponiveis(req, res) {
-  let query = {'website.disponivel' : true},
-    page = req.param('page'),
-    findImoveis = imovelModel.find(query).skip((page -1) * 12).limit(12).exec(),
-    findCount = imovelModel.count(query),
-    operations = [findImoveis, findCount]
+  buscarImoveisDisponiveis(req, res) {
+    let query = {'website.disponivel' : true},
+      page = req.param('page'),
+      findImoveis = imovelModel.find(query).skip((page -1) * 12).limit(12).exec(),
+      findCount = imovelModel.count(query),
+      operations = [findImoveis, findCount]
 
-  Promise.all(operations).then(results => {
-    let [imoveis, count] = results
-    res.json({imoveis, count})
-  })
-}
+    Promise.all(operations).then(results => {
+      let [imoveis, count] = results
+      res.json({imoveis, count})
+    })
+  }
 }
 
 

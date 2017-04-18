@@ -1,7 +1,7 @@
 import {AsStructure, observable, action, toJS} from 'mobx'
 import config from '../config.js'
 import {putJson, getJson} from '../fetch.js'
-
+import { hashHistory } from 'react-router'
 
 export default class ImovelFormStore {
   @observable imovel = {
@@ -12,6 +12,7 @@ export default class ImovelFormStore {
     observacaoGestor: '',
     precoVenda: null,
     precoLocacao: null,
+    valorCondominio: null,
     metragem : {
       areaTotal: '',
       areaConstruida: '',
@@ -22,6 +23,7 @@ export default class ImovelFormStore {
   
   @observable buttonText = 'Salvar'
   @observable buttonStyle: { backgroundColor: 'blue'}
+  @observable showDeleteModal = false
 
   @action save(id) {
     this.buttonText = 'Salvando...'
@@ -34,6 +36,19 @@ export default class ImovelFormStore {
           this.buttonText = "Salvar"
         }, 3000)
       })
+  }
+
+  @action delete(id) {
+    let url = `${config.url}/imovel/${id}`
+
+    fetch(url, {
+      method: 'DELETE'
+    }).then(response => {
+      if (response.ok) {
+        hashHistory.push('/admin/imoveis')
+        
+      }
+    })
   }
 
   @action getImovel(id) {

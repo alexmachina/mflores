@@ -15,7 +15,7 @@ imovelModel.find({'locatario.dataFimValidadeGarantia': {$lt:cutoff, $gt:today}})
 
       let transporter = nodemailer.createTransport({
         host: 'smtp.zoho.com',
-        port: 465,
+        port: 587,
         auth:{
           user:'notificacao@webyang.com.br',
           pass: 'cthulhu1'

@@ -12,7 +12,6 @@ let conString = config.mongoDbConString
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 corsMiddleware = function (req, res, next) {
-  console.log('appending CORS')
   res.header('Access-Control-Allow-Origin', req.headers.origin || "*");
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, HEAD, DELETE, OPTIONS');
   res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
