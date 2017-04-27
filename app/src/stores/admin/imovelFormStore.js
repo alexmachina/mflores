@@ -9,6 +9,7 @@ export default class ImovelFormStore {
     tipo: '',
     rgi: '',
     instalacao: '',
+    energia: '',
     observacaoGestor: '',
     precoVenda: null,
     precoLocacao: null,
@@ -19,6 +20,9 @@ export default class ImovelFormStore {
       capacidade: ''
     },
     zoneamento: false,
+    IPTU: '',
+    valorAnualIPTU: null,
+    valorParceladoIPTU: null
   }
   
   @observable buttonText = 'Salvar'

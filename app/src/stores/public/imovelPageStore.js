@@ -7,7 +7,16 @@ export default class ImovelPageStore {
     website: {
       titulo: ''
     },
-    imagens: []
+    imagens: [],
+    endereco: {
+      bairro: '',
+      cidade: '',
+      rua: '',
+      numero: '',
+      pontoDeReferencia: '',
+      complemento: '',
+
+    }
     
   }
 
@@ -16,7 +25,6 @@ export default class ImovelPageStore {
 
     getJson(url).then(imovel => {
       this.imovel = imovel
-      console.log(this.imovel.website.titulo)
     })
   }
 }

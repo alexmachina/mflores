@@ -8,6 +8,7 @@ import Slider, { Range } from 'rc-slider'
 import 'rc-slider/assets/index.css';
 import './styles/imoveis.scss'
 import { Link } from 'react-router'
+import config from '../../stores/config.js'
 
 @observer
 export default class ImoveisPage extends React.Component {
@@ -78,9 +79,9 @@ export default class ImoveisPage extends React.Component {
         <Col className="imoveis">
           <Row>
             {this.store.imoveis.map(i => (
-              <Col key={i._id} xs={12} md={3} style={{minHeight:'450px'}}>
+              <Col className="imovel" key={i._id} xs={12} md={3}>
                 <h3>{i.website.titulo}</h3>
-                <Image src={'/img/imoveis/thumbnails/'+i.imagemPrincipal} className="imovel-image" responsive/>
+                <Image src={config.url +'/img/imoveis/'+i.imagemPrincipal} className="imovel-image" responsive/>
                 <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
                 <p>{i.website.descricao}</p>
                 {i.precoVenda ? (
@@ -162,10 +163,7 @@ export default class ImoveisPage extends React.Component {
   }
 
   formatToReal(valor) {
-    if(valor)
-      return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
-    else
-      return ''
+    return valor //Desculpa.
   }
 
 }

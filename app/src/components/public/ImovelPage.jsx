@@ -17,6 +17,7 @@ export default class ImovelPage extends React.Component {
   }
 
   render() {
+    let endereco = this.store.imovel.endereco
     let images = []
     images.push({
       original: `/img/imoveis/${this.store.imovel.imagemPrincipal}`,
@@ -47,30 +48,46 @@ export default class ImovelPage extends React.Component {
         </Col>
         <Col xs={12} md={6} className="text-center">
           <h1 style={{color:'#c8002d'}}>{this.store.imovel.website.subtitulo}</h1>
+
+            <p>{this.store.imovel.website.descricao}</p>
           <Col className="text-left">
-            {this.store.imovel.precoVenda ?
-                (
-            <h3>Preço de venda:{this.formatToReal(this.store.imovel.precoVenda)}</h3>
-                ) : <h3></h3>
-            }
+            <h3>Endereço</h3>
+            <p>Cidade: {endereco.cidade}</p>
+            <p>Bairro: {endereco.bairro}</p>
+            <p>Rua: {endereco.rua}</p>
+            <p>Numero: {endereco.numero}</p>
+            <p>Complemento : {endereco.complemento}</p>
+            <p>Ponto de Referência: {endereco.pontoDeReferencia}</p>
 
-            {this.store.imovel.precoLocacao ? (
-            <h3>Preço de Locação: {this.formatToReal(this.store.imovel.precoLocacao)}</h3>
-            ) : <h3></h3>
-            }
+            </Col>
+            <Col className="text-left">
+              {this.store.imovel.valorAnualIPTU || this.store.imovel.valorParceladoIPTU ? <h3>IPTU</h3> : <h3></h3>}
+              {this.store.imovel.valorAnualIPTU ? (<p>Valor anual do IPTU: {this.store.imovel.valorAnualIPTU}</p>) : <p></p>}
+              {this.store.imovel.valorParceladoIPTU ? (<p>Valor parcelado do IPTU: {this.store.imovel.valorParceladoIPTU}</p>) : <p></p>}
+            </Col>
+            <Col className="text-left">
+              {this.store.imovel.precoVenda ?
+                  (
+                    <h3>Preço de venda:{this.store.imovel.precoVenda}</h3>
+                  ) : <h3></h3>
+              }
+
+              {this.store.imovel.precoLocacao ? (
+                <h3>Preço de Locação: {this.store.imovel.precoLocacao}</h3>
+              ) : <h3></h3>
+              }
+            </Col>
           </Col>
-          <p>{this.store.imovel.website.descricao}</p>
-        </Col>
-      </Row>
-    </div>
-    )
-}
-formatToReal(valor) {
-  if(valor)
-    return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
-  else
-    return ''
-}
+        </Row>
+      </div>
+      )
+      }
+      formatToReal(valor) {
+        if(valor)
+          return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
+        else
+          return ''
+      }
 
 
-}
+      }

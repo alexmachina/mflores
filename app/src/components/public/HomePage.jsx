@@ -63,7 +63,7 @@ export default class HomePage extends React.Component {
             </section>
             <aside className="col-md-4 col-sm-4">
               <h2>{this.store.imovelPrincipal.website.titulo}</h2>
-              <a href="#"><img className="img-thumbnail" src={'/img/imoveis/thumbnails/' +this.store.imovelPrincipal.imagemPrincipal} alt="" class="img-responsive" /></a>
+              <a href="#"><img className="img-thumbnail" src={'/img/imoveis/' +this.store.imovelPrincipal.imagemPrincipal} alt="" class="img-responsive" /></a>
               <h4 className="h4-center">{this.store.imovelPrincipal.website.subtitulo}</h4>
 
               <p>{this.store.imovelPrincipal.website.descricao}</p>
@@ -74,7 +74,7 @@ export default class HomePage extends React.Component {
             {this.store.imoveisHomepage.map(i => (
               <section className="col-md-3 col-sm-6">
                 <h2>{i.website.titulo}</h2>
-                <img className="img-thumbnail" src={'/img/imoveis/thumbnails/'+i.imagemPrincipal} alt="Foto inicial imóvel 1" className="img-responsive" /><br/>
+                <img className="img-thumbnail" src={'/img/imoveis/'+i.imagemPrincipal} alt="Foto inicial imóvel 1" className="img-responsive" /><br/>
                 <h4 className="h4-center">{i.website.subtitulo}</h4>
                 <p className="text-center">{i.website.observacao}</p>
                 {i.precoVenda ? (

@@ -5,6 +5,7 @@ import {Row,Modal, Col, Button} from 'react-bootstrap'
 import Input from '../../utils/Input.jsx'
 import Select from '../../utils/Select.jsx'
 import validator from 'validator'
+import CurrencyInput from 'react-currency-input'
 
 @observer
 export default class ImovelForm extends React.Component {
@@ -24,7 +25,8 @@ export default class ImovelForm extends React.Component {
       {value: 'Industrial', option:'Industrial'},
       {value: 'Terreno', option:'Terreno'},
       {value: 'Comercial', option: 'Comercial'},
-      {value: 'Galpão', option: 'Galpão'}
+      {value: 'Galpão', option: 'Galpão'},
+      {value: 'Chácara', option: 'Chácara'}
     ]
     return(
       <div className="container-fluid">
@@ -58,20 +60,29 @@ export default class ImovelForm extends React.Component {
               value={this.store.imovel.observacaoGestor}
               onChange={this.onObservacaoGestorChange.bind(this)}
             />
-            <Input label="Area Construída (em metros)"
+            <label>Area Construída</label>
+            <CurrencyInput 
+              decimalSeparator=","
+              thousandSeparator="."
+              className="form-control"
               value={this.store.imovel.metragem.areaConstruida}
               onChange={this.onAreaConstruidaChange.bind(this)}
-              validationMessage="Campo invalido"
-              validationFunction={validator.isInt}
             />
 
-          <Input label="Area Total (em metros)"
+          <label>Area Total</label>
+          <CurrencyInput 
+            decimalSeparator=","
+            thousandSeparator="."
+            className="form-control"
             value={this.store.imovel.metragem.areaTotal}
             onChange={this.onAreaTotalChange.bind(this)}
-            validationMessage="Campo invalido"
-            validationFunction={validator.isInt}
           />
-          <Input label="Capacidade (em metros)" 
+
+          <label>Capacidade</label>
+          <CurrencyInput 
+            decimalSeparator=","
+            thousandSeparator="."
+            className="form-control"
             value={this.store.imovel.metragem.capacidade}
             onChange={this.onCapacidadeChange.bind(this)}
           />
@@ -80,6 +91,10 @@ export default class ImovelForm extends React.Component {
           value={this.store.imovel.instalacao}
           onChange={this.onInstalacaoChange.bind(this)}
         />
+        <Input label="Energia"
+          value={this.store.imovel.energia}
+          onChange={this.onEnergiaChange.bind(this)}
+        />
 
       <label>Zoneamento?</label>
       <input type="checkbox"
@@ -87,18 +102,53 @@ export default class ImovelForm extends React.Component {
         onChange={this.onZoneamentoChange.bind(this)}
         className="form-control"
       />
-      <Input label="Preço de venda"
-        onChange={this.onPrecoVendaChange.bind(this)}
+      <label>Preço de Venda</label>
+      <CurrencyInput
+        decimalSeparator=","
+        thousandSeparator="."
+        prefix="R$"
+        className="form-control"
         value={this.store.imovel.precoVenda}
+        onChange={this.onPrecoVendaChange.bind(this)}
       />
-      <Input label="Preço de locação"
-        onChange={this.onPrecoLocacaoChange.bind(this)}
+
+      <label>Preço de Locação</label>
+      <CurrencyInput 
+        decimalSeparator=","
+        thousandSeparator="."
+        prefix="R$" 
+        className="form-control"
         value={this.store.imovel.precoLocacao}
+        onChange={this.onPrecoLocacaoChange.bind(this)}
       />
-      <Input label="Valor do Condominio"
-        onChange={this.onValorCondominioChange.bind(this)}
+
+      <label>Valor do condomínio</label>
+      <CurrencyInput 
+        prefix="R$"
+        decimalSeparator=","
+        thousandSeparator="."
+        className="form-control"
         value={this.store.imovel.valorCondominio}
+        onChange={this.onValorCondominioChange.bind(this)}
       />
+
+    <Input label="IPTU"
+      onChange={this.onIPTUChange.bind(this)}
+      value={this.store.imovel.IPTU}
+    />
+      <label>Valor Anual IPTU</label>
+      <CurrencyInput 
+        prefix="R$" 
+        decimalSeparator=","
+        thousandSeparator="."
+        className="form-control"
+      value={this.store.imovel.valorAnualIPTU}
+      onChange={this.onValorAnualIPTUChange.bind(this)}
+    />
+    <Input label="Valor Parcelado IPTU"
+      onChange={this.onValorParceladoIPTUChange.bind(this)}
+      value={this.store.imovel.valorParceladoIPTU}
+    />
     <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
       {this.store.buttonText}
     </Button>
@@ -158,19 +208,22 @@ export default class ImovelForm extends React.Component {
   }
 
   onAreaConstruidaChange(e) {
-    this.store.imovel.metragem.areaConstruida = e.target.value
+    this.store.imovel.metragem.areaConstruida = e
   }
 
   onAreaTotalChange(e) {
-    this.store.imovel.metragem.areaTotal = e.target.value
+    this.store.imovel.metragem.areaTotal = e
   }
 
   onCapacidadeChange(e) {
-    this.store.imovel.metragem.capacidade = e.target.value
+    this.store.imovel.metragem.capacidade = e
   }
 
   onInstalacaoChange(e) {
     this.store.imovel.instalacao = e.target.value
+  }
+  onEnergiaChange(e) {
+    this.store.imovel.energia = e.target.value
   }
 
 
@@ -178,14 +231,26 @@ export default class ImovelForm extends React.Component {
     this.store.imovel.zoneamento = e.target.checked
   }
   onPrecoVendaChange(e) {
-    this.store.imovel.precoVenda = e.target.value
+    this.store.imovel.precoVenda = e
   }
 
   onPrecoLocacaoChange(e) {
-    this.store.imovel.precoLocacao = e.target.value
+    this.store.imovel.precoLocacao = e
   }
 
   onValorCondominioChange(e) {
-    this.store.imovel.valorCondominio = e.target.value
+    this.store.imovel.valorCondominio = e
+  }
+
+  onIPTUChange(e) {
+    this.store.imovel.IPTU = e.target.value
+  }
+
+  onValorAnualIPTUChange(e) {
+    this.store.imovel.valorAnualIPTU = e.target.value
+  }
+
+  onValorParceladoIPTUChange(e) {
+    this.store.imovel.valorParceladoIPTU = e.target.value
   }
 }

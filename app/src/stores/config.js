@@ -1,7 +1,6 @@
-let url = 'http://mflores.uh-app.com.br'
-//let url = 'http://localhost:3000'
-let config = {
-  url: url
+ const url = 'http://mflores.uh-app.com.br'
+// const url = 'http://localhost:3000'
+const config = {
+  url,
 }
-
 export default config

@@ -85,76 +85,113 @@ export default class RelatorioImovelStore {
 
             { image: base64Img,
               width:150 ,
-              height:150,
+              height:75,
               alignment:'left',
+              margin: [50, 50, 0, 0]
             }
 
           ],
           footer: [
-
-
-            { image: base64Img,
-              width:150 ,
-              height:150,
-              alignment:'left',
-
-
-            }
-
-
-
-          ],
+            {
+              columns: [
+                [
+                  {style: 'footerText',text: 'Telefones: 11 7703-4683/ 11 41592624/ 11 95639 9063 \n'+
+                    'Rua Professor Valdecir Campestre, 364, Sala 01 \n'+
+                    'Centro, Vargem Grande Paulista'},
+                  {alignment: 'center', text:'www.mfloresimoveis.com.br | creci: 174374'}
+                ],
+                { image: base64Img,
+                  width:200 ,
+                  height:150,
+                  alignment:'left',
+                }
+              ]
+            }],
           content: [
+            { 
+              style:'table',
+              margin:[50,0,50,15],
+              table: {
+                widths:['auto','*'],
+                body: [
+                  ['Proprietario:', imovel.proprietario.nome]
+                ]
+              }
+            },
 
-            {text: imovel.titulo, style: 'header'},
-            {style:'default', text: 'Tipo:' + imovel.tipo},
-            {style:'default', text: 'RGI: ' + imovel.rgi},
-            {style:'default', text: 'Observação: ' + imovel.observacaoGestor},
-            {style:'default', text: 'Metragem', style: 'subtitulo'},
-            {style:'default', text: 'Area total: ' + imovel.metragem.areaTotal},
-            {style:'default', text: 'Area construida: ' + imovel.metragem.areaConstruida},
-            {style:'default', text: 'Capacidade: ' + imovel.metragem.capacidade},
 
-            {style:'default', text: 'Endereço ', style:'subtitulo'},
+            {
+              style:'table',
+              table: {
+                widths: ['auto','*'],
+                body: [
+                  ['Disponivel:', imovel.website.disponivel ? 'Sim': 'Não'],
+                  ['Titulo:', imovel.website.titulo]
+                ]
+              }
+            },
 
-            {style:'default', text: 'Estado: ' + imovel.endereco.estado},
-            {style:'default', text: 'Cidade: ' + imovel.endereco.cidade},
-            {style:'default', text: 'Bairro: ' + imovel.endereco.bairro},
-            {style:'default', text: 'Rua: ' + imovel.endereco.rua},
-            {style:'default', text: 'Numero: ' + imovel.endereco.numero},
-            {style:'default', text: 'Complemento: ' + imovel.endereco.complemento},
-            {style:'default', text: 'Ponto de referência: ' + imovel.endereco.pontoDeReferencia},
+            { 
+              style: 'informacoes',
+              text: 'Informações do Imóvel:'},
+            {
+              style:'tablePrincipal',
+              table:{
+                widths:['auto','*'],
+                body: [
+                  ['Endereço:', imovel.endereco.rua],
+                  ['Número: ', imovel.endereco.numero],
+                  ['Cidade: ', imovel.endereco.cidade],
+                  ['Referência: ', imovel.endereco.pontoDeReferencia],
+                  ['CEP: ', imovel.endereco.cep],
+                  ['Venda: ', imovel.precoVenda],
+                  ['Locação: ', imovel.precoLocacao],
+                  ['Condomínio: ', imovel.valorCondominio],
+                  ['Área Total: ', imovel.metragem.areaTotal],
+                  ['Área Construída: ', imovel.metragem.areaConstruida],
+                  ['Observação: ', imovel.website.descricao],
+                  ['IPTU: ', imovel.IPTU + '/Anual: ' + this.formatToReal(imovel.valorAnualIPTU) 
+                    + '/Parcelado: '+ imovel.valorParceladoIPTU],
+                  ['RGI: ', imovel.rgi],
+                  ['Energia: ', imovel.energia],
+                  ['Capacidade instalada: ', imovel.metragem.capacidade]
 
-            {style:'default', text: 'Proprietário', style: 'subtitulo'},
-            {style:'default', text: 'Nome: ' + imovel.proprietario.nome },
+                ]
+              }
+            },
 
-            {style:'default', text: 'Locatario', style: 'subtitulo'},
-
-            {style:'default', text: 'Seguro? ' + (imovel.locatario.seguro ? 'Sim' : 'Não')},
-            {style:'default', text: 'Garantia: ' + imovel.locatario.garantia},
-            {style:'default', text: 'Descrição da garantia: ' + imovel.locatario.descricaoGarantia},
-            {style:'default',
-              text: 'Data de inicio de validade da garantia: ' + moment(imovel.locatario.dataInicioValidadeGarantia).format('DD/MM/YYYY')},
-            {style:'default',
-              text: 'Data do fim da validade da garantia: ' + moment(imovel.locatario.dataFimValidadeGarantia).format('DD/MM/YYYY')},
-            {style:'default',
-              text: 'Data de vencimento do seguro: ' + moment(imovel.locatario.dataVencimentoSeguro).format('DD/MM/YYYY')},
-            {style: 'marginTop', text: ''},
-            {style:'default', text: 'Despesas', style: 'subtitulo'},
+            {style:'informacoes', text: 'Despesas', },
             {table: {
               body: despesas
 
-            }, style:'default'},
-            {style:'default', text:'Receitas', style:'subtitulo'},
-            {table: {
-              body:receitas
-            }}
+            }, style:'table'},
+            {style:'informacoes', text:'Receitas'},
+            { style:'table',
+              table: {
+                body:receitas
+              }}
           ],
           styles:{
+            footerText: {
+              alignment:'center',
+              color:'#3062b2',
+              margin:[0,90,0,0]
+            },
             header: {
               fontSize:12,
               bold:true,
               alignment: 'center'
+            },
+            table: {
+              marginRight:50,
+              marginLeft:50
+            },
+            tablePrincipal: {
+              margin:[50,15,50,30]
+            },
+            informacoes: {
+              fontSize:14,
+              margin:[50,15,0,15]
             },
             subtitulo:
             {

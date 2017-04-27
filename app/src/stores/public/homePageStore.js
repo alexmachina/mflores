@@ -23,6 +23,7 @@ export default class homePageStore {
   }
   @action getImoveisHomepage() {
     getJson(config.url + '/imoveisHomepage').then(imoveis => {
+      console.log(imoveis)
       this.imoveisHomepage = imoveis
     })
   }

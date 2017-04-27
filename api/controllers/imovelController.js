@@ -2,7 +2,7 @@ let imovelModel = require('../models/imovelModel')
 let imagemModel = require('../models/imagemModel')
 let fs = require('fs')
 let path = require('path')
-let sharp = require('sharp')
+//let sharp = require('sharp')
 
 class ImovelController {
   addImovel(req, res) {
@@ -54,24 +54,8 @@ class ImovelController {
       let imagem = req.body
       let arquivo = req.file.filename
       imagem.arquivo = arquivo
-      fs.readFile(req.file.path, (err, buf) => {
-        if (err) {
-          console.log(err)
-          return res.status(500).send(err)
-        }
-        sharp(buf)
-          .resize(350, 350)
-          .max()
-          .ignoreAspectRatio()
-          .toFile('app/img/imoveis/thumbnails/'+arquivo, 
-            (err,info) => {
-              if (err) {
-                console.log(err)
-                
-              }
-            })
-      })
 
+      //this._generateThumbnail(req.file)
 
       imovelModel.findByIdAndUpdate(req.params.id, 
         {$push: {'imagens' : imagem}},
@@ -105,24 +89,7 @@ class ImovelController {
         }
 
         if(req.body.arquivo) {
-
-          fs.readFile(req.file.path, (err, buf) => {
-            if (err) {
-              console.log(err)
-              return res.status(500).send(err)
-            }
-            sharp(buf)
-              .resize(350, 350)
-              .max()
-              .ignoreAspectRatio()
-              .toFile('app/img/imoveis/thumbnails/'+req.body.arquivo, 
-                (err,info) => {
-                  if (err) {
-                    console.log(err)
-
-                  }
-                })
-          })
+          //this._generateThumbnail(req.file)
         }
 
         Object.assign(imagem, req.body)
@@ -132,6 +99,30 @@ class ImovelController {
           res.send()
         })
       })
+  }
+
+  _generateThumbnail(file) {
+    return new Promise((resolve, reject) => {
+      fs.readFile(file.path, (err, buf) => {
+        if (err) {
+          return reject(err)
+        }
+
+        sharp(buf)
+          .resize(350, 350)
+          .max()
+          .ignoreAspectRatio()
+          .toFile('app/img/imoveis/thumbnails/'+file.filename,
+            (err,info) => {
+              if (err) {
+                reject(err)
+              }
+
+              resolve()
+            })
+      })
+    })
+
   }
 
   addDespesa(req, res) {
@@ -173,23 +164,8 @@ class ImovelController {
     let update = imovelModel.findByIdAndUpdate(req.params.id,
       {$set: {imagemPrincipal: req.file.filename}})
 
-    fs.readFile(req.file.path, (err, buf) => {
-      if (err) {
-        console.log(err)
-        return res.status(500).send(err)
-      }
-      sharp(buf)
-        .resize(350, 350)
-        .toFormat('jpeg')
-        .ignoreAspectRatio()
-        .toFile('app/img/imoveis/thumbnails/'+req.file.filename, 
-          (err,info) => {
-            if (err) {
-              console.log(err)
+    //this._generateThumbnail(req.file)
 
-            }
-          })
-    })
 
     update.then(() => res.send())
     update.catch(err => res.status(500).send(err))
