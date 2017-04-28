@@ -78,10 +78,10 @@ export default class HomePage extends React.Component {
                 <h4 className="h4-center">{i.website.subtitulo}</h4>
                 <p className="text-center">{i.website.observacao}</p>
                 {i.precoVenda ? (
-                <p>Preço de venda: {this.formatToReal(i.precoVenda)}</p>
+                <p>Preço de venda: {i.precoVenda}</p>
                 ) : <p></p> }
                 {i.precoLocacao ? (
-                <p>Preço de locação: {this.formatToReal(i.precoLocacao)}</p>
+                <p>Preço de locação: {i.precoLocacao}</p>
                 ) : <p></p>}
                 <p>{i.website.descricao}</p>
                 <p><a className="btn btn-default" href={'/#/imovel/'+i._id}>Veja mais &raquo;</a></p>

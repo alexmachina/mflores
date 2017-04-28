@@ -5,7 +5,7 @@ import {Image} from 'react-bootstrap'
 export default class EmpresaPage extends React.Component {
   render() {
     let defaultProps = {
-      center: {lat:-23.6039054, lng:-47.0241479},
+      center: {lat:-23.6021746, lng:-47.0230318},
       zoom: 18
     };
 
@@ -43,7 +43,7 @@ export default class EmpresaPage extends React.Component {
       defaultCenter={defaultProps.center}
       defaultZoom={defaultProps.zoom}
       >
-      <Image src="/img/marker.svg" 
+      <Image src="/img/marker-512.png" style={{width:'25px', height:'25px'}} 
       lat={defaultProps.center.lat}
       lng={defaultProps.center.lng} />
       </GoogleMapReact>
