@@ -5,6 +5,7 @@ let loginController = require('./controllers/loginController')
 let despesaController = require('./controllers/despesaController')
 let receitaController = require('./controllers/receitaController')
 let contactController = require('./controllers/contactController')
+let userController = require('./controllers/userController')
 let multer = require('multer')
 let upload = multer({dest: 'app/img/imoveis'})
 
@@ -44,6 +45,10 @@ router.get('/imovel/:imovelId/receitas/:dataInicial/:dataFinal', receitaControll
 
 router.post('/contact/sendMessage', contactController.sendMessage)
 
+router.get('/usuarios', userController.getUsers)
+router.get('/usuario/:id', userController.getUser)
+router.post('/usuario', userController.addUser)
+router.put('/usuario/:id', userController.updateUser)
 
 
 module.exports = router;

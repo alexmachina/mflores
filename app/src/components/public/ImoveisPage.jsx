@@ -9,6 +9,7 @@ import 'rc-slider/assets/index.css';
 import './styles/imoveis.scss'
 import { Link } from 'react-router'
 import config from '../../stores/config.js'
+import formatToReal from '../utils/formatToReal.js'
 
 @observer
 export default class ImoveisPage extends React.Component {
@@ -85,12 +86,12 @@ export default class ImoveisPage extends React.Component {
                 <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
                 <p>{i.website.descricao}</p>
                 {i.precoVenda ? (
-                <p>Preço de venda: {this.formatToReal(i.precoVenda)}</p>
+                <p>Preço de venda: {formatToReal(i.precoVenda)}</p>
                 ) : <p></p>
                 }
 
                 {i.precoLocacao ?
-                (<p>Preço de locação: {this.formatToReal(i.precoLocacao)}</p>
+                (<p>Preço de locação: {formatToReal(i.precoLocacao)}</p>
                 ) : <p></p>}
                 <Link to={`/imovel/${i._id}`}>
                   <Button bsSize="lg" bsStyle="default">

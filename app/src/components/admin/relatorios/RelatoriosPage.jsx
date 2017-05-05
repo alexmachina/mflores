@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Row, Jumbotron, Button, Col } from 'react-bootstrap'
+import { Row, Jumbotron, Glyphicon, Button, Col } from 'react-bootstrap'
 import '../styles/relatorios.scss'
 
 export default () => (
@@ -10,10 +10,10 @@ export default () => (
         <Jumbotron className="admin-jumbotron text-center">
           <h1>Relatórios</h1>
         </Jumbotron>
-        <Col xs={12} mdOffset={2} md={4}>
+        <Col xs={12} sm={6}>
           <Link to="/admin/relatorios/imoveis">
             <Button className="relatorio-button" bsSize="large" block>
-              Relatório de Imóveis
+              <Glyphicon glyph="list" /> Relatório de Imóveis
             </Button>
           </Link>
         </Col>

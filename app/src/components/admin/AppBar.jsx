@@ -25,6 +25,7 @@ export default class AppBar extends React.Component {
                 <Nav>
                   <NavItem eventKey={1} href="/#/admin/imoveis">Imoveis</NavItem>
                   <NavItem eventKey={2} href="/#/admin/relatorios">Relatorios</NavItem>
+                  <NavItem eventKey={3} href="/#/admin/sistema">Sistema</NavItem>
                 </Nav>
                 <Nav pullRight>
                   <NavItem eventKey={2} href="#">

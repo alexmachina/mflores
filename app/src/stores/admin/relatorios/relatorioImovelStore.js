@@ -4,6 +4,7 @@ import config from '../../config.js'
 import pdfmake from 'pdfmake/build/pdfmake.min.js'
 import vfs_fonts from 'pdfmake/build/vfs_fonts.js'
 import moment from 'moment'
+import formatToReal from '../../../components/utils/formatToReal.js'
 
 export default class RelatorioImovelStore {
   @observable imovel = {
@@ -25,7 +26,7 @@ export default class RelatorioImovelStore {
         let despesasArr = []
         despesasArr.push(['Descrição', 'Valor','Data'])
         despesas.forEach(d => {
-          despesasArr.push([d.descricao, this.formatToReal(d.valor), moment(d.data).format('DD/MM/YYYY')])
+          despesasArr.push([d.descricao, formatToReal(d.valor), moment(d.data).format('DD/MM/YYYY')])
         })
 
         resolve(despesasArr)
@@ -33,9 +34,7 @@ export default class RelatorioImovelStore {
     })
   }
 
-  formatToReal(valor) {
-    return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
-  }
+  
 
   getReceitas(id) {
     return new Promise((resolve, reject) => {
@@ -43,7 +42,7 @@ export default class RelatorioImovelStore {
         let receitasArr = []
         receitasArr.push(['Descrição', 'Valor', 'Data', 'Observação'])
         receitas.forEach(r => {
-          receitasArr.push([r.descricao, this.formatToReal(r.valor), moment(r.data).format('DD/MM/YYYY'), r.observacao])
+          receitasArr.push([r.descricao, formatToReal(r.valor), moment(r.data).format('DD/MM/YYYY'), r.observacao])
         })
 
         resolve(receitasArr)
@@ -74,7 +73,7 @@ export default class RelatorioImovelStore {
   @action generatePdf(id) {
 
     getJson(config.url + '/imovel/' + id).then(imovel => {
-      this.toDataUrl('http://localhost:3000/img/tb_logo.png', (base64Img) => {
+      this.toDataUrl(config.url + '/img/tb_logo.png', (base64Img) => {
 
 
       this.getDespesas(imovel._id).then(despesas => {
@@ -144,13 +143,13 @@ export default class RelatorioImovelStore {
                   ['Cidade: ', imovel.endereco.cidade],
                   ['Referência: ', imovel.endereco.pontoDeReferencia],
                   ['CEP: ', imovel.endereco.cep],
-                  ['Venda: ', imovel.precoVenda],
-                  ['Locação: ', imovel.precoLocacao],
-                  ['Condomínio: ', imovel.valorCondominio],
+                  ['Venda: ', formatToReal(imovel.precoVenda)],
+                  ['Locação: ', formatToReal(imovel.precoLocacao)],
+                  ['Condomínio: ', formatToReal(imovel.valorCondominio)],
                   ['Área Total: ', imovel.metragem.areaTotal],
                   ['Área Construída: ', imovel.metragem.areaConstruida],
                   ['Observação: ', imovel.website.descricao],
-                  ['IPTU: ', imovel.IPTU + '/Anual: ' + this.formatToReal(imovel.valorAnualIPTU) 
+                  ['IPTU: ', imovel.IPTU + '/Anual: ' + formatToReal(imovel.valorAnualIPTU) 
                     + '/Parcelado: '+ imovel.valorParceladoIPTU],
                   ['RGI: ', imovel.rgi],
                   ['Energia: ', imovel.energia],

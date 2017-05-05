@@ -1,6 +1,8 @@
 import React from 'react'
 import HomePageStore from '../../stores/public/homePageStore.js'
 import { observer } from 'mobx-react'
+import formatToReal from '../utils/formatToReal.js'
+import config from '../../stores/config.js'
 
 @observer
 export default class HomePage extends React.Component {
@@ -42,10 +44,10 @@ export default class HomePage extends React.Component {
                     }
                     return(
                       <div className={active}>
-                        <img src={'/img/imoveis/'+imovel.imagemPrincipal} />
+                        <img src={`${config.url}/img/imoveis/${imovel.imagemPrincipal}`} />
                         <div className="carousel-caption">
                           <p>{imovel.website.titulo}</p>
-                          <a className="btn btn-large btn-primary" href="#">Veja mais >></a>
+                          <a className="btn btn-large btn-primary" href={`/#/imovel/${imovel._id}`}>Veja mais >></a>
                         </div>
                       </div> )
                   })}
@@ -78,10 +80,10 @@ export default class HomePage extends React.Component {
                 <h4 className="h4-center">{i.website.subtitulo}</h4>
                 <p className="text-center">{i.website.observacao}</p>
                 {i.precoVenda ? (
-                <p>Preço de venda: {i.precoVenda}</p>
+                <p>Preço de venda: {formatToReal(i.precoVenda)}</p>
                 ) : <p></p> }
                 {i.precoLocacao ? (
-                <p>Preço de locação: {i.precoLocacao}</p>
+                <p>Preço de locação: {formatToReal(i.precoLocacao)}</p>
                 ) : <p></p>}
                 <p>{i.website.descricao}</p>
                 <p><a className="btn btn-default" href={'/#/imovel/'+i._id}>Veja mais &raquo;</a></p>
@@ -91,11 +93,5 @@ export default class HomePage extends React.Component {
       </div>
     </div>
     )
-  }
-  formatToReal(valor) {
-    if(valor)
-      return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
-    else
-      return ''
   }
 }

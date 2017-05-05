@@ -3,7 +3,6 @@ let userModel = require('../models/userModel')
 
 class LoginController {
   login(req, res) {
-    debugger
     let find = userModel.findOne(req.body).exec()
     if(!req.body.password || !req.body.username) {
       return res.status(404).send('Usuario ou senha não presentes')

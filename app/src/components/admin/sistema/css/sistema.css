@@ -1,0 +1,32 @@
+.opcao-sistema button{
+  width:100%;
+ height:250px;
+ font-size:22px;
+
+ }
+
+.sistema {
+  margin-top:50px;
+}
+
+.opcao-sistema  button{
+
+  background-color:#7eaab5;
+  color:white;
+}
+
+.opcao-sistema button {
+  background-color:#7eaab5;
+  color:white;
+}
+
+.opcao-sistema button:hover{
+}
+
+#erro {
+  color:red;
+}
+
+#loading {
+  color:green;
+}

@@ -4,6 +4,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import { observer } from 'mobx-react'
 import ImovelPageStore from '../../stores/public/imovelPageStore.js'
 import ImageGallery from 'react-image-gallery'
+import formatToReal from '../utils/formatToReal.js'
 
 @observer
 export default class ImovelPage extends React.Component {
@@ -62,18 +63,18 @@ export default class ImovelPage extends React.Component {
             </Col>
             <Col className="text-left">
               {this.store.imovel.valorAnualIPTU || this.store.imovel.valorParceladoIPTU ? <h3>IPTU</h3> : <h3></h3>}
-              {this.store.imovel.valorAnualIPTU ? (<p>Valor anual do IPTU: {this.store.imovel.valorAnualIPTU}</p>) : <p></p>}
+              {this.store.imovel.valorAnualIPTU ? (<p>Valor anual do IPTU: {formatToReal(this.store.imovel.valorAnualIPTU)}</p>) : <p></p>}
               {this.store.imovel.valorParceladoIPTU ? (<p>Valor parcelado do IPTU: {this.store.imovel.valorParceladoIPTU}</p>) : <p></p>}
             </Col>
             <Col className="text-left">
               {this.store.imovel.precoVenda ?
                   (
-                    <h3>Preço de venda:{this.store.imovel.precoVenda}</h3>
+                    <h3>Preço de venda:{formatToReal(this.store.imovel.precoVenda)}</h3>
                   ) : <h3></h3>
               }
 
               {this.store.imovel.precoLocacao ? (
-                <h3>Preço de Locação: {this.store.imovel.precoLocacao}</h3>
+                <h3>Preço de Locação: {formatToReal(this.store.imovel.precoLocacao)}</h3>
               ) : <h3></h3>
               }
             </Col>
@@ -82,12 +83,6 @@ export default class ImovelPage extends React.Component {
       </div>
       )
       }
-      formatToReal(valor) {
-        if(valor)
-          return 'R$'+ Intl.NumberFormat('pt-BR').format(valor).toString()
-        else
-          return ''
-      }
-
+      
 
       }

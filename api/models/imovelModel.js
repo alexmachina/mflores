@@ -16,11 +16,11 @@ let schema = new mongoose.Schema({
   zoneamento: {type: Boolean, default: false},
   tipo:{type: {type: String, default: ''}},
   imagemPrincipal: {type:String, default: ''},
-  precoVenda:{type:String, default:null },
-  precoLocacao: {type:String, default: null},
-  valorCondominio: {type:String, default: null},
+  precoVenda:{type:Number, default:null },
+  precoLocacao: {type:Number, default: null},
+  valorCondominio: {type:Number, default: null},
   IPTU: {type: String, default: ''},
-  valorAnualIPTU: {type: String, default: null},
+  valorAnualIPTU: {type: Number, default: null},
   valorParceladoIPTU: {type: String, default: null},
   
 
