@@ -6,6 +6,7 @@ let despesaController = require('./controllers/despesaController')
 let receitaController = require('./controllers/receitaController')
 let contactController = require('./controllers/contactController')
 let userController = require('./controllers/userController')
+let contratoController = require('./controllers/contratoController')
 let multer = require('multer')
 let upload = multer({dest: 'app/img/imoveis'})
 
@@ -49,6 +50,12 @@ router.get('/usuarios', userController.getUsers)
 router.get('/usuario/:id', userController.getUser)
 router.post('/usuario', userController.addUser)
 router.put('/usuario/:id', userController.updateUser)
+
+router.get('/contrato/:id', contratoController.getContrato)
+router.post('/contrato', contratoController.addContrato)
+router.post('/contrato/:id/clausula', contratoController.addClausula)
+router.get('/contratos', contratoController.getContratos)
+router.get('/imovel/:imovelId/contrato/:contratoId', contratoController.getContratoImovel)
 
 
 module.exports = router;
