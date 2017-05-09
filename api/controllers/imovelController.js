@@ -232,7 +232,7 @@ class ImovelController {
   searchImoveis(req, res) {
     let query = { $or: [
       {'website.titulo' : {$regex: new RegExp(req.params.search, 'i')}},
-      {'website.subtitulo': {$regex: req.params.search}}
+      {'website.subtitulo': {$regex: new RegExp(req.params.search, 'i')}}
     ], 'website.disponivel': true}
 
     let page = req.param('page')

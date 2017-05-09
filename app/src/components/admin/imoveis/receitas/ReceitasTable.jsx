@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 import Input from '../../../utils/Input.jsx'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import formatToReal from '../../../utils/formatToReal.js'
 
 @observer
 export default class ReceitasTable extends React.Component {
@@ -57,7 +58,7 @@ export default class ReceitasTable extends React.Component {
                 {this.props.receitas.map(r => (
                   <tr key={r._id}>
                     <td>{r.descricao}</td>
-                    <td>{Intl.NumberFormat('pt-BR').format(r.valor)}</td>
+                    <td>{formatToReal(r.valor)}</td>
                     <td>{moment(r.data).format('DD/MM/YYYY')}</td>
                     <td>{r.observacao}</td>
                     <td>{r.modoPagamento}</td>

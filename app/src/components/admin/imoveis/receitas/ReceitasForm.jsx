@@ -3,6 +3,7 @@ import {Row, Col, Button} from 'react-bootstrap'
 import Input from '../../../utils/Input.jsx'
 import { observer } from 'mobx-react'
 import DatePicker from 'react-datepicker'
+import CurrencyInput from 'react-currency-input'
 
 @observer
 export default class ReceitasForm extends React.Component {
@@ -16,15 +17,20 @@ export default class ReceitasForm extends React.Component {
                 onChange={this.props.onDescricaoChange}
                 value={this.props.selectedReceita.descricao}
               />
+              <label>Valor</label>
+              <CurrencyInput 
+                prefix="R$"
+                decimalSeparator=","
+                thousandSeparator="."
+                className="form-control"
+                value={this.props.selectedReceita.valor}
+                onChange={this.props.onValorChange}
+              />
               <label>Data</label>
               <DatePicker 
                 selected={this.props.selectedReceita.data}
                 onChange={this.props.onDataChange}
                 className="date-picker form-control"
-              />
-              <Input label="Valor"
-                onChange={this.props.onValorChange}
-                value={this.props.selectedReceita.valor}
               />
 
             <Input label="Observação"
@@ -44,6 +50,6 @@ export default class ReceitasForm extends React.Component {
 
     </Row>
   </div>
-    )
+  )
   }
-}
+  }

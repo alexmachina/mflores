@@ -19,13 +19,7 @@ export default class DespesasPageStore {
   }
   @observable totalDespesas = null
 
-  parseComma2Dot(value) {
-    value = value.replace(',','.')
-    value = parseFloat(value)
-    return value
-  }
   @action saveDespesa(id) {
-    this.selectedDespesa.valor = this.parseComma2Dot(this.selectedDespesa.valor)
     if(!this.selectedDespesa._id) {
       let url = config.url + '/imovel/' + id + '/despesa' 
       postJson(url, toJS(this.selectedDespesa)).then(() => {

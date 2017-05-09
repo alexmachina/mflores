@@ -99,8 +99,8 @@ export default class DespesasPage extends React.Component {
     this.store.selectedDespesa.descricao = e.target.value
   }
 
-  onValorChange(e) {
-    this.store.selectedDespesa.valor = e.target.value
+  onValorChange(e, f) {
+    this.store.selectedDespesa.valor = f
   }
   onDataChange(e) {
     this.store.selectedDespesa.data = e

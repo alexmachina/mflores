@@ -21,12 +21,7 @@ export default class HomePage extends React.Component {
       <div>
         <div>
           <div className="container">
-            <header className="row cima">
-              <header className="col-md-12">
-                <a href="/#/" title="atalho para a home"><img  src="/img/tb_logo.png" width="320" alt="Logo Miria Flores" className="img-responsive pull-left img-home" /></a>
-              </header>
-            </header>
-
+           
             <section className="col-md-8  col-sm-8">
               <h2 className="h2-dstq">DESTAQUES <span>&raquo;</span></h2>
 

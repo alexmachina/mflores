@@ -78,6 +78,10 @@ export default class EnderecoForm extends React.Component {
                 value={this.store.endereco.numero}
                 onChange={this.onNumeroChange.bind(this)}
               />
+              <Input label="Complemento"
+                value={this.store.endereco.complemento}
+                onChange={this.onComplementoChange.bind(this)}
+              />
               <Input label="Ponto de Referência"
                 value={this.store.endereco.pontoDeReferencia}
                 onChange={this.onPontoDeReferenciaChange.bind(this)}
@@ -115,6 +119,9 @@ export default class EnderecoForm extends React.Component {
   }
   onNumeroChange(e) {
     this.store.endereco.numero = e.target.value
+  }
+  onComplementoChange(e) {
+    this.store.endereco.complemento = e.target.value
   }
   onPontoDeReferenciaChange(e) {
     this.store.endereco.pontoDeReferencia = e.target.value

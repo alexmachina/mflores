@@ -13,12 +13,7 @@ export default class EmpresaPage extends React.Component {
 
     return (
       <div className="container">
-      <header className="row cima">
-        <header className="col-md-12">
-          <a href="index.html" title="atalho para a home"><img  src="/img/tb_logo.png" width="320" alt="Logo Miria Flores" className="img-responsive pull-left img-home" /></a>
-        </header>
-      </header>
-
+     
       <div className="row">
         <div>
           <article className="col-md-12">

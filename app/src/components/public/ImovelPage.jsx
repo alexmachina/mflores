@@ -33,12 +33,7 @@ export default class ImovelPage extends React.Component {
     })
     return (
       <div className="container">
-      <header className="row cima">
-        <header className="col-md-6">
-          <a href="index.html" title="atalho para a home"><img  src="/img/tb_logo.png" width="320" alt="Logo Miria Flores" className="img-responsive pull-left img-home" /></a>
-        </header>
-      </header>
-
+     
       <Row>
         <Col xs={12} md={6}>
           <h1>{this.store.imovel.website.titulo}</h1>

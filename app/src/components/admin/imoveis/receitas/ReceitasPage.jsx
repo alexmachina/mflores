@@ -73,8 +73,8 @@ export default class ReceitasPage extends React.Component {
   onDataChange(e) {
     this.store.selectedReceita.data = e
   }
-  onValorChange(e) {
-    this.store.selectedReceita.valor = e.target.value
+  onValorChange(e, f) {
+    this.store.selectedReceita.valor = f
   }
 
   onDataInicialChange(e) {

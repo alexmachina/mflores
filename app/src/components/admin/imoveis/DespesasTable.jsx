@@ -5,6 +5,7 @@ import moment from 'moment'
 import Input from '../../utils/Input.jsx'
 import Select from '../../utils/Select.jsx'
 import DatePicker from 'react-datepicker'
+import formatToReal from '../../utils/formatToReal.js'
 
 export default class DespesasTable extends React.Component {
   constructor(props) {
@@ -47,7 +48,7 @@ export default class DespesasTable extends React.Component {
               <tr key={d._id}>
                 <td>{d.descricao}</td>
                 <td>{moment(d.data).format('DD/MM/YYYY')}</td>
-                <td>{new Intl.NumberFormat('de-DE').format(d.valor)}</td>
+                <td>{formatToReal(d.valor)}</td>
                 <td>
                   <Button onClick={() => {
                     d.data = moment(d.data)

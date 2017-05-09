@@ -4,6 +4,7 @@ import Select from '../../utils/Select.jsx'
 import DatePicker from 'react-datepicker'
 import { observer } from 'mobx-react'
 import {Row, Col, Button} from 'react-bootstrap'
+import CurrencyInput from 'react-currency-input'
 
 @observer
 export default class DespesasForm extends React.Component {
@@ -18,7 +19,12 @@ export default class DespesasForm extends React.Component {
             value={this.props.selectedDespesa.descricao}
             onChange={this.props.onDescricaoChange}
           />
-          <Input label="Valor"
+          <label>Valor</label>
+          <CurrencyInput
+            prefix="R$"
+            decimalSeparator=","
+            thousandSeparator="."
+            className="form-control"
             value={this.props.selectedDespesa.valor}
             onChange={this.props.onValorChange}
           />
