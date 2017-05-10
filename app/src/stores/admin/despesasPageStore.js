@@ -8,6 +8,7 @@ export default class DespesasPageStore {
     descricao: '',
     valor: 0,
     data: null,
+    observacao: ''
   }
   @observable despesas= []
   @observable showModal = false
@@ -17,6 +18,8 @@ export default class DespesasPageStore {
     dataInicial: '',
     dataFinal: ''
   }
+  @observable isSearch = false 
+
   @observable totalDespesas = null
 
   @action saveDespesa(id) {
@@ -38,19 +41,22 @@ export default class DespesasPageStore {
 
   @action getDespesas(id) {
     let url = config.url + '/imovel/' + id + '/despesas?page='+this.activePage
-    getJson(url).then(despesas => {
-      this.despesas = despesas,
-      this.items = 0
+    getJson(url).then(response => {
+      this.despesas = response.despesas
+      this.items = Math.ceil(response.count/10)
     })
     
   }
 
   @action getDespesasByData(id) {
     let url = config.url + '/imovel/' + id + '/despesas/'+this.search.dataInicial + '/' + this.search.dataFinal
+    url += '?page=' + this.activePage
     console.log(url)
     getJson(url).then(res => {
       this.despesas = res.despesas
       this.totalDespesas = res.totalDespesas
+      this.items = Math.ceil(res.count/10)
+      
     })
     
   }

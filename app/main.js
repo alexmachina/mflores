@@ -1,10 +1,11 @@
 import PublicPage from './src/components/public/PublicPage.jsx'
 import AdminPage from './src/components/admin/AdminPage.jsx'
-import ImovelPage from './src/components/admin/imoveis/ImovelPage.jsx'
+import ImovelPage from './src/components/admin/imoveis/imovel/ImovelPage.jsx'
 import ImoveisPage from './src/components/admin/imoveis/ImoveisPage.jsx'
 import RelatoriosPage from './src/components/admin/relatorios/RelatoriosPage.jsx'
-import RelatorioImoveisPage from './src/components/admin/relatorios/RelatorioImoveisPage.jsx'
-import RelatorioImovelPage from './src/components/admin/relatorios/RelatorioImovelPage.jsx'
+import RelatorioImoveisPage from './src/components/admin/relatorios/imoveis/RelatorioImoveisPage.jsx'
+import RelatorioImovelPage from './src/components/admin/relatorios/imoveis/RelatorioImovelPage.jsx'
+import RelatorioControlePage from './src/components/admin/relatorios/controle/RelatorioControlePage.jsx'
 import SistemaPage from './src/components/admin/sistema/SistemaPage.jsx'
 import UsuariosPage from './src/components/admin/sistema/usuarios/UsuariosPage.jsx'
 import HomePage from './src/components/public/HomePage.jsx'
@@ -30,6 +31,7 @@ const rt = (
       <Route path="/admin/imovel/:id" component={ImovelPage} />
       <Route path="/admin/relatorios" component={RelatoriosPage} />
       <Route path="/admin/relatorios/imoveis" component={RelatorioImoveisPage} />
+      <Route path="/admin/relatorios/controle" component={RelatorioControlePage} />
       <Route path="/admin/sistema" component={SistemaPage} />
       <Route path="/admin/sistema/usuarios" component={UsuariosPage} />
       

@@ -3,8 +3,18 @@ let ObjectId = require('mongoose').Types.ObjectId
 
 class ReceitaController {
   getReceitas(req, res) {
-    receitaModel.find({imovel: req.params.imovelId}).exec()
-      .then(receitas => res.json(receitas))
+    const findReceitas = receitaModel.find({imovel: req.params.imovelId})
+      .limit(10)
+      .skip((req.param('page') - 1) * 10)
+      .exec(),
+
+      findCount = receitaModel.count({imovel: req.params.imovelId}),
+    operations = [findReceitas, findCount]
+
+    Promise.all(operations).then(results => {
+      let [receitas, count] = results
+      res.json({receitas, count})
+    })
   }
 
   addReceita(req, res) {
@@ -34,20 +44,26 @@ class ReceitaController {
       data: {$gte: dataInicial, $lte: dataFinal}
     }
 
-    let find = receitaModel.find(query).exec()
-    let count = receitaModel.aggregate([
+    let find = receitaModel.find(query)
+      .limit(10)
+      .skip((req.param('page') -1) * 10)
+      .exec()
+
+    let totalReceitas = receitaModel.aggregate([
       {$match: {$and: [
         {'data' : {$gte: dataInicial, $lte: dataFinal} },
         {'imovel' : new ObjectId(req.params.imovelId) }
       ]}},
       {$group: {'_id': null, count: {$sum: '$valor'}}}
     ])
+    let count = receitaModel.count(query)
 
-    let operations = [find, count]
+    let operations = [find, totalReceitas, count]
     Promise.all(operations).then(result => {
       let response = {
         receitas: result[0],
-        count: result[1][0].count
+        totalReceitas: result[1][0].count,
+        count: result[2]
       }
       res.json(response)
     })

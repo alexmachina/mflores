@@ -1,5 +1,5 @@
 import React from 'react'
-import {Glyphicon, Row, Col, Button, Table} from 'react-bootstrap'
+import {Pagination, Glyphicon, Row, Col, Button, Table} from 'react-bootstrap'
 import { observer } from 'mobx-react'
 import Input from '../../../utils/Input.jsx'
 import DatePicker from 'react-datepicker'
@@ -39,6 +39,13 @@ export default class ReceitasTable extends React.Component {
                 Filtrar
               </Button>
             </form>
+          </Col>
+          <Col xs={12} md={6}>
+            <Pagination
+              items={this.props.items}
+              onSelect={this.props.onSelect}
+              activePage={this.props.activePage}
+            />
           </Col>
         </Row>
         <Row>

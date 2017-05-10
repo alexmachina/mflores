@@ -1,0 +1,67 @@
+import React from 'react'
+import {Row, Pagination, Col, Button, Jumbotron, Table, Modal} from 'react-bootstrap'
+import RelatorioImoveisStore from '../../../../stores/admin/relatorios/relatorioImoveisStore.js'
+import RelatorioImovelStore from '../../../../stores/admin/relatorios/relatorioImovelStore.js'
+import { observer } from 'mobx-react'
+import { Link } from 'react-router'
+import RelatorioImovelForm from './RelatorioImovelForm.jsx'
+@observer
+export default class RelatorioImoveisPage extends React.Component {
+  constructor(props) {
+    super(props)
+    this.store = new RelatorioImoveisStore()
+    this.imovelStore = new RelatorioImovelStore()
+  }
+  
+  componentDidMount() {
+    this.store.getImoveis()
+  }
+
+  render() {
+    return (
+      <div className="container-fluid">
+        <Row>
+          <Col xs={12}>
+            <Jumbotron className="text-center admin-jumbotron">
+              <h1>Relatório de Imóveis</h1>
+            </Jumbotron>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={8} mdOffset={2}>
+            <Pagination
+              items={this.store.items}
+              activePage={this.store.activePage}
+              onSelect={this.handleSelect.bind(this)}
+            />
+            <Table hover className="text-center"> 
+              <thead>
+                <tr>
+                  <th>Titulo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.store.imoveis.map(i => (
+                  <tr key={i._id}>
+                    <td onClick={() => {
+                      this.imovelStore.generatePdf(i._id)
+                    
+                    }}>
+                    {i.titulo}
+                  </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Col>
+
+        </Row>
+      </div>
+    )
+  }
+
+  handleSelect(e) {
+    this.store.activePage = e
+    this.store.getImoveis()
+  }
+}

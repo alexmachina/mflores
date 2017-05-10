@@ -28,6 +28,9 @@ export default class ReceitasPage extends React.Component {
               onDataFinalChange={this.onDataFinalChange.bind(this)}
               onEditClick={this.onEditClick.bind(this)}
               totalReceitas={this.store.totalReceitas}
+              items={this.store.items}
+              activePage={this.store.activePage}
+              onSelect={this.onSelect.bind(this)}
             />
               
           </Col>
@@ -86,7 +89,9 @@ export default class ReceitasPage extends React.Component {
   }
   onSearchSubmit(e) {
     e.preventDefault()
+    this.store.activePage = 1
     this.store.searchByDate(this.props.id)
+    this.store.isSearch = true
   }
 
   onObservacaoChange(e) {
@@ -100,6 +105,15 @@ export default class ReceitasPage extends React.Component {
   onEditClick(receitaId) {
     this.store.getReceita(receitaId, this.props.id)
     this.store.showModal = true
+  }
+
+  onSelect(page){
+      this.store.activePage = page
+    if(!this.store.isSearch) {
+      this.store.getReceitas(this.props.id)
+    } else {
+      this.store.searchByDate(this.props.id)
+    }
   }
 }
 

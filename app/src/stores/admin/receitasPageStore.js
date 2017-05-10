@@ -22,10 +22,16 @@ export default class ReceitasPageStore {
   }
 
   @observable showModal = false
+  @observable items = 0
+  @observable activePage = 1
+  @observable isSearch = false
 
   @action getReceitas(imovelId) {
-    getJson(config.url + '/imovel/' + imovelId + '/receitas').then(
-      receitas => this.receitas = receitas)
+    getJson(config.url + '/imovel/' + imovelId + '/receitas?page=' + this.activePage).then(
+      response => { 
+        this.receitas = response.receitas
+        this.items = Math.ceil(response.count/10)
+      })
   }
 
   @action saveReceita(imovelId) {
@@ -54,11 +60,13 @@ export default class ReceitasPageStore {
 
   @action searchByDate(imovelId) {
     let url = config.url + '/imovel/' + imovelId + '/receitas/'
-      + this.search.dataInicial + '/' + this.search.dataFinal
+      + this.search.dataInicial + '/' + this.search.dataFinal 
+      + '?page='+this.activePage
     getJson(url).then(
       response => { 
         this.receitas = response.receitas 
-        this.totalReceitas = response.count
+        this.totalReceitas = response.totalReceitas
+        this.items = Math.ceil(response.count/10)
       }
     )
   }

@@ -16,8 +16,8 @@ export default class AdminPage  extends React.Component{
     }
     return (
       <div>
-      {ren}
-    </div>
+        {ren}
+      </div>
     )
   }
 }

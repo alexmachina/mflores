@@ -27,6 +27,9 @@ export default class Footer extends React.Component {
                       <a href="https://www.instagram.com/miriafloresimoveis/">
                         <img src="img/instagram.png" alt="Logo do instagram" />
                       </a>
+                      <a href="https://galpoesindustriais.blogspot.com">
+                        <img src="img/blog.png" />
+                      </a>
                       <div className="panel-title">
                         <br />
                         <a data-toggle="collapse" data-parent="#accordion" href="#footer">

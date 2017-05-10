@@ -1,6 +1,6 @@
 let config = require('./config.js')
 const express = require('express'),
-      bodyParser = require('body-parser'),
+  bodyParser = require('body-parser'),
   router = require('./api/routes'),
   mongoose = require('mongoose')
 

@@ -34,8 +34,6 @@ export default class RelatorioImovelStore {
     })
   }
 
-  
-
   getReceitas(id) {
     return new Promise((resolve, reject) => {
       getJson(config.url+'/imovel/'+id+'/receitas').then(receitas => {
@@ -49,6 +47,11 @@ export default class RelatorioImovelStore {
 
       })
 
+    })
+  }
+
+  getSomaReceitas(id) {
+    return new Promise((resolve, reject) => {
     })
   }
   toDataUrl(src, callback, outputFormat) {
@@ -75,9 +78,13 @@ export default class RelatorioImovelStore {
     getJson(config.url + '/imovel/' + id).then(imovel => {
       this.toDataUrl(config.url + '/img/tb_logo.png', (base64Img) => {
 
+        const getDespesas = this.getDespesas(imovel._id),
+          getReceitas = this.getReceitas(imovel._id),
+          operations = [getDespesas, getReceitas]
 
-      this.getDespesas(imovel._id).then(despesas => {
-        this.getReceitas(imovel._id).then(receitas => {
+        Promise.all(operations).then(results => {
+          let [despesas, receitas] = results
+
         var docDefinition = {
           pageMargins:[0,150,0,150],
           header: [
@@ -209,7 +216,6 @@ export default class RelatorioImovelStore {
         }
           pdfMake.createPdf(docDefinition).open()
         })
-      })
       })
     })
   }

@@ -5,50 +5,50 @@ let nodemailer = require('nodemailer')
 let moment = require('moment')
 
 module.exports = function verifyAndSendEmail() {
-let cutoff = new Date()
-today = new Date()
-cutoff.setDate(cutoff.getDate() + 30)
+  let cutoff = new Date()
+  today = new Date()
+  cutoff.setDate(cutoff.getDate() + 30)
 
-imovelModel.find({'locatario.dataFimValidadeGarantia': {$lt:cutoff, $gt:today}}).exec().then(imoveis => {
-  if (imoveis.length) {
-    try{
+  imovelModel.find({'locatario.dataFimValidadeGarantia': {$lt:cutoff, $gt:today}}).exec().then(imoveis => {
+    if (imoveis.length) {
+      try{
 
-      let transporter = nodemailer.createTransport({
-        host: 'smtp.zoho.com',
-        port: 587,
-        auth:{
-          user:'notificacao@webyang.com.br',
-          pass: 'cthulhu1'
+        let transporter = nodemailer.createTransport({
+          host: 'smtp.zoho.com',
+          port: 587,
+          auth:{
+            user:'notificacao@webyang.com.br',
+            pass: 'cthulhu1'
+          }
+        })
+        console.log('transport created')
+        let mailOptions = {
+          from: 'notificacao@webyang.com.br',
+          to: 'alex.xmde@gmail.com',
+          subject: 'Aviso: Vencimento de garantia',
+          html: createHtml(imoveis)
         }
-      })
-      console.log('transport created')
-      let mailOptions = {
-        from: 'notificacao@webyang.com.br',
-        to: 'alex.xmde@gmail.com',
-        subject: 'Aviso: Vencimento de garantia',
-        html: createHtml(imoveis)
+        transporter.sendMail(mailOptions, err => {
+          if(err)
+            return console.log(err)
+
+          console.log('Email sent')
+        })
+      } catch(ex) {
+        console.log(ex)
       }
-      transporter.sendMail(mailOptions, err => {
-        if(err)
-          return console.log(err)
-
-        console.log('Email sent')
-      })
-    } catch(ex) {
-      console.log(ex)
     }
-  }
-})
+  })
 
-function createHtml(imoveis) {
-  let tbody = ''
-  imoveis.forEach(i => {
-    tbody += `<tr>
+  function createHtml(imoveis) {
+    let tbody = ''
+    imoveis.forEach(i => {
+      tbody += `<tr>
     <td>${i.titulo}</td>
     <td>${moment(i.locatario.dataFimValidadeGarantia).format('DD/MM/YYYY')}</td>
     </tr>`
-  })
-  let html = `<div>
+    })
+    let html = `<div>
   <span>Aviso: Próximos vencimentos de Garantias
   <table>
     <thead>
@@ -63,5 +63,5 @@ function createHtml(imoveis) {
   </table>
   </div>`
     return html
-}
+  }
 }

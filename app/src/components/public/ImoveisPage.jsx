@@ -24,8 +24,8 @@ export default class ImoveisPage extends React.Component {
   render() {
     return (
       <div className="container">
-        <header className="row cima">
-          <Col xs={12} md={6}  id="search">
+        <header className="row cima text-center">
+          <Col xs={12} md={6}  id="search" className="text-center">
             <SearchField 
               handleSearchChange={this.onSearchChange.bind(this)}
               search={this.store.search}
@@ -48,70 +48,70 @@ export default class ImoveisPage extends React.Component {
                   <Input label="Até"
                     onChange={this.onPrecoVendaAteChange.bind(this)}
                     value={this.store.precoVendaAte}
-      />
-      <Button type="submit">
-      Pesquisar
-    </Button>
-      </form>
-    </Col>
-      </Col>
-      <Col xs={12} md={6}>
-      <h3>Faixa de Preço de Locação</h3>
-      <form onSubmit={this.onPrecoLocacaoSubmit.bind(this)}>
-      <Input label="De"
-        onChange={this.onPrecoLocacaoDeChange.bind(this)}
-        value={this.store.precoLocacaoDe}
-      />
-      <Input label="Até" 
-        onChange={this.onPrecoLocacaoAteChange.bind(this)}
-        value={this.store.precoLocacaoAte}
-      />
-      <Button type="submit">
-        Pesquisar
-      </Button>
-    </form>
-      </Col>
-    </Col>
-      </Row>
-      <Row>
-        <Col className="imoveis">
-          <Row>
-            {this.store.imoveis.map(i => (
-              <Col className="imovel" key={i._id} xs={12} md={3}>
-                <h3>{i.website.titulo}</h3>
-                <Image src={config.url +'/img/imoveis/'+i.imagemPrincipal} className="imovel-image" responsive/>
-              <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
-              <p>{i.website.descricao}</p>
-                {i.precoVenda ? (
-                <p>Preço de venda: {formatToReal(i.precoVenda)}</p>
-                ) : <p></p>
-                }
+                  />
+                  <Button type="submit">
+                    Pesquisar
+                  </Button>
+                </form>
+              </Col>
+            </Col>
+            <Col xs={12} md={6}>
+              <h3>Faixa de Preço de Locação</h3>
+              <form onSubmit={this.onPrecoLocacaoSubmit.bind(this)}>
+                <Input label="De"
+                  onChange={this.onPrecoLocacaoDeChange.bind(this)}
+                  value={this.store.precoLocacaoDe}
+                />
+                <Input label="Até" 
+                  onChange={this.onPrecoLocacaoAteChange.bind(this)}
+                  value={this.store.precoLocacaoAte}
+                />
+                <Button type="submit">
+                  Pesquisar
+                </Button>
+              </form>
+            </Col>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="imoveis">
+            <Row>
+              {this.store.imoveis.map(i => (
+                <Col className="imovel" key={i._id} xs={12} md={3}>
+                  <h3>{i.website.titulo}</h3>
+                  <Image src={config.url +'/img/imoveis/'+i.imagemPrincipal} className="imovel-image" responsive/>
+                  <h4 className="text-center" style={{color:'#c8002d'}}> {i.website.subtitulo}</h4>
+                  <p>{i.website.descricao}</p>
+                  {i.precoVenda ? (
+                    <p>Preço de venda: {formatToReal(i.precoVenda)}</p>
+                  ) : <p></p>
+                  }
 
-                {i.precoLocacao ?
-                    (<p>Preço de locação: {formatToReal(i.precoLocacao)}</p>
-                    ) : <p></p>}
-              <Link to={`/imovel/${i._id}`}>
-                <Button bsSize="lg" bsStyle="default">
-              Veja mais >>
-            </Button>
-          </Link>
-        </Col>
-        ))}
-      </Row>
-      <Row>
-        <Col xs={12}>
-      <Pagination
-        activePage={this.store.activePage}
-        items={this.store.items}
-    onSelect={(e) => {
-    this.store.activePage = e
-    this.store.getImoveis()
-    }}
-  />
-</Col>
-          </Row>
-
+                  {i.precoLocacao ?
+                      (<p>Preço de locação: {formatToReal(i.precoLocacao)}</p>
+                  ) : <p></p>}
+                  <Link to={`/imovel/${i._id}`}>
+                    <Button bsSize="lg" bsStyle="default">
+                      Veja mais >>
+                    </Button>
+                  </Link>
+                </Col>
+              ))}
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <Pagination
+                  activePage={this.store.activePage}
+                  items={this.store.items}
+                  onSelect={(e) => {
+                    this.store.activePage = e
+                    this.store.getImoveis()
+                  }}
+                />
       </Col>
+    </Row>
+
+  </Col>
       </Row> </div>
     )
     }
