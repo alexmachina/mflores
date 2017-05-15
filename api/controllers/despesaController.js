@@ -10,13 +10,22 @@ class DespesaController {
       .skip((req.param('page')-1)*10)
       .exec(),
       findCount = despesaModel.count({imovel: req.params.imovelId}),
-      operations = [find, findCount]
+
+    soma = despesaModel.aggregate([{
+      $match : { 'imovel' : new ObjectId(req.params.imovelId) },
+    },
+      {$group: {_id: null, count : {$sum: '$valor'}}}])
+
+    const count = despesaModel.count({imovel : req.params.imovelId})
+
+     let  operations = [find, findCount, soma]
 
     Promise.all(operations).then(results => {
       const [despesas, count] = results,
         response = {
           despesas,
-          count
+          count,
+          soma: results[2][0].count
         }
       res.json(response)
     })
@@ -52,13 +61,16 @@ class DespesaController {
 
     let operations = [find, countValor, countItems]
     Promise.all(operations).then(results => {
-      debugger
+      if(results[2] == 0)
+        return res.status(404).send()
       res.json({
         totalDespesas: results[1][0].count,
         despesas: results[0],
         count: results[2]
       })
-    })
+    }).catch(err => { 
+      console.log(err)
+      res.status(500).send(err) })
   }
 
   addDespesa(req, res) {
@@ -73,6 +85,12 @@ class DespesaController {
 
     update.then(() => res.send())
     update.catch(err => res.status(500).send(err))
+  }
+
+  deleteDespesa(req, res) {
+    despesaModel.findByIdAndRemove(req.params.id).then(
+      () => res.send()) 
+      .catch(err => res.status(500).send(err))
   }
 }
 

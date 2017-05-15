@@ -45,6 +45,14 @@ export default class ReceitasForm extends React.Component {
           <Button className="save-button" type="submit">
             Salvar
           </Button>
+          {this.props.selectedReceita._id ? (
+          <Button
+            className="btn btn-danger delete-button" 
+            onClick={this.props.onDeleteClick}
+          >
+            Deletar
+          </Button>
+          ) : <p></p>}
         </form>
       </Col>
 

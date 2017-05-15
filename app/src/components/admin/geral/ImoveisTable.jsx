@@ -7,7 +7,7 @@ const ImoveisTable = ({
   activePage,
   onSelect,
   search,
-  OnEditClick,
+  onEditClick,
   handleSearchChange,
   imoveis
 

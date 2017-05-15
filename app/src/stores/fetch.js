@@ -1,12 +1,16 @@
 import Cookies from 'js-cookie'
 
 export function getJson(url) {
-  return new Promise((resolve,reject) => { fetch(url, { headers: new Headers({
+  return new Promise((resolve,reject) => {
+    fetch(url, { headers: new Headers({
         authorization: Cookies.get('token')
       })
-    }
-    ).then(response =>{
-      if(response.ok) {
+    } ).then(response =>{
+
+      if (response.status == 404) {
+        return reject('Nenhum registro encontrado')
+      }
+      if (response.ok) {
         response.json().then(json => resolve(json))
       } else {
         response.text().then(text => reject(text))
@@ -56,5 +60,19 @@ export function postJson(url, json) {
         response.text().then(text => reject(text))
       }
     }).catch(err => reject(err))
+  })
+}
+
+export function Delete(url) {
+  return new Promise((resolve, reject) => {
+    fetch(url, { method: 'DELETE' })
+      .then(response => {
+        response.text().then(text => {
+          if (response.ok)
+            resolve(text)
+          else
+            reject(text)
+        })
+      })
   })
 }

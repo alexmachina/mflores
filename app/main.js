@@ -4,7 +4,6 @@ import ImovelPage from './src/components/admin/imoveis/imovel/ImovelPage.jsx'
 import ImoveisPage from './src/components/admin/imoveis/ImoveisPage.jsx'
 import RelatoriosPage from './src/components/admin/relatorios/RelatoriosPage.jsx'
 import RelatorioImoveisPage from './src/components/admin/relatorios/imoveis/RelatorioImoveisPage.jsx'
-import RelatorioImovelPage from './src/components/admin/relatorios/imoveis/RelatorioImovelPage.jsx'
 import RelatorioControlePage from './src/components/admin/relatorios/controle/RelatorioControlePage.jsx'
 import SistemaPage from './src/components/admin/sistema/SistemaPage.jsx'
 import UsuariosPage from './src/components/admin/sistema/usuarios/UsuariosPage.jsx'
@@ -36,7 +35,6 @@ const rt = (
       <Route path="/admin/sistema/usuarios" component={UsuariosPage} />
       
     </Route>
-    <Route path="/relatorios/imovel/:id" component={RelatorioImovelPage} />
     
   </Router>
 )

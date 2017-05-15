@@ -4,6 +4,7 @@ import ReceitasForm from './ReceitasForm.jsx'
 import ReceitasPageStore from '../../../../stores/admin/receitasPageStore.js'
 import { observer } from 'mobx-react'
 import ReceitasTable from './ReceitasTable.jsx'
+import ConfirmationModal from '../../geral/ConfirmationModal.jsx'
 
 @observer
 export default class ReceitasPage extends React.Component {
@@ -51,14 +52,32 @@ export default class ReceitasPage extends React.Component {
                 onObservacaoChange={this.onObservacaoChange.bind(this)}
                 selectedReceita={this.store.selectedReceita}
                 onSubmit={this.onSubmit.bind(this)}
+                onDeleteClick={this.onDeleteClick.bind(this)}
               />
-                
-
             </Modal.Body>
+            <ConfirmationModal 
+              header= "Sistema"
+              question= "Deseja realmente deletar?"
+              onConfirm={this.onDeleteConfirm.bind(this)}
+              onDeny={this.onDeleteDeny.bind(this)}
+              show={this.store.showDeleteConfirm}
+            />
           </Modal>
         </Row>
       </div>
     )
+  }
+
+  onDeleteClick() {
+    this.store.showDeleteConfirm = true
+  }
+
+  onDeleteConfirm() {
+    this.store.deleteReceita()
+     }
+
+  onDeleteDeny() {
+    this.store.showDeleteConfirm = false
   }
   onSubmit(e) {
     e.preventDefault()
@@ -67,6 +86,7 @@ export default class ReceitasPage extends React.Component {
 
   onNovaReceitaClick() {
     this.store.showModal = true
+    this.store.clearSelectedReceita()
   }
 
   onDescricaoChange(e) {

@@ -9,11 +9,16 @@ class ReceitaController {
       .exec(),
 
       findCount = receitaModel.count({imovel: req.params.imovelId}),
-    operations = [findReceitas, findCount]
+      findSoma = receitaModel.aggregate([
+        {$match: {'imovel': new ObjectId(req.params.imovelId)}},
+        {$group : { _id: null,count: { $sum: '$valor'}}}
+      ]),
+
+      operations = [findReceitas, findCount, findSoma]
 
     Promise.all(operations).then(results => {
-      let [receitas, count] = results
-      res.json({receitas, count})
+      let [receitas, count, soma] = results
+      res.json({receitas, count, soma:soma[0].count})
     })
   }
 
@@ -60,6 +65,9 @@ class ReceitaController {
 
     let operations = [find, totalReceitas, count]
     Promise.all(operations).then(result => {
+      if (result[2] === 0) {
+        return res.status(404).send()
+      }
       let response = {
         receitas: result[0],
         totalReceitas: result[1][0].count,
@@ -67,6 +75,12 @@ class ReceitaController {
       }
       res.json(response)
     })
+  }
+
+  deleteReceita(req, res) {
+    receitaModel.findByIdAndRemove(req.params.id)
+      .then(() => res.send())
+      .catch(err => res.send(err))
   }
 }
 

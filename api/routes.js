@@ -37,12 +37,14 @@ router.post('/imovel/:id/despesa', despesaController.addDespesa)
 router.put('/imovel/:imovelId/despesa/:id', despesaController.updateDespesa)
 router.get('/imovel/:imovelId/despesas', despesaController.getDespesas)
 router.get('/imovel/:imovelId/despesas/:dataInicial/:dataFinal', despesaController.getDespesasByData)
+router.delete('/despesa/:id', despesaController.deleteDespesa)
 
 router.post('/imovel/:imovelId/receita', receitaController.addReceita)
 router.put('/imovel/:imovelId/receita/:receitaId', receitaController.updateReceita)
 router.get('/imovel/:imovelId/receita/:receitaId', receitaController.getReceita)
 router.get('/imovel/:imovelId/receitas', receitaController.getReceitas)
 router.get('/imovel/:imovelId/receitas/:dataInicial/:dataFinal', receitaController.getReceitasByData)
+router.delete('/receita/:id', receitaController.deleteReceita)
 
 router.post('/contact/sendMessage', contactController.sendMessage)
 

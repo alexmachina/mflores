@@ -19,8 +19,10 @@ export default class DespesasPageStore {
     dataFinal: ''
   }
   @observable isSearch = false 
+  @observable idToDelete = null
 
   @observable totalDespesas = null
+  @observable showConfirmation = false
 
   @action saveDespesa(id) {
     if(!this.selectedDespesa._id) {
@@ -29,7 +31,7 @@ export default class DespesasPageStore {
         this.showModal = false
         this.getDespesas(id)
       })
-      
+
     } else {
       let url = config.url + '/imovel/'+id+'/despesa/'+this.selectedDespesa._id
       putJson(url, toJS(this.selectedDespesa)).then(() => {
@@ -43,9 +45,10 @@ export default class DespesasPageStore {
     let url = config.url + '/imovel/' + id + '/despesas?page='+this.activePage
     getJson(url).then(response => {
       this.despesas = response.despesas
+      this.totalDespesas = response.soma
       this.items = Math.ceil(response.count/10)
     })
-    
+
   }
 
   @action getDespesasByData(id) {
@@ -56,8 +59,18 @@ export default class DespesasPageStore {
       this.despesas = res.despesas
       this.totalDespesas = res.totalDespesas
       this.items = Math.ceil(res.count/10)
-      
+
     })
-    
+
+  }
+
+  @action deleteDespesa() {
+    let id = this.idToDelete
+    fetch(`${config.url}/despesa/${id}`, {
+      method: 'DELETE'
+    }).then(response => {
+      if (response.ok) {
+      }
+    })
   }
 }

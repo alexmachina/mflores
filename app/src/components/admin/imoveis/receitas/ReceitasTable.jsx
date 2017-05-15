@@ -78,7 +78,7 @@ export default class ReceitasTable extends React.Component {
                 ))}
               </tbody>
             </Table>
-            <span>Total: {Intl.NumberFormat('pt-BR').format(this.props.totalReceitas)} </span>
+            <span>Total:{formatToReal(this.props.totalReceitas)} </span>
           </Col>
         </Row>
       </div>

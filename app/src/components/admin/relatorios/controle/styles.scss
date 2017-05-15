@@ -1,0 +1,45 @@
+#choices {
+  display:flex;
+  flex-direction:row;
+  
+}
+
+#choices :nth-child(1) {
+  background-color:#7eaab5;
+
+}
+
+#choices :nth-child(2) {
+  background-color:#7eaab5;
+}
+
+.choice-button {
+  display:flex;
+  align-items: center;
+  justify-content:center;
+  height:200px;
+  margin-right:10px;
+  font-size:32px;
+  color:white;
+}
+
+.choice-button:hover {
+  background-color:#ccdade !important;
+}
+
+.date-picker {
+  display:block;
+  width:100%;
+}
+.react-datepicker__input-container {
+  position: relative;
+  display: inline !important;
+}
+
+.form-button {
+  width:100%;
+  margin-top:25px;
+}
+
+.modal-body {
+}

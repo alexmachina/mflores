@@ -1,6 +1,6 @@
 import { observable, toJS, action } from 'mobx'
 import config from '../config.js'
-import { getJson, postJson, putJson } from '../fetch.js'
+import {Delete, getJson, postJson, putJson } from '../fetch.js'
 import moment from 'moment'
 
 export default class ReceitasPageStore {
@@ -15,6 +15,8 @@ export default class ReceitasPageStore {
 
   @observable receitas = []
   @observable totalReceitas = null
+
+  @observable showDeleteConfirm = false
 
   @observable search = {
     dataInicial: '',
@@ -31,6 +33,7 @@ export default class ReceitasPageStore {
       response => { 
         this.receitas = response.receitas
         this.items = Math.ceil(response.count/10)
+        this.totalReceitas = response.soma
       })
   }
 
@@ -46,28 +49,51 @@ export default class ReceitasPageStore {
         this.getReceitas(imovelId)
         this.showModal = false
       })
+
     }
-    
+  }
+  @action clearSelectedReceita() {
+    this.selectedReceita = {
+      descricao: '',
+      data: '',
+      valor: '',
+      observacao: '',
+      modoPagamento: '',
+      imovel: ''
+    }
   }
 
-  @action getReceita(receitaId, imovelId) {
-    getJson(config.url + '/imovel/' + imovelId + '/receita/' + receitaId).then(
-      receita => {
-        receita.data = moment(receita.data)
-        this.selectedReceita = receita
-      })
-  }
 
-  @action searchByDate(imovelId) {
-    let url = config.url + '/imovel/' + imovelId + '/receitas/'
-      + this.search.dataInicial + '/' + this.search.dataFinal 
-      + '?page='+this.activePage
-    getJson(url).then(
-      response => { 
-        this.receitas = response.receitas 
-        this.totalReceitas = response.totalReceitas
-        this.items = Math.ceil(response.count/10)
-      }
-    )
-  }
+
+@action getReceita(receitaId, imovelId) {
+  getJson(config.url + '/imovel/' + imovelId + '/receita/' + receitaId).then(
+    receita => {
+      receita.data = moment(receita.data)
+      this.selectedReceita = receita
+
+    })
+}
+
+@action searchByDate(imovelId) {
+  let url = config.url + '/imovel/' + imovelId + '/receitas/'
+    + this.search.dataInicial + '/' + this.search.dataFinal 
+    + '?page='+this.activePage
+  getJson(url).then(
+    response => { 
+      this.receitas = response.receitas 
+      this.totalReceitas = response.totalReceitas
+      this.items = Math.ceil(response.count/10)
+    }
+  )
+}
+
+@action deleteReceita(){
+  const url = `${config.url}/receita/${this.selectedReceita._id}`
+  Delete(url).then(() => {
+    this.showModal = false
+    this.showDeleteConfirm = false
+    this.getReceitas(this.props.id)
+
+  })
+}
 }

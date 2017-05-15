@@ -49,6 +49,7 @@ export default class DespesasTable extends React.Component {
               <th>Descrição</th>
               <th>Mes/Ano</th>
               <th>Valor</th>
+              <th>Observação</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -58,6 +59,7 @@ export default class DespesasTable extends React.Component {
                 <td>{d.descricao}</td>
                 <td>{moment(d.data).format('DD/MM/YYYY')}</td>
                 <td>{formatToReal(d.valor)}</td>
+                <td>{d.observacao}</td>
                 <td>
                   <Button onClick={() => {
                     d.data = moment(d.data)
@@ -71,7 +73,7 @@ export default class DespesasTable extends React.Component {
           </tbody>
         </Table>
         <Row>
-          <span>Total mensal: {Intl.NumberFormat('pt-BR').format(this.props.totalDespesas)}</span>
+          <span>Total mensal:{formatToReal(this.props.totalDespesas)}</span>
       </Row>
       </div>)
   }

@@ -13,10 +13,18 @@ export default class ImoveisTableContainer extends React.Component {
 
   onSelect(page) {
     this.store.activePage = page
+
+    if (!this.store.isSearch) {
+      this.store.fetchImoveis()
+    } else {
+      this.store.performSearch()
+    }
   }
 
   handleSearchChange(e) {
+    this.store.activePage = 1
     this.store.search = e.target.value
+    this.store.isSearch = true
     this.store.performSearch()
   }
   componentDidMount() {
@@ -25,14 +33,15 @@ export default class ImoveisTableContainer extends React.Component {
 
   render() {
     return (
-    <ImoveisTable 
-      imoveis={this.store.imoveis}
-      items={this.store.items}
-      activePage={this.store.activePage}
-      onSelect={this.onSelect.bind(this)}
-      search = {this.store.search}
-      handleSearchChange={this.handleSearchChange.bind(this)}
-    />
-    )
+      <ImoveisTable 
+        imoveis={this.store.imoveis}
+        items={this.store.items}
+        activePage={this.store.activePage}
+        onSelect={this.onSelect.bind(this)}
+        search = {this.store.search}
+        handleSearchChange={this.handleSearchChange.bind(this)}
+        onEditClick={this.props.onEditClick}
+      />
+      )
   }
 }

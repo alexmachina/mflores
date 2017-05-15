@@ -4,6 +4,7 @@ import DespesasForm from './DespesasForm.jsx'
 import DespesasTable from './DespesasTable.jsx'
 import { observer } from 'mobx-react'
 import {Row,Pagination, Col, Button, Modal} from 'react-bootstrap' 
+import ConfirmationModal from '../../geral/ConfirmationModal.jsx'
 
 @observer
 export default class DespesasPage extends React.Component {
@@ -48,7 +49,16 @@ export default class DespesasPage extends React.Component {
                       onDataChange={this.onDataChange.bind(this)}
                       onObservacaoChange={this.onObservacaoChange.bind(this)}
                       selectedDespesa={this.store.selectedDespesa} 
-                      onSubmit={this.onSubmit.bind(this)} />
+                      onSubmit={this.onSubmit.bind(this)} 
+                      onDeleteClick={this.onDeleteClick.bind(this)}
+                    />
+                    <ConfirmationModal
+                      show={this.store.showConfirmation}
+                      header="Sistema"
+                      question="Deseja realmente deletar?"
+                      onConfirm={this.confirmDelete.bind(this)}
+                      onDeny={this.denyDelete.bind(this)}
+                    />
                   </Modal.Body>
                 </Modal>
               </div>
@@ -92,7 +102,26 @@ data: null
   onSubmit(e) {
     e.preventDefault()
       this.store.saveDespesa(this.props.id)
+  }
 
+  onDeleteClick(id) {
+    this.store.idToDelete = id
+    this.store.showConfirmation = true
+  }
+
+  confirmDelete() {
+    this.store.deleteDespesa()
+    this.store.showConfirmation = false
+    this.store.showModal = false
+    if (!this.store.isSearch) {
+      this.store.getDespesas(this.props.id)
+    } else {
+      this.store.getDespesasByData(this.props.id)
+    }
+  }
+
+  denyDelete() {
+    this.store.showConfirmation = false
   }
 
   onDescricaoChange(e) {

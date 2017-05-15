@@ -40,6 +40,14 @@ export default class DespesasForm extends React.Component {
           <Button className="save-button" type="submit">
             Salvar
           </Button>
+
+          {this.props.selectedDespesa._id ? (
+          <Button
+            className="btn btn-danger delete-button"
+            onClick={() => this.props.onDeleteClick(this.props.selectedDespesa._id)}
+          >
+            Deletar
+          </Button>) : <p></p>}
         </form>
       </div>
     )
