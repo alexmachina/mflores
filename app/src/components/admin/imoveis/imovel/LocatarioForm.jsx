@@ -8,6 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css'
   import moment from 'moment'
 import {observer} from 'mobx-react'
 moment.locale('pt-BR')
+import CurrencyInput from 'react-currency-input'
 
 @observer
   export default class LocatarioForm extends React.Component {
@@ -64,12 +65,17 @@ moment.locale('pt-BR')
                   selected={this.store.locatario.dataFimContrato}
                   onChange={this.onDataFimContratoChange.bind(this)}
                 />
-                
-                <Input label="Valor(em reais)"
+                <label>Valor</label>
+                <CurrencyInput 
+                  prefix="R$"
+                  decimalSeparator=","
+                  thousandSeparator="."
+                  className="form-control"
                   value={this.store.locatario.valor}
                   onChange={this.onValorChange.bind(this)}
                 />
-                <label>Seguro?</label>
+                
+                                <label>Seguro?</label>
                 <input
                   className="form-control"
                   type="checkbox"
@@ -154,8 +160,8 @@ moment.locale('pt-BR')
   onDataFimContratoChange(e) {
     this.store.locatario.dataFimContrato = e
   }
-  onValorChange(e) {
-    this.store.locatario.valor = e.target.value
+  onValorChange(e, f) {
+    this.store.locatario.valor = f
   }
   onSeguroChange(e) {
     this.store.locatario.seguro = e.target.checked

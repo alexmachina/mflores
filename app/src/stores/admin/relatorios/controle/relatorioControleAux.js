@@ -81,7 +81,7 @@ export default class RelatorioControleAux {
     ]
     const despesasBody = despesas.map(despesa => 
       [despesa.descricao, formatToReal(despesa.valor), moment(despesa.data).format('DD/MM/YYYY'),
-        despesa.observacao])
+        despesa.observacao ? despesa.observacao : ""])
 
     const tableContent = [despesasHeader, ...despesasBody]
     const despesasTable = [
