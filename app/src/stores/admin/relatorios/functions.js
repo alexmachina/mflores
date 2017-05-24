@@ -94,5 +94,9 @@ export const styles =
     },
     marginTop: {
       marginTop:200
+    },
+    total: {
+      alignment:'right',
+      marginRight:50
     }
   }

@@ -74,115 +74,123 @@ import CurrencyInput from 'react-currency-input'
                   value={this.store.locatario.valor}
                   onChange={this.onValorChange.bind(this)}
                 />
-                
-                                <label>Seguro?</label>
-                <input
-                  className="form-control"
-                  type="checkbox"
-                  checked={this.store.locatario.seguro}
-                  onChange={this.onSeguroChange.bind(this)}
-                />
-                <br />
-                <label>Data de vencimento do seguro</label>
-                <DatePicker
-                  className="date-picker"
-                  selected={this.store.locatario.dataVencimentoSeguro}
-                  onChange={this.onDataVencimentoSeguroChange.bind(this)}
-                 />
-
-                  <Select label="Garantia"
-                    options={[
-                      {option: 'Fiança'},
-                      {option: 'Caução'},
-                      {option: 'Hipoteca'},
-                      {option: 'Seguro Fiança'}
-                    ]}
-                    value={this.store.locatario.garantia}
-                    onChange={this.onGarantiaChange.bind(this)}
-                  />
-                  <Input label="Descrição da Garantia" 
-                    onChange={this.onDescricaoGarantiaChange.bind(this)}
-                    value={this.store.locatario.descricaoGarantia}
-                />
-                <label>Data de inicio da garantia</label>
-                <DatePicker
-                  className="date-picker"
-                  selected={this.store.locatario.dataInicioValidadeGarantia}
-                  onChange={this.onDataInicioGarantiaChange.bind(this)}
-                />
-                <label> Data de fim da garantia</label>
-                <DatePicker 
-                  className="date-picker"
-                  selected={this.store.locatario.dataFimValidadeGarantia}
-                  onChange={this.onDataFimGarantiaChange.bind(this)}
+                <Input label="Indice de Reajuste"
+                  value={this.store.locatario.indiceDeReajuste}
+                  onChange={this.onIndiceDeReajusteChange.bind(this)}
                 />
 
-                <Button type="submit" style={this.store.buttonStyle} className="save-button">
-                  {this.store.buttonText}
-                </Button>
-            </form>
-          </Col>
-        </Row>
-      </div>
-    )
-  }
+              <label>Seguro?</label>
+              <input
+                className="form-control"
+                type="checkbox"
+                checked={this.store.locatario.seguro}
+                onChange={this.onSeguroChange.bind(this)}
+              />
+              <br />
+              <label>Data de vencimento do seguro</label>
+              <DatePicker
+                className="date-picker"
+                selected={this.store.locatario.dataVencimentoSeguro}
+                onChange={this.onDataVencimentoSeguroChange.bind(this)}
+              />
 
-  onSubmit(e) {
-    e.preventDefault()
-      this.store.saveLocatario(this.props.id)
-  }
+            <Select label="Garantia"
+              options={[
+              {option: 'Fiança'},
+              {option: 'Caução'},
+              {option: 'Hipoteca'},
+              {option: 'Seguro Fiança'}
+              ]}
+              value={this.store.locatario.garantia}
+              onChange={this.onGarantiaChange.bind(this)}
+            />
+            <Input label="Descrição da Garantia" 
+              onChange={this.onDescricaoGarantiaChange.bind(this)}
+              value={this.store.locatario.descricaoGarantia}
+            />
+            <label>Data de inicio da garantia</label>
+            <DatePicker
+              className="date-picker"
+              selected={this.store.locatario.dataInicioValidadeGarantia}
+              onChange={this.onDataInicioGarantiaChange.bind(this)}
+            />
+            <label> Data de fim da garantia</label>
+            <DatePicker 
+              className="date-picker"
+              selected={this.store.locatario.dataFimValidadeGarantia}
+              onChange={this.onDataFimGarantiaChange.bind(this)}
+            />
 
-  onNomeChange(e) {
-    this.store.locatario.nome = e.target.value
-  }
+          <Button type="submit" style={this.store.buttonStyle} className="save-button">
+            {this.store.buttonText}
+          </Button>
+        </form>
+      </Col>
+    </Row>
+  </div>
+  )
+}
 
-  onCpfCnpjChange(e) {
-    this.store.locatario.cpfCnpj = e.target.value
-  }
-  onRgInscricaoChange(e) {
-    this.store.locatario.rgInscricao = e.target.value
-  }
-  onResponsavelChange(e) {
-    this.store.locatario.responsavel = e.target.value
-  }
-  onTelefoneChange(e) {
-    this.store.locatario.telefone = e.target.value
-  }
-  onCelularChange(e) {
-    this.store.locatario.celular = e.target.value
-  }
-  onEmailChange(e) {
-    this.store.locatario.email = e.target.value
-  }
-  onDataInicioContratoChange(e) {
-    this.store.locatario.dataInicioContrato = e
-  }
-  onDataFimContratoChange(e) {
-    this.store.locatario.dataFimContrato = e
-  }
-  onValorChange(e, f) {
-    this.store.locatario.valor = f
-  }
-  onSeguroChange(e) {
-    this.store.locatario.seguro = e.target.checked
-  }
-  onDataVencimentoSeguroChange(e) {
-    this.store.locatario.dataVencimentoSeguro = e
-  }
+onSubmit(e) {
+  e.preventDefault()
+  this.store.saveLocatario(this.props.id)
+}
 
-  onGarantiaChange(e) {
-    this.store.locatario.garantia = e.target.value
-  }
+onNomeChange(e) {
+  this.store.locatario.nome = e.target.value
+}
 
-  onDescricaoGarantiaChange(e) {
-    this.store.locatario.descricaoGarantia = e.target.value
-  }
+onCpfCnpjChange(e) {
+  this.store.locatario.cpfCnpj = e.target.value
+}
+onRgInscricaoChange(e) {
+  this.store.locatario.rgInscricao = e.target.value
+}
+onResponsavelChange(e) {
+  this.store.locatario.responsavel = e.target.value
+}
+onTelefoneChange(e) {
+  this.store.locatario.telefone = e.target.value
+}
+onCelularChange(e) {
+  this.store.locatario.celular = e.target.value
+}
+onEmailChange(e) {
+  this.store.locatario.email = e.target.value
+}
+onDataInicioContratoChange(e) {
+  this.store.locatario.dataInicioContrato = e
+}
+onDataFimContratoChange(e) {
+  this.store.locatario.dataFimContrato = e
+}
+onValorChange(e, f) {
+  this.store.locatario.valor = f
+}
 
-  onDataInicioGarantiaChange(e) {
-    this.store.locatario.dataInicioValidadeGarantia = e
-  }
+onIndiceDeReajusteChange(e) {
+  this.store.locatario.indiceDeReajuste = e.target.value
+}
+onSeguroChange(e) {
+  this.store.locatario.seguro = e.target.checked
+}
+onDataVencimentoSeguroChange(e) {
+  this.store.locatario.dataVencimentoSeguro = e
+}
 
-  onDataFimGarantiaChange(e) {
-    this.store.locatario.dataFimValidadeGarantia = e
-  }
+onGarantiaChange(e) {
+  this.store.locatario.garantia = e.target.value
+}
+
+onDescricaoGarantiaChange(e) {
+  this.store.locatario.descricaoGarantia = e.target.value
+}
+
+onDataInicioGarantiaChange(e) {
+  this.store.locatario.dataInicioValidadeGarantia = e
+}
+
+onDataFimGarantiaChange(e) {
+  this.store.locatario.dataFimValidadeGarantia = e
+}
 }

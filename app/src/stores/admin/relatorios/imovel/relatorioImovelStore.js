@@ -79,8 +79,8 @@ export default class RelatorioImovelStore {
                   ['IPTU: ', imovel.IPTU + '/Anual: ' + formatToReal(imovel.valorAnualIPTU) 
                     + '/Parcelado: '+ imovel.valorParceladoIPTU],
                   ['RGI: ', imovel.rgi],
+                  ['Instalação: ', imovel.instalacao],
                   ['Energia: ', imovel.energia],
-                  ['Capacidade instalada: ', imovel.metragem.capacidade]
                 ]
               }
             },

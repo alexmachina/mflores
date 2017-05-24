@@ -16,6 +16,7 @@ export default class LocatarioStore {
     dataInicioContrato: '',
     dataFimContrato: '',
     valor: '',
+    indiceDeReajuste: '',
     seguro: false,
     dataVencimentoSeguro: '',
     garantia: '',

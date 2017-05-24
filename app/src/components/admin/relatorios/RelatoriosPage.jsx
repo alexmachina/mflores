@@ -24,6 +24,13 @@ export default () => (
             </Button>
           </Link>
         </Col>
+        <Col xs={12} sm={6}>
+          <Link to="/admin/relatorios/locacao">
+            <Button className="relatorio-button" bsSize="large" block>
+              <Glyphicon glyph="list" /> Relatorio de Locação
+            </Button>
+          </Link>
+        </Col>
 
       </Col>
     </Row>

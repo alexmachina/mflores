@@ -65,21 +65,37 @@ export default class RelatorioControleAux {
 
       const url = `${config.url}/imovel/${imovelId}/despesas/${dataInicial}/${dataFinal}`
       getJson(url).then(response => {
-        const pdfContent = this._buildDespesasTable(response.despesas)
+        const pdfContent = this._buildDespesasTable(response.despesas, response.totalDespesas)
 
         resolve(pdfContent)
-      }).catch(err => reject(err) )
+      }).catch(err =>{ 
+        const pdfContent = this._buildDespesasTable([], 0)
+        resolve(pdfContent)
+      } )
     })
   }
 
-  _buildDespesasTable(despesas) {
+  _buildDespesasTable(despesas, totalDespesas) {
     const despesasHeader = [
       {text: 'Descrição', style:'tableHeader'},
       {text: 'Valor', style:'tableHeader'},
       {text: 'Data', style: 'tableHeader'},
-      {text: 'Observacao', style: 'tableHeader'},
+      {text: 'Observação', style: 'tableHeader'},
     ]
-    const despesasBody = despesas.map(despesa => 
+    let despesasBody = []
+
+    if(!totalDespesas) {
+      return [
+        {
+          style:'tablePrincipal',
+          table: {
+            widths: ['auto', 'auto', 'auto', '*'],
+            body:[despesasHeader]
+          }
+        }
+      ]
+    }
+    despesasBody = despesas.map(despesa => 
       [despesa.descricao, formatToReal(despesa.valor), moment(despesa.data).format('DD/MM/YYYY'),
         despesa.observacao ? despesa.observacao : ""])
 
@@ -91,6 +107,9 @@ export default class RelatorioControleAux {
           widths: ['auto', 'auto', 'auto', '*'],
           body:tableContent
         }
+      },
+      { style:'total',
+        text: 'Total de Despesas: ' + formatToReal(-totalDespesas)
       }
     ]
 
@@ -109,13 +128,16 @@ export default class RelatorioControleAux {
 
       const url = `${config.url}/imovel/${imovelId}/receitas/${dataInicial}/${dataFinal}`
       getJson(url).then(response => {
-        const pdfContent = this._buildReceitasTable(response.receitas)
+        const pdfContent = this._buildReceitasTable(response.receitas, response.totalReceitas)
         resolve(pdfContent)
-      }).catch(error => reject(error) )
+      }).catch(error => {
+        const pdfContent = this._buildReceitasTable([], 0)
+        resolve(pdfContent)
+      })
     })
   }
 
-  _buildReceitasTable(receitas) {
+  _buildReceitasTable(receitas, totalReceitas) {
     const receitasHeader = [
       {text: 'Descrição', style:'tableHeader'},
       {text: 'Valor', style:'tableHeader'},
@@ -123,12 +145,23 @@ export default class RelatorioControleAux {
       {text: 'Pagamento', style: 'tableHeader'},
       {text: 'Observacao', style: 'tableHeader'},
     ]
+    let receitasBody = []
 
-    const receitasBody = receitas.map(receita => 
+    if(!totalReceitas) {
+      return {
+        style:'tablePrincipal',
+        table: {
+          widths: ['auto',75,'auto','auto','*'],
+          body: [receitasHeader]
+        }
+      }
+    }
+
+    receitasBody = receitas.map(receita => 
       [receita.descricao, formatToReal(receita.valor), moment(receita.data).format('DD/MM/YYYY'), 
         receita.modoPagamento, receita.observacao])
 
-    const tableContent = [receitasHeader, ...receitasBody]
+    const tableContent = [receitasHeader, ...receitasBody,]
 
     const receitasTable = [
       {
@@ -137,9 +170,13 @@ export default class RelatorioControleAux {
           widths:['auto',75,'auto','auto','*'],
           body: tableContent,
         }
+      },
+      { style:'total',
+        text: 'Total de Receitas: '+formatToReal(totalReceitas)
       }
     ]
 
+    console.log(receitasTable)
     return receitasTable
 
   }

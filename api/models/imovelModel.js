@@ -22,7 +22,6 @@ let schema = new mongoose.Schema({
   IPTU: {type: String, default: ''},
   valorAnualIPTU: {type: Number, default: null},
   valorParceladoIPTU: {type: String, default: null},
-  
 
   endereco: {type: enderecoModel, default:enderecoModel},
   locatario: {type: locatarioModel, default: locatarioModel},

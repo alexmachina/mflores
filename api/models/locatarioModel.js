@@ -11,6 +11,7 @@ let schema = new mongoose.Schema({
   dataInicioContrato: {type: Date, default:null},
   dataFimContrato: {type: Date, default: null},
   valor: {type:Number, default: ''},
+  indiceDeReajuste: {type: String, default: ''},
   seguro: {type: Boolean, default: ''},
   garantia: {type: String, default: ''},
   descricaoGarantia:{type:String, default: ''},

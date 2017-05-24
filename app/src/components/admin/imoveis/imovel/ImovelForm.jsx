@@ -26,7 +26,12 @@ import Select from '../../../utils/Select.jsx'
         {value: 'Terreno', option:'Terreno'},
         {value: 'Comercial', option: 'Comercial'},
         {value: 'Galpão', option: 'Galpão'},
-        {value: 'Chácara', option: 'Chácara'}
+        {value: 'Chácara', option: 'Chácara'},
+        {value: 'Sobrado', option: 'Sobrado'},
+        {value: 'Sobrado Residencial', option: 'Sobrado Residencial'},
+        {value: 'Predio', option: 'Predio'},
+        {value: 'Predio Comercial', option: 'Predio Comercial'},
+        {value: 'Sitio', options: 'Sitio'}
       ]
       return(
         <div className="container-fluid">
@@ -40,8 +45,6 @@ import Select from '../../../utils/Select.jsx'
                 />
                 <Input 
                   label="RGI"
-                  validationMessage="Campo invalido"
-                  validationFunction={validator.isInt}
                   value={this.store.imovel.rgi}
                   onChange={this.onRgiChange.bind(this)}
                 />
@@ -78,15 +81,7 @@ import Select from '../../../utils/Select.jsx'
               onChange={this.onAreaTotalChange.bind(this)}
             />
 
-            <label>Capacidade</label>
-            <CurrencyInput 
-              decimalSeparator=","
-              thousandSeparator="."
-              className="form-control"
-              value={this.store.imovel.metragem.capacidade}
-              onChange={this.onCapacidadeChange.bind(this)}
-            />
-
+           
           <Input label="Instalação"
             value={this.store.imovel.instalacao}
             onChange={this.onInstalacaoChange.bind(this)}

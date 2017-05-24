@@ -5,6 +5,7 @@ import ImoveisPage from './src/components/admin/imoveis/ImoveisPage.jsx'
 import RelatoriosPage from './src/components/admin/relatorios/RelatoriosPage.jsx'
 import RelatorioImoveisPage from './src/components/admin/relatorios/imoveis/RelatorioImoveisPage.jsx'
 import RelatorioControlePage from './src/components/admin/relatorios/controle/RelatorioControlePage.jsx'
+import RelatorioLocacaoPage from './src/components/admin/relatorios/locacao/RelatorioLocacaoPage.jsx'
 import SistemaPage from './src/components/admin/sistema/SistemaPage.jsx'
 import UsuariosPage from './src/components/admin/sistema/usuarios/UsuariosPage.jsx'
 import HomePage from './src/components/public/HomePage.jsx'
@@ -31,6 +32,7 @@ const rt = (
       <Route path="/admin/relatorios" component={RelatoriosPage} />
       <Route path="/admin/relatorios/imoveis" component={RelatorioImoveisPage} />
       <Route path="/admin/relatorios/controle" component={RelatorioControlePage} />
+      <Route path="/admin/relatorios/locacao" component={RelatorioLocacaoPage} />
       <Route path="/admin/sistema" component={SistemaPage} />
       <Route path="/admin/sistema/usuarios" component={UsuariosPage} />
       

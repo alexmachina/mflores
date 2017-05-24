@@ -17,7 +17,6 @@ export default class ImovelFormStore {
     metragem : {
       areaTotal: '',
       areaConstruida: '',
-      capacidade: ''
     },
     zoneamento: false,
     IPTU: '',
