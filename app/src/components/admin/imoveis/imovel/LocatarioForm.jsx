@@ -96,7 +96,7 @@ import CurrencyInput from 'react-currency-input'
 
             <Select label="Garantia"
               options={[
-              {option: 'Fiança'},
+              {option: 'Fiador'},
               {option: 'Caução'},
               {option: 'Hipoteca'},
               {option: 'Seguro Fiança'}

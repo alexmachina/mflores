@@ -86,166 +86,178 @@ import Select from '../../../utils/Select.jsx'
             value={this.store.imovel.instalacao}
             onChange={this.onInstalacaoChange.bind(this)}
           />
-          <Input label="Energia"
-            value={this.store.imovel.energia}
-            onChange={this.onEnergiaChange.bind(this)}
-          />
+        <Input label="Capacidade Instalada"
+          value={this.store.imovel.capacidadeInstalada}
+          onChange={this.onCapacidadeInstaladaChange.bind(this)}
+          className="col-xs-12 col-md-6"
+        />
+        <Input label="Capacidade Disponível"
+        value={this.store.imovel.capacidadeDisponivel}
+        onChange={this.onCapacidadeDisponivelChange.bind(this)}
+        className="col-xs-12 col-md-6"
+        />
+
 
         <label>Zoneamento?</label>
         <input type="checkbox"
-          checked={this.store.imovel.zoneamento}
-          onChange={this.onZoneamentoChange.bind(this)}
-          className="form-control"
+        checked={this.store.imovel.zoneamento}
+        onChange={this.onZoneamentoChange.bind(this)}
+        className="form-control"
         />
         <label>Preço de Venda</label>
         <CurrencyInput
-          decimalSeparator=","
-          thousandSeparator="."
-          prefix="R$"
-          className="form-control"
-          value={this.store.imovel.precoVenda}
-          onChange={this.onPrecoVendaChange.bind(this)}
+        decimalSeparator=","
+        thousandSeparator="."
+        prefix="R$"
+        className="form-control"
+        value={this.store.imovel.precoVenda}
+        onChange={this.onPrecoVendaChange.bind(this)}
         />
 
         <label>Preço de Locação</label>
         <CurrencyInput 
-          decimalSeparator=","
-          thousandSeparator="."
-          prefix="R$" 
-          className="form-control"
-          value={this.store.imovel.precoLocacao}
-          onChange={this.onPrecoLocacaoChange.bind(this)}
+        decimalSeparator=","
+        thousandSeparator="."
+        prefix="R$" 
+        className="form-control"
+        value={this.store.imovel.precoLocacao}
+        onChange={this.onPrecoLocacaoChange.bind(this)}
         />
 
         <label>Valor do condomínio</label>
         <CurrencyInput 
-          prefix="R$"
-          decimalSeparator=","
-          thousandSeparator="."
-          className="form-control"
-          value={this.store.imovel.valorCondominio}
-          onChange={this.onValorCondominioChange.bind(this)}
+        prefix="R$"
+        decimalSeparator=","
+        thousandSeparator="."
+        className="form-control"
+        value={this.store.imovel.valorCondominio}
+        onChange={this.onValorCondominioChange.bind(this)}
         />
 
-      <Input label="IPTU"
+        <Input label="IPTU"
         onChange={this.onIPTUChange.bind(this)}
         value={this.store.imovel.IPTU}
-      />
+        />
         <label>Valor Anual IPTU</label>
         <CurrencyInput 
-          prefix="R$" 
-          decimalSeparator=","
-          thousandSeparator="."
-          className="form-control"
+        prefix="R$" 
+        decimalSeparator=","
+        thousandSeparator="."
+        className="form-control"
         value={this.store.imovel.valorAnualIPTU}
-      onChange={this.onValorAnualIPTUChange.bind(this)}
-    />
-    <Input label="Valor Parcelado IPTU"
-      onChange={this.onValorParceladoIPTUChange.bind(this)}
-      value={this.store.imovel.valorParceladoIPTU}
-    />
-    <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
-      {this.store.buttonText}
-    </Button>
-    <div className="text-center">
-    </div>
-    <Button onClick={() => this.store.showDeleteModal = true} style={{marginTop:'30px',width:'100%'}} className="btn btn-danger">
-      Deletar
-    </Button>
-    <Modal show={this.store.showDeleteModal} onHide={() => this.store.showDeleteModal = false}>
-      <Modal.Header closeButton>
+        onChange={this.onValorAnualIPTUChange.bind(this)}
+        />
+        <Input label="Valor Parcelado IPTU"
+        onChange={this.onValorParceladoIPTUChange.bind(this)}
+        value={this.store.imovel.valorParceladoIPTU}
+        />
+        <Button style={this.store.buttonStyle} className="form-button" className="save-button" type="submit">
+        {this.store.buttonText}
+        </Button>
+        <div className="text-center">
+        </div>
+        <Button onClick={() => this.store.showDeleteModal = true} style={{marginTop:'30px',width:'100%'}} className="btn btn-danger">
+        Deletar
+        </Button>
+        <Modal show={this.store.showDeleteModal} onHide={() => this.store.showDeleteModal = false}>
+        <Modal.Header closeButton>
         <Modal.Title>Deletar Imovel?</Modal.Title>
-      </Modal.Header>
+        </Modal.Header>
 
-      <Modal.Body>
-      </Modal.Body>
+        <Modal.Body>
+        </Modal.Body>
 
-      <Modal.Footer>
+        <Modal.Footer>
 
         <Button bsStyle="danger" onClick={this.onDeleteButtonClick.bind(this)}style={{}}>Sim</Button>
         <Button onClick={() => this.store.showDeleteModal = false}>Cancelar</Button>
-      </Modal.Footer>
+        </Modal.Footer>
 
-    </Modal>
-  </form>
-      </Col>
-    </Row>
-  </div>
-    )
-  }
+        </Modal>
+        </form>
+        </Col>
+        </Row>
+        </div>
+      )
+    }
 
-  onDeleteButtonClick(e) {
-    this.store.delete(this.props.id)
-  }
+    onDeleteButtonClick(e) {
+      this.store.delete(this.props.id)
+    }
 
-  onSubmit(e) {
-    e.preventDefault()
-    this.store.save(this.props.id)
-  }
+    onSubmit(e) {
+      e.preventDefault()
+      this.store.save(this.props.id)
+    }
 
-  onTituloChange(e) {
-    this.store.imovel.titulo = e.target.value
-  }
+    onTituloChange(e) {
+      this.store.imovel.titulo = e.target.value
+    }
 
-  onRgiChange(e) {
-    this.store.imovel.rgi = e.target.value
-  }
-  onTipoChange(e) {
-    this.store.imovel.tipo = e.target.value
-  }
+    onRgiChange(e) {
+      this.store.imovel.rgi = e.target.value
+    }
+    onTipoChange(e) {
+      this.store.imovel.tipo = e.target.value
+    }
 
-  onObservacaoGestorChange(e) {
-    this.store.imovel.observacaoGestor = e.target.value
-  }
+    onObservacaoGestorChange(e) {
+      this.store.imovel.observacaoGestor = e.target.value
+    }
 
-  onObservacaoWebsiteChange(e) {
-    this.store.imovel.observacaoWebsite = e.target.value
-  }
+    onObservacaoWebsiteChange(e) {
+      this.store.imovel.observacaoWebsite = e.target.value
+    }
 
-  onAreaConstruidaChange(e) {
-    this.store.imovel.metragem.areaConstruida = e
-  }
+    onAreaConstruidaChange(e) {
+      this.store.imovel.metragem.areaConstruida = e
+    }
 
-  onAreaTotalChange(e) {
-    this.store.imovel.metragem.areaTotal = e
-  }
+    onAreaTotalChange(e) {
+      this.store.imovel.metragem.areaTotal = e
+    }
 
-  onCapacidadeChange(e) {
-    this.store.imovel.metragem.capacidade = e
-  }
+    onCapacidadeInstaladaChange(e) {
+      this.store.imovel.capacidadeInstalada = e.target.value
+    }
 
-  onInstalacaoChange(e) {
-    this.store.imovel.instalacao = e.target.value
-  }
-  onEnergiaChange(e) {
-    this.store.imovel.energia = e.target.value
-  }
+    onCapacidadeDisponivelChange(e) {
+      this.store.imovel.capacidadeDisponivel = e.target.value
+    }
+
+    
+    onInstalacaoChange(e) {
+      this.store.imovel.instalacao = e.target.value
+    }
+    onEnergiaChange(e) {
+      this.store.imovel.energia = e.target.value
+    }
 
 
-  onZoneamentoChange(e) {
-    this.store.imovel.zoneamento = e.target.checked
-  }
-  onPrecoVendaChange(e, f) {
-    this.store.imovel.precoVenda = f
-  }
+    onZoneamentoChange(e) {
+      this.store.imovel.zoneamento = e.target.checked
+    }
+    onPrecoVendaChange(e, f) {
+      this.store.imovel.precoVenda = f
+    }
 
-  onPrecoLocacaoChange(e, f) {
-    this.store.imovel.precoLocacao = f
-  }
+    onPrecoLocacaoChange(e, f) {
+      this.store.imovel.precoLocacao = f
+    }
 
-  onValorCondominioChange(e, f) {
-    this.store.imovel.valorCondominio = f
-  }
+    onValorCondominioChange(e, f) {
+      this.store.imovel.valorCondominio = f
+    }
 
-  onIPTUChange(e) {
-    this.store.imovel.IPTU = e.target.value
-  }
+    onIPTUChange(e) {
+      this.store.imovel.IPTU = e.target.value
+    }
 
-  onValorAnualIPTUChange(e, f) {
-    this.store.imovel.valorAnualIPTU = f
-  }
+    onValorAnualIPTUChange(e, f) {
+      this.store.imovel.valorAnualIPTU = f
+    }
 
-  onValorParceladoIPTUChange(e) {
-    this.store.imovel.valorParceladoIPTU = e.target.value
+    onValorParceladoIPTUChange(e) {
+      this.store.imovel.valorParceladoIPTU = e.target.value
+    }
   }
-}

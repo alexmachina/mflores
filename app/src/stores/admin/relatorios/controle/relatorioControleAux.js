@@ -84,7 +84,7 @@ export default class RelatorioControleAux {
     ]
     let despesasBody = []
 
-    if(!totalDespesas) {
+    if(!despesas.length) {
       return [
         {
           style:'tablePrincipal',
@@ -147,7 +147,7 @@ export default class RelatorioControleAux {
     ]
     let receitasBody = []
 
-    if(!totalReceitas) {
+    if(!receitas.length) {
       return {
         style:'tablePrincipal',
         table: {

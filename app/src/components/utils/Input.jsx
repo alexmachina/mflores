@@ -20,6 +20,7 @@ export default class Input extends React.Component{
     let inputClassName = null
     let divClassName = null
     let divStyle = {}
+
     if(this.props.align == 'horizontal') {
       inputClassName= ''
       divClassName = ''
@@ -28,6 +29,16 @@ export default class Input extends React.Component{
     else {
       divClassName='form-group'
       inputClassName= 'form-control'
+    }
+
+    if(this.props.className) {
+      divClassName = this.props.className
+      divStyle={
+        padding:'0 11 0 0',
+        
+        marginBottom:10
+      }
+      
     }
 
     return(

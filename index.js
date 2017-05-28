@@ -4,11 +4,15 @@ const express = require('express'),
   router = require('./api/routes'),
   mongoose = require('mongoose')
 
-let verifyAndSendEmail = require('./verifyJob')
+require('dotenv').config()
+
+let verificaGarantia = require('./services/verificaGarantia.js')
+let verificaContrato = require('./services/verificaContrato.js')
+let verificaSeguro = require('./services/verificaSeguro.js')
+
 
 let app = express();
 app.set('port', (process.env.PORT || 3000))
-let conString = config.mongoDbConString
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 corsMiddleware = function (req, res, next) {
@@ -23,7 +27,7 @@ corsMiddleware = function (req, res, next) {
 
 app.use('/', corsMiddleware, express.static('app'));
 
-mongoose.connect(conString)
+mongoose.connect(process.env.DB_URI)
 
 app.use(corsMiddleware);
 app.use(router)
@@ -35,8 +39,10 @@ app.listen(app.get('port'), err => err ?
 
 
 var CronJob = require('cron').CronJob;
-new CronJob('00 55 10 * * *', function() {
-  verifyAndSendEmail()
+new CronJob('50 10 * * *', function() {
+  verificaGarantia()
+  verificaContrato()
+  verificaSeguro()
 }, null, true, 'America/Sao_Paulo');
 
 console.log('CRON Job set')

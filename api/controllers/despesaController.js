@@ -5,7 +5,7 @@ let mongoose = require('mongoose')
 class DespesaController {
   getDespesas(req, res) {
     const find = despesaModel.find({imovel : req.params.imovelId})
-      .sort({ano: 1, mes: 1})
+      .sort({data: 1})
       .limit(10)
       .skip((req.param('page')-1)*10)
       .exec(),
@@ -44,6 +44,7 @@ class DespesaController {
     }
 
     let find = despesaModel.find(query)
+      .sort({data: 1})
       .limit(10)
       .skip((req.param('page') - 1) * 10)
       .exec()

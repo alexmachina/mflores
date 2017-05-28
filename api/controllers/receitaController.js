@@ -4,6 +4,7 @@ let ObjectId = require('mongoose').Types.ObjectId
 class ReceitaController {
   getReceitas(req, res) {
     const findReceitas = receitaModel.find({imovel: req.params.imovelId})
+      .sort({data: 1})
       .limit(10)
       .skip((req.param('page') - 1) * 10)
       .exec(),
@@ -50,6 +51,7 @@ class ReceitaController {
     }
 
     let find = receitaModel.find(query)
+      .sort({data: 1})
       .limit(10)
       .skip((req.param('page') -1) * 10)
       .exec()
