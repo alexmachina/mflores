@@ -1,6 +1,4 @@
 let nodemailer = require('nodemailer')
-let config = require('../../config.js')
-console.log(config)
 
 class ContactController {
   sendMessage(req, res) {
@@ -22,8 +20,8 @@ class ContactController {
       host: 'smtp.zoho.com',
       port: 587,
       auth:{
-        user:'notificacao@webyang.com.br',
-        pass: config.emailPassword
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD
       }
     })
     let mailOptions = {

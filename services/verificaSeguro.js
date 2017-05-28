@@ -1,6 +1,5 @@
 let imovelModel = require('../api/models/imovelModel')
 let mongoose = require('mongoose')
-let config = require('../config')
 let nodemailer = require('nodemailer')
 let moment = require('moment')
 
