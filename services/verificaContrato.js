@@ -17,14 +17,17 @@ let moment = require('moment')
   })
 
   imovelModel.find({'locatario.dataFimContrato': {$lt:cutoff, $gt:today}}).exec().then(imoveis => {
+
     if (imoveis.length) {
+    console.log("Fins de contrato encontrados")
       try{
         let mailOptions = {
           from: 'notificacao@webyang.com.br',
-          to: 'alex.xmde@gmail.com',
+          to: process.env.EMAIL_DESTINY,
           subject: 'Aviso: Vencimento de Contrato',
           html: createHtml(imoveis)
         }
+        console.log("Enviando email de contrato")
         transporter.sendMail(mailOptions, err => {
           if(err)
             return console.log(err)

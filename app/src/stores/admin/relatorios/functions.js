@@ -96,7 +96,7 @@ export const styles =
       marginTop:200
     },
     total: {
-      alignment:'right',
+      alignment:'center',
       marginRight:50
     }
   }

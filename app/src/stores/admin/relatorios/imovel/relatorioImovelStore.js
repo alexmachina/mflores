@@ -40,7 +40,7 @@ export default class RelatorioImovelStore {
               table: {
                 widths:['auto','*'],
                 body: [
-                  ['Proprietario:', imovel.proprietario.nome]
+                  ['Proprietário:', imovel.proprietario.nome]
                 ]
               }
             },
@@ -51,8 +51,8 @@ export default class RelatorioImovelStore {
               table: {
                 widths: ['auto','*'],
                 body: [
-                  ['Disponivel:', imovel.website.disponivel ? 'Sim': 'Não'],
-                  ['Titulo:', imovel.website.titulo]
+                  ['Disponível', imovel.website.disponivel ? 'Sim': 'Não'],
+                  ['Título', imovel.website.titulo]
                 ]
               }
             },
@@ -73,14 +73,14 @@ export default class RelatorioImovelStore {
                   ['Venda: ', formatToReal(imovel.precoVenda)],
                   ['Locação: ', formatToReal(imovel.precoLocacao)],
                   ['Condomínio: ', formatToReal(imovel.valorCondominio)],
-                  ['Área Total: ', imovel.metragem.areaTotal],
-                  ['Área Construída: ', imovel.metragem.areaConstruida],
+                  ['Área Total: ', imovel.metragem.areaTotal + 'm²'],
+                  ['Área Construída: ', imovel.metragem.areaConstruida + 'm²'],
                   ['Observação: ',{ text: imovel.website.descricao, fontSize:10}],
                   ['IPTU: ', imovel.IPTU + '/Anual: ' + formatToReal(imovel.valorAnualIPTU) 
                     + '/Parcelado: '+ imovel.valorParceladoIPTU],
-                  ['RGI: ', imovel.rgi],
+                  ['Agua/Esgoto: ', imovel.rgi],
                   ['Instalação: ', imovel.instalacao],
-                  ['Energia: ', imovel.energia],
+                  ['Capacidade: ', 'Disponivel: ' + imovel.capacidadeDisponivel + ' | Instalada:' +imovel.capacidadeInstalada]
                 ]
               }
             },

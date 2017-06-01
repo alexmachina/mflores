@@ -50,11 +50,15 @@ class ReceitaController {
       data: {$gte: dataInicial, $lte: dataFinal}
     }
 
-    let find = receitaModel.find(query)
-      .sort({data: 1})
-      .limit(10)
-      .skip((req.param('page') -1) * 10)
-      .exec()
+    let find = receitaModel.find(query).sort({data: 1}).exec()
+
+    if (req.param('page')) {
+      let find = receitaModel.find(query)
+        .sort({data: 1})
+        .limit(10)
+        .skip((req.param('page') -1) * 10)
+        .exec()
+    }
 
     let totalReceitas = receitaModel.aggregate([
       {$match: {$and: [

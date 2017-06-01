@@ -38,10 +38,9 @@ app.listen(app.get('port'), err => err ?
 
 
 var CronJob = require('cron').CronJob;
-new CronJob('50 10 * * *', function() {
+new CronJob('30 11 * * *', function() {
   verificaGarantia()
   verificaContrato()
   verificaSeguro()
 }, null, true, 'America/Sao_Paulo');
 
-console.log('CRON Job set')

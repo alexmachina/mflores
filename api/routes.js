@@ -27,6 +27,7 @@ router.get('/buscarImoveisDisponiveis', imovelController.buscarImoveisDisponivei
 
 
 router.post('/imovel/:id/addImage', upload.single('arquivo'), imovelController.addImage)
+router.post('/imovel/:id/addImages',upload.array('arquivos',10), imovelController.addImages)
 router.delete('/imovel/:id/deleteImage/:imageId', imovelController.deleteImage)
 router.put('/imovel/:id/image/:imageId', upload.single('arquivo'), imovelController.updateImage)
 router.put('/imovel/:id/imagemPrincipal', upload.single('arquivo'), imovelController.updateImagemPrincipal)

@@ -26,7 +26,7 @@ export default class RelatorioControleAux {
   renderRangeData(dataInicial, dataFinal) {
     return new Promise((resolve, reject) => {
       const datasNode = {
-        text:`Periodo de ${moment(dataInicial).format('DD/MM/YYYY')}  á ${moment(dataFinal).format('DD/MM/YYYY')}`,
+        text:`Período de ${moment(dataInicial).format('DD/MM/YYYY')}  á ${moment(dataFinal).format('DD/MM/YYYY')}`,
         alignment: 'center',
         fontSize:18,
         margin:[0,20,0,20]
@@ -89,7 +89,7 @@ export default class RelatorioControleAux {
         {
           style:'tablePrincipal',
           table: {
-            widths: ['auto', 'auto', 'auto', '*'],
+            widths: ['auto', '*', 'auto', '*'],
             body:[despesasHeader]
           }
         }
@@ -97,14 +97,14 @@ export default class RelatorioControleAux {
     }
     despesasBody = despesas.map(despesa => 
       [despesa.descricao, formatToReal(despesa.valor), moment(despesa.data).format('DD/MM/YYYY'),
-        despesa.observacao ? despesa.observacao : ""])
+        despesa.observacao ? {text:despesa.observacao,fontSize:10} : ""])
 
     const tableContent = [despesasHeader, ...despesasBody]
     const despesasTable = [
       {
         style:'tablePrincipal',
         table: {
-          widths: ['auto', 'auto', 'auto', '*'],
+          widths: ['auto', 75, 'auto', '*'],
           body:tableContent
         }
       },
@@ -143,7 +143,7 @@ export default class RelatorioControleAux {
       {text: 'Valor', style:'tableHeader'},
       {text: 'Data', style: 'tableHeader'},
       {text: 'Pagamento', style: 'tableHeader'},
-      {text: 'Observacao', style: 'tableHeader'},
+      {text: 'Observação', style: 'tableHeader'},
     ]
     let receitasBody = []
 

@@ -22,10 +22,11 @@ module.exports = function verificaGarantia() {
         console.log('transport created')
         let mailOptions = {
           from: 'notificacao@webyang.com.br',
-          to: 'alex.xmde@gmail.com',
+          to: process.env.EMAIL_DESTINY,
           subject: 'Aviso: Vencimento de garantia',
           html: createHtml(imoveis)
         }
+        console.log("Enviando email de garantia")
         transporter.sendMail(mailOptions, err => {
           if(err)
             return console.log(err)

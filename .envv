@@ -1,0 +1,4 @@
+DB_URI=mongodb://mflores:*Cthulhu1@mflores.mongodb.uhserver.com/mflores
+EMAIL_USERNAME=notificacao@webyang.com.br
+EMAIL_PASSWORD=cthulhu1
+PORT=3000

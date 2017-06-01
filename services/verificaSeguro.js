@@ -23,10 +23,11 @@ module.exports = function verificaSeguro() {
         console.log('transport created')
         let mailOptions = {
           from: 'notificacao@webyang.com.br',
-          to: 'alex.xmde@gmail.com',
+          to: process.env.EMAIL_DESTINY,
             subject: 'Aviso: Vencimento de Seguro',
           html: createHtml(imoveis)
         }
+        console.log("Enviando email de seguro")
         transporter.sendMail(mailOptions, err => {
           if(err)
             return console.log(err)

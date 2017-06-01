@@ -14,6 +14,11 @@ export default class ImagemForm extends React.Component {
   componentDidMount() {
     this.store.getImagens(this.props.id)
   }
+
+    onMultipleChange(e) {
+      this.store.saveImages(e.target.files, this.props.id)
+  }
+
   render() {
     let deleteButton = null
     if(this.store.imagem._id) {
@@ -22,6 +27,10 @@ export default class ImagemForm extends React.Component {
       }}>Deletar</Button>
 
     }
+    let loading = null
+    if(this.store.loading)
+      loading = <span>Carregando...</span>
+
     return (
       <div className="container-fluid">
         <Row>
@@ -31,7 +40,7 @@ export default class ImagemForm extends React.Component {
               <Col xs={12} md={6}>
                 <Image src={'/img/imoveis/'+this.store.capa} responsive/>
               </Col>
-              <input type="file" onChange={this.onCapaChange.bind(this)} />
+              <input type="file" style={{display:'inline'}} onChange={this.onCapaChange.bind(this)} />
               <Button type="submit">
                 Enviar
               </Button>
@@ -42,6 +51,7 @@ export default class ImagemForm extends React.Component {
           <Row>
             <Col xs={12} md={8} mdOffset={2}>
               {this.store.error}
+              <Col xs={12} md={6}>
               <Button onClick={() =>{ 
                 this.store.showModal = true
                 this.store.imagem = {}
@@ -50,6 +60,16 @@ export default class ImagemForm extends React.Component {
               bsStyle="primary">
               Adicionar Imagem
             </Button>
+      </Col>
+      <Col xs={12} md={6}>
+            <label>Inserir multiplas imagens</label>
+            <input 
+               type="file"
+               name="arquivos"
+               onChange={this.onMultipleChange.bind(this)}
+               multiple />
+      {loading}
+      </Col>
           </Col>
         </Row>
         <Row>

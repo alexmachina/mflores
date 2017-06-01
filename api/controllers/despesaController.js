@@ -43,11 +43,16 @@ class DespesaController {
       data: {$gte: dataInicial, $lte: dataFinal}
     }
 
-    let find = despesaModel.find(query)
-      .sort({data: 1})
-      .limit(10)
-      .skip((req.param('page') - 1) * 10)
-      .exec()
+    debugger
+    let find = despesaModel.find(query).sort({data: 1}).exec()
+
+    if(req.param('page')) {
+      find = despesaModel.find(query)
+        .sort({data: 1})
+        .limit(10)
+        .skip((req.param('page') - 1) * 10)
+        .exec()
+    }
 
     let countValor = despesaModel.aggregate([
       {$match: {$and : [
@@ -73,6 +78,7 @@ class DespesaController {
       console.log(err)
       res.status(500).send(err) })
   }
+
 
   addDespesa(req, res) {
     let despesa = new despesaModel(req.body)

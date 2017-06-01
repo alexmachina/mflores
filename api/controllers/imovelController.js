@@ -68,6 +68,20 @@ class ImovelController {
 
   }
 
+  addImages(req, res) {
+    setTimeout(function () {
+    let images = []
+    req.files.forEach(file => {
+      images.push({arquivo: file.filename})
+    })
+
+    imovelModel.findByIdAndUpdate(req.params.id,
+      {$push: {'imagens' : {$each: images}}}).then(() => {
+        return res.send()
+      })
+    },5000)
+  }
+
   deleteImage(req, res) {
     let find = imovelModel.findById(req.params.id).exec()
 
