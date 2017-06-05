@@ -15,10 +15,10 @@ class ContratoController {
   }
 
   addClausula(req, res) {
-   const update = contratoModel.findByIdAndUpdate(req.params.id,
+    const update = contratoModel.findByIdAndUpdate(req.params.id,
       {$push: {'clausulas' : req.body}})
-  
-  update.then(res.send())
+
+    update.then(res.send())
 
   }
 
@@ -38,7 +38,7 @@ class ContratoController {
       contrato.clausulas.map(clausula => {
         clausula.corpo = clausula.corpo.replace('->nome_locatario', imovel.locatario.nome)
         return clausula
-        })
+      })
       res.json(contrato)
     }).catch(err => res.status(500).send(err))
 

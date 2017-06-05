@@ -11,14 +11,14 @@ class DespesaController {
       .exec(),
       findCount = despesaModel.count({imovel: req.params.imovelId}),
 
-    soma = despesaModel.aggregate([{
-      $match : { 'imovel' : new ObjectId(req.params.imovelId) },
-    },
-      {$group: {_id: null, count : {$sum: '$valor'}}}])
+      soma = despesaModel.aggregate([{
+        $match : { 'imovel' : new ObjectId(req.params.imovelId) },
+      },
+        {$group: {_id: null, count : {$sum: '$valor'}}}])
 
     const count = despesaModel.count({imovel : req.params.imovelId})
 
-     let  operations = [find, findCount, soma]
+    let  operations = [find, findCount, soma]
 
     Promise.all(operations).then(results => {
       const [despesas, count] = results,

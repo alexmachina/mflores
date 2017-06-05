@@ -2,6 +2,15 @@ import PublicPage from './src/components/public/PublicPage.jsx'
 import AdminPage from './src/components/admin/AdminPage.jsx'
 import ImovelPage from './src/components/admin/imoveis/imovel/ImovelPage.jsx'
 import ImoveisPage from './src/components/admin/imoveis/ImoveisPage.jsx'
+import EnderecoPage from './src/components/admin/imoveis/imovel/endereco/EnderecoPage.jsx'
+import ImagensPage from './src/components/admin/imoveis/imovel/imagens/ImagensPage.jsx'
+import LocatarioPage from './src/components/admin/imoveis/imovel/locatario/LocatarioPage.jsx'
+import ProprietarioPage from './src/components/admin/imoveis/imovel/proprietario/ProprietarioPage.jsx'
+import WebsitePage from './src/components/admin/imoveis/imovel/website/WebsitePage.jsx'
+
+import DespesasPage from './src/components/admin/imoveis/imovel/despesas/DespesasPage.jsx'
+import ReceitasPage from './src/components/admin/imoveis/imovel/receitas/ReceitasPage.jsx'
+
 import RelatoriosPage from './src/components/admin/relatorios/RelatoriosPage.jsx'
 import RelatorioImoveisPage from './src/components/admin/relatorios/imoveis/RelatorioImoveisPage.jsx'
 import RelatorioControlePage from './src/components/admin/relatorios/controle/RelatorioControlePage.jsx'
@@ -29,7 +38,15 @@ const rt = (
     <Route path="/admin" component={AdminPage} >
       <Route path="/admin/imoveis" component={ImoveisPage} />
       <Route path="/admin/imovel/:id" component={ImovelPage} />
+      <Route path="/admin/imovel/:id/endereco" component={EnderecoPage} />
+      <Route path="/admin/imovel/:id/imagens" component={ImagensPage} />
+      <Route path="/admin/imovel/:id/locatario" component={LocatarioPage} />
+      <Route path="/admin/imovel/:id/proprietario" component={ProprietarioPage} />
+      <Route path="/admin/imovel/:id/website" component={WebsitePage} />
+      <Route path="/admin/imovel/:id/despesas" component={DespesasPage} />
+      <Route path="/admin/imovel/:id/receitas" component={ReceitasPage} />
       <Route path="/admin/relatorios" component={RelatoriosPage} />
+      
       <Route path="/admin/relatorios/imoveis" component={RelatorioImoveisPage} />
       <Route path="/admin/relatorios/controle" component={RelatorioControlePage} />
       <Route path="/admin/relatorios/locacao" component={RelatorioLocacaoPage} />

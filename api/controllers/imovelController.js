@@ -275,6 +275,15 @@ class ImovelController {
       res.json({imoveis, count})
     })
   }
+
+  getTitulo(req, res) {
+    let query = imovelModel.findById(req.params.id).select('titulo').exec()
+    
+
+    query.then(imovel => {
+      return res.json({titulo: imovel.titulo})
+    })
+  }
 }
 
 

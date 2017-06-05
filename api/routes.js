@@ -24,6 +24,7 @@ router.get('/buscarImoveisPorPrecoDeVenda/:from/:to', imovelController.buscarImo
 router.get('/buscarImoveisPorPrecoDeLocacao/:from/:to', imovelController.buscarImoveisPorPrecoDeLocacao)
 router.get('/searchImoveis/:search', imovelController.searchImoveis)
 router.get('/buscarImoveisDisponiveis', imovelController.buscarImoveisDisponiveis)
+router.get('/imovel/:id/titulo', imovelController.getTitulo)
 
 
 router.post('/imovel/:id/addImage', upload.single('arquivo'), imovelController.addImage)
