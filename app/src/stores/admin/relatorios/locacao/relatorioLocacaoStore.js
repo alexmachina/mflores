@@ -3,7 +3,6 @@ import { getJson } from '../../../fetch.js'
 import config from '../../../config.js'
 import pdfmake from 'pdfmake/build/pdfmake.min.js'
 import { renderHeader, renderFooter, styles } from '../functions.js'
-import RelatorioLocacaoAux from './relatorioLocacaoAux.js'
 
 export default class relatorioLocacaoStore {
   constructor() {
@@ -37,7 +36,7 @@ export default class relatorioLocacaoStore {
         ]
 
       const doc = {
-        pageMargins:[0,150,0,130],
+        pageMargins:[0,0,0,0],
         header,
         footer,
         content,
@@ -47,8 +46,8 @@ export default class relatorioLocacaoStore {
       console.log(content)
       pdfMake.createPdf(doc).open()
 
-
-
     }).catch(err => this.erro = err)
   }
+
+
 }

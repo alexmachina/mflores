@@ -44,8 +44,6 @@ export default class RelatorioImovelStore {
                 ]
               }
             },
-
-
             {
               style:'table',
               table: {
@@ -78,7 +76,7 @@ export default class RelatorioImovelStore {
                   ['Observação: ',{ text: imovel.website.descricao, fontSize:10}],
                   ['IPTU: ', imovel.IPTU + '/Anual: ' + formatToReal(imovel.valorAnualIPTU) 
                     + '/Parcelado: '+ imovel.valorParceladoIPTU],
-                  ['Agua/Esgoto: ', imovel.rgi],
+                  ['Água/Esgoto: ', imovel.rgi],
                   ['Instalação: ', imovel.instalacao],
                   ['Capacidade: ', 'Disponivel: ' + imovel.capacidadeDisponivel + ' | Instalada:' +imovel.capacidadeInstalada]
                 ]

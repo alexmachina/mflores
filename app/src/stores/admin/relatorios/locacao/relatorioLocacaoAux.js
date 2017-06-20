@@ -28,10 +28,10 @@ export default class RelatorioLocacaoAux {
       table: { 
         widths: ['auto','*'],
         body: [
-          ['Proprietario',imovel.proprietario.nome ? imovel.proprietario.nome : ''],
+          ['Proprietário',imovel.proprietario.nome ? imovel.proprietario.nome : ''],
           ['Locatário', imovel.locatario.nome ? imovel.locatario.nome : ''],
           ['Responsável', imovel.locatario.responsavel ? imovel.locatario.responsavel : ''],
-          ['Data de Inicio do contrato', dataInicio ? dataInicio : ''],
+          ['Data de Início do contrato', dataInicio ? dataInicio : ''],
           ['Data de fim do contrato',dataFim ? dataFim : ''],
           ['Garantia', imovel.locatario.garantia ? imovel.locatario.garantia : ''],
           ['Valor do Aluguel',imovel.locatario.valor ? formatToReal(imovel.locatario.valor) : ''],

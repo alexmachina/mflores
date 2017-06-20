@@ -62,6 +62,7 @@ export default class ImoveisPage extends React.Component {
           <thead>
             <tr>
               <th>Titulo</th>
+              <th>Proprietário</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -70,6 +71,14 @@ export default class ImoveisPage extends React.Component {
               <tr key={i._id}>
                 <td>
                   {i.titulo}
+                </td>
+                <td>
+                  {i.proprietario ?
+                      (<Link to={`/admin/proprietario/${i.proprietario._id}`}>
+                        {i.proprietario.nome}
+                      </Link>
+                      ) 
+                      : 'Nenhum'}
                 </td>
                 <td>
                   <Link to={'/admin/imovel/'+i._id}>

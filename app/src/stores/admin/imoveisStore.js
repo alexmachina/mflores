@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, action, toJS } from 'mobx'
 import { postJson, getJson } from '../fetch.js'
 import config from '../config.js'
 import { hashHistory } from 'react-router'
@@ -20,6 +20,7 @@ export default class ImoveisStore {
   @action getImoveis() {
     getJson(config.url + '/imoveis?page=' + this.activePage + '&search=' + this.search).then(res => {
       this.imoveis = res.imoveis
+        console.log(toJS(this.imoveis))
       this.items = Math.ceil(res.count /10)
     })
   }

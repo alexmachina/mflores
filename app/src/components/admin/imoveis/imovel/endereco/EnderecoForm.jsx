@@ -13,38 +13,9 @@ export default class EnderecoForm extends React.Component {
   }
   componentDidMount() {
     this.store.getEndereco(this.props.id)
+    this.store.getEstados()
   }
   render() {
-    let EstadoOptions = [
-      {value: 'AC'},
-      {value: 'AL'},
-      {value: 'AP'},
-      {value: 'AM'},
-      {value: 'BA'},
-      {value: 'CE'},
-      {value: 'DF'},
-      {value: 'ES'},
-      {value: 'GO'},
-      {value: 'MA'},
-      {value: 'MT'},
-      {value: 'MS'},
-      {value: 'MG'},
-      {value: 'PA'},
-      {value: 'PB'},
-      {value: 'PR'},
-      {value: 'PE'},
-      {value: 'PI'},
-      {value: 'RJ'},
-      {value: 'RN'},
-      {value: 'RS'},
-      {value: 'RO'},
-      {value: 'RR'},
-      {value: 'SC'},
-      {value: 'SP'},
-      {value: 'SE'},
-      {value: 'TO'}
-    ]
-
     return(
       <div className="container-fluid">
         <Row>
@@ -52,17 +23,19 @@ export default class EnderecoForm extends React.Component {
             <form onSubmit={this.onSubmit.bind(this)}>
               <Select 
                 label="Estado"
-                options={EstadoOptions}
+                options={this.store.estados}
                 value={this.store.endereco.estado}
                 onChange={this.onEstadoChange.bind(this)}
                 validationMessage="Campo invalido"
               />
-              <Input 
-                label="Cidade"
+              <Select
+                label="cidade"
+                options={this.store.cidades}
                 value={this.store.endereco.cidade}
                 onChange={this.onCidadeChange.bind(this)}
+                validationMessage="Escolha uma cidade"
               />
-              <Input label="Bairro"
+                          <Input label="Bairro"
                 value={this.store.endereco.bairro}
                 onChange={this.onBairroChange.bind(this)}
               />
@@ -104,6 +77,7 @@ export default class EnderecoForm extends React.Component {
 
   onEstadoChange(e) {
     this.store.endereco.estado = e.target.value
+    this.store.getCidades(e.target.value)
   }
   onCidadeChange(e) {
     this.store.endereco.cidade = e.target.value

@@ -42,7 +42,7 @@ export const renderHeader = function() {
         width: 150,
         height:75,
         alignment:'left',
-        margin: [50, 50, 0, 0]
+        margin: [30, 30, 0, 0]
       }]
 
       resolve(header)
@@ -96,7 +96,6 @@ export const styles =
       marginTop:200
     },
     total: {
-      alignment:'center',
-      marginRight:50
+      marginLeft:50
     }
   }

@@ -27,7 +27,10 @@ class ImovelController {
 
       let findAll = imovelModel.find(query)
         .limit(10).skip((req.param('page') -1) * 10)
+        .sort({titulo: 1})
+        .populate('proprietario')
         .exec()
+
       findAll.then(imoveis => res.json({imoveis, count}))
       findAll.catch(err => res.status(500).send(err))
 

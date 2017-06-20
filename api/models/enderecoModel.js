@@ -1,8 +1,8 @@
 let mongoose = require('mongoose')
 
 let schema = mongoose.Schema({
-  estado: {type: String, default: ''},
-  cidade: {type: String, default: ''},
+  estado: {type: mongoose.Schema.Types.ObjectId, ref:'Estado'},
+  cidade: {type: mongoose.Schema.Types.ObjectId, ref:'Cidade'},
   cep: {type: String, default: ''},
   rua: {type: String, default: ''},
   numero: {type: String, default: ''},

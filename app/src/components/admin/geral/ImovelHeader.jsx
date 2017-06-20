@@ -29,6 +29,12 @@ export default class ImovelHeader extends React.Component {
               Imovel
             </Button>
           </Link>
+          <Link to={`/admin/imovel/${id}/endereco`} className="link" activeClassName="active">
+            <Button bsSize="lg" bsStyle="default">
+              Endereço
+            </Button>
+          </Link>
+
           <Link to={`/admin/imovel/${id}/website`} className="link" activeClassName="active" > 
             <Button bsSize="lg" bsStyle="default">
               Website
@@ -51,10 +57,10 @@ export default class ImovelHeader extends React.Component {
           </Link>
           <Link to={`/admin/imovel/${id}/despesas`} className="link" activeClassName="active" > 
             <Button bsSize="lg" bsStyle="default">
-             Despesas
+              Despesas
             </Button>
           </Link>
-  <Link to={`/admin/imovel/${id}/receitas`} className="link" activeClassName="active" > 
+          <Link to={`/admin/imovel/${id}/receitas`} className="link" activeClassName="active" > 
             <Button bsSize="lg" bsStyle="default">
               Receitas
             </Button>
@@ -65,6 +71,6 @@ export default class ImovelHeader extends React.Component {
       </Row>
     </Jumbotron>
   )
-  }
+}
 }
 

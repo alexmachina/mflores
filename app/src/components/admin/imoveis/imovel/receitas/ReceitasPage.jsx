@@ -83,7 +83,7 @@ export default class ReceitasPage extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault()
-    this.store.saveReceita(this.props.id)
+    this.store.saveReceita(this.props.params.id)
   }
 
   onNovaReceitaClick() {
@@ -112,7 +112,7 @@ export default class ReceitasPage extends React.Component {
   onSearchSubmit(e) {
     e.preventDefault()
     this.store.activePage = 1
-    this.store.searchByDate(this.props.id)
+    this.store.searchByDate(this.props.params.id)
     this.store.isSearch = true
   }
 
@@ -125,16 +125,16 @@ export default class ReceitasPage extends React.Component {
   }
 
   onEditClick(receitaId) {
-    this.store.getReceita(receitaId, this.props.id)
+    this.store.getReceita(receitaId, this.props.params.id)
     this.store.showModal = true
   }
 
   onSelect(page){
       this.store.activePage = page
     if(!this.store.isSearch) {
-      this.store.getReceitas(this.props.id)
+      this.store.getReceitas(this.props.params.id)
     } else {
-      this.store.searchByDate(this.props.id)
+      this.store.searchByDate(this.props.params.id)
     }
   }
 }

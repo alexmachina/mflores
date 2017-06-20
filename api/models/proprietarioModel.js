@@ -11,4 +11,4 @@ let schema = new mongoose.Schema({
   endereco: {type: enderecoModel, default: enderecoModel}
 })
 
-module.exports = schema
+module.exports = mongoose.model('Proprietario', schema)

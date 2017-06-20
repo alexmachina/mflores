@@ -4,7 +4,6 @@ let mongoose = require('mongoose'),
   despesaModel = require('./despesaModel'),
   imagemModel = require('./imagemModel'),
   locatarioModel = require('./locatarioModel')
-  proprietarioModel = require('./proprietarioModel')
   websiteModel = require('./websiteModel')
 
 let schema = new mongoose.Schema({
@@ -24,9 +23,10 @@ let schema = new mongoose.Schema({
   valorAnualIPTU: {type: Number, default: null},
   valorParceladoIPTU: {type: String, default: null},
 
+  proprietario: {type: mongoose.Schema.Types.ObjectId, ref: 'Proprietario', default: null},
+
   endereco: {type: enderecoModel, default:enderecoModel},
   locatario: {type: locatarioModel, default: locatarioModel},
-  proprietario: {type: proprietarioModel, default: proprietarioModel},
   metragem: {type: metragemModel, default: metragemModel},
   imagens: [imagemModel],
   despesas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Despesa'}],

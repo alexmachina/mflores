@@ -24,10 +24,12 @@ export default class ImovelFormStore {
     valorAnualIPTU: null,
     valorParceladoIPTU: null
   }
-  
+  @observable loaded = true
+  @observable proprietariosArr = []
   @observable buttonText = 'Salvar'
   @observable buttonStyle: { backgroundColor: 'blue'}
   @observable showDeleteModal = false
+  @observable error_message = ''
 
   @action save(id) {
     this.buttonText = 'Salvando...'
@@ -56,10 +58,30 @@ export default class ImovelFormStore {
   }
 
   @action getImovel(id) {
+    this.loaded = false
     getJson(config.url+'/imovel/'+id).then(
       imovel => {
         this.imovel = observable(imovel)
+        this.loaded = true
       })
 
+  }
+
+  @action getProprietarios() {
+    this.loaded = false
+    const url = `${config.url}/proprietarios`
+    getJson(url).then(proprietarios => {
+      this.proprietariosArr = 
+        proprietarios.map((p) => { 
+          return {
+            value: p._id,
+            option: p.nome 
+          }
+        })
+      this.loaded = true
+    }).catch(err => {
+      this.error_message = err
+      this.loaded = true
+    })
   }
 }

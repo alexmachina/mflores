@@ -7,6 +7,9 @@ import ImagensPage from './src/components/admin/imoveis/imovel/imagens/ImagensPa
 import LocatarioPage from './src/components/admin/imoveis/imovel/locatario/LocatarioPage.jsx'
 import ProprietarioPage from './src/components/admin/imoveis/imovel/proprietario/ProprietarioPage.jsx'
 import WebsitePage from './src/components/admin/imoveis/imovel/website/WebsitePage.jsx'
+import ProprietariosPage from './src/components/admin/proprietarios/containers/ProprietariosPage.jsx'
+import ProprietariosFormContainer from './src/components/admin/proprietarios/containers/ProprietariosFormContainer.jsx'
+import ProprietariosImoveisContainer from './src/components/admin/proprietarios/containers/ProprietariosImoveisContainer.jsx'
 
 import DespesasPage from './src/components/admin/imoveis/imovel/despesas/DespesasPage.jsx'
 import ReceitasPage from './src/components/admin/imoveis/imovel/receitas/ReceitasPage.jsx'
@@ -15,6 +18,7 @@ import RelatoriosPage from './src/components/admin/relatorios/RelatoriosPage.jsx
 import RelatorioImoveisPage from './src/components/admin/relatorios/imoveis/RelatorioImoveisPage.jsx'
 import RelatorioControlePage from './src/components/admin/relatorios/controle/RelatorioControlePage.jsx'
 import RelatorioLocacaoPage from './src/components/admin/relatorios/locacao/RelatorioLocacaoPage.jsx'
+import RelatorioResumoProprietarios from './src/components/admin/relatorios/proprietarios/RelatorioResumoProprietarios.jsx'
 import SistemaPage from './src/components/admin/sistema/SistemaPage.jsx'
 import UsuariosPage from './src/components/admin/sistema/usuarios/UsuariosPage.jsx'
 import HomePage from './src/components/public/HomePage.jsx'
@@ -45,11 +49,16 @@ const rt = (
       <Route path="/admin/imovel/:id/website" component={WebsitePage} />
       <Route path="/admin/imovel/:id/despesas" component={DespesasPage} />
       <Route path="/admin/imovel/:id/receitas" component={ReceitasPage} />
+      <Route path="/admin/proprietarios" component={ProprietariosPage} />
+      <Route path="/admin/proprietario" component={ProprietariosFormContainer} />
+      <Route path="/admin/proprietario/:id" component={ProprietariosFormContainer} />
+      <Route path="/admin/proprietario/:id/imoveis" component={ProprietariosImoveisContainer} />
       <Route path="/admin/relatorios" component={RelatoriosPage} />
       
       <Route path="/admin/relatorios/imoveis" component={RelatorioImoveisPage} />
       <Route path="/admin/relatorios/controle" component={RelatorioControlePage} />
       <Route path="/admin/relatorios/locacao" component={RelatorioLocacaoPage} />
+      <Route path="/admin/relatorios/proprietarios" component={RelatorioResumoProprietarios} />
       <Route path="/admin/sistema" component={SistemaPage} />
       <Route path="/admin/sistema/usuarios" component={UsuariosPage} />
       

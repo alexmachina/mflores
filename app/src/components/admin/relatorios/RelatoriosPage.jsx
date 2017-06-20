@@ -4,12 +4,13 @@ import { Row, Jumbotron, Glyphicon, Button, Col } from 'react-bootstrap'
 import '../styles/relatorios.scss'
 
 export default () => (
-  <div className="container-fluid">
+  <div className="">
+    <Jumbotron className="admin-jumbotron text-center">
+      <h1>Relatórios</h1>
+    </Jumbotron>
     <Row>
       <Col xs={12} md={12}>
-        <Jumbotron className="admin-jumbotron text-center">
-          <h1>Relatórios</h1>
-        </Jumbotron>
+
         <Col xs={12} sm={6}>
           <Link to="/admin/relatorios/imoveis">
             <Button className="relatorio-button" bsSize="large" block>
@@ -28,6 +29,13 @@ export default () => (
           <Link to="/admin/relatorios/locacao">
             <Button className="relatorio-button" bsSize="large" block>
               <Glyphicon glyph="list" /> Relatorio de Locação
+            </Button>
+          </Link>
+        </Col>
+        <Col xs={12} sm={6}>
+          <Link to="/admin/relatorios/proprietarios">
+            <Button className="relatorio-button" bsSize="large" block>
+              <Glyphicon glyph="list" /> Relatorio de Proprietários
             </Button>
           </Link>
         </Col>

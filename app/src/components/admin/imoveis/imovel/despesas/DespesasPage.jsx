@@ -72,7 +72,7 @@ export default class DespesasPage extends React.Component {
 
   handlePaginationSelect(activePage) {
     this.store.activePage = activePage
-      this.store.getDespesas(this.props.id)
+      this.store.getDespesas(this.props.params.id)
   }
   onEditClick(despesa) {
     this.store.selectedDespesa = despesa
@@ -90,7 +90,7 @@ export default class DespesasPage extends React.Component {
 
   onSearchFormSubmit(e) {
     e.preventDefault()
-      this.store.getDespesasByData(this.props.id)
+      this.store.getDespesasByData(this.props.params.id)
       this.store.isSearch = true
   }
 
@@ -103,7 +103,7 @@ data: null
 
   onSubmit(e) {
     e.preventDefault()
-      this.store.saveDespesa(this.props.id)
+      this.store.saveDespesa(this.props.params.id)
   }
 
   onDeleteClick(id) {
@@ -118,7 +118,7 @@ data: null
     if (!this.store.isSearch) {
       this.store.getDespesas(this.props.id)
     } else {
-      this.store.getDespesasByData(this.props.id)
+      this.store.getDespesasByData(this.props.params.id)
     }
   }
 
@@ -143,9 +143,9 @@ data: null
   onSelect(page) {
     this.store.activePage = page;
     if(!this.store.isSearch) 
-      this.store.getDespesas(this.props.id)
+      this.store.getDespesas(this.props.params.id)
     else
-      this.store.getDespesasByData(this.props.id)
+      this.store.getDespesasByData(this.props.params.id)
   }
 
 
