@@ -48,7 +48,7 @@ export default class ImovelPage extends React.Component {
             <p>{this.store.imovel.website.descricao}</p>
           <Col className="text-left">
             <h3>Endereço</h3>
-            <p>Cidade: {endereco.cidade}</p>
+            <p>Cidade: {endereco.cidade.nome}</p>
             <p>Bairro: {endereco.bairro}</p>
             <p>Rua: {endereco.rua}</p>
             <p>Numero: {endereco.numero}</p>

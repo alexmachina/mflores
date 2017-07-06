@@ -55,7 +55,8 @@ export default class ReceitasTable extends React.Component {
                 <tr>
                   <td>Descrição</td>
                   <td>Valor</td>
-                  <td>Data</td>
+                  <td>Data de Recebimento</td>
+                  <td>Data de Vencimento</td>
                   <td>Observação</td>
                   <td>Modo de Pagamento</td>
                   <td>Ações</td>
@@ -67,6 +68,7 @@ export default class ReceitasTable extends React.Component {
                     <td>{r.descricao}</td>
                     <td>{formatToReal(r.valor)}</td>
                     <td>{moment(r.data).format('DD/MM/YYYY')}</td>
+                    <td>{moment(r.dataVencimento).format('DD/MM/YYYY')}</td>
                     <td>{r.observacao}</td>
                     <td>{r.modoPagamento}</td>
                     <td>
@@ -78,7 +80,9 @@ export default class ReceitasTable extends React.Component {
                 ))}
               </tbody>
             </Table>
-            <span>Total:{formatToReal(this.props.totalReceitas)} </span>
+            <span>Total a Receber:{formatToReal(this.props.totalAReceber)} </span>
+            <br />
+            <span>Total Recebido: {formatToReal(this.props.totalRecebido)}</span>
           </Col>
         </Row>
       </div>

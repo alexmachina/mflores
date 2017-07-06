@@ -19,6 +19,8 @@ import RelatorioImoveisPage from './src/components/admin/relatorios/imoveis/Rela
 import RelatorioControlePage from './src/components/admin/relatorios/controle/RelatorioControlePage.jsx'
 import RelatorioLocacaoPage from './src/components/admin/relatorios/locacao/RelatorioLocacaoPage.jsx'
 import RelatorioResumoProprietarios from './src/components/admin/relatorios/proprietarios/RelatorioResumoProprietarios.jsx'
+import RelatorioContasAReceber from './src/components/admin/relatorios/contas/RelatorioContasAReceber.jsx'
+import RelatorioContasAPagar from './src/components/admin/relatorios/contas/RelatorioContasAPagar.jsx'
 import SistemaPage from './src/components/admin/sistema/SistemaPage.jsx'
 import UsuariosPage from './src/components/admin/sistema/usuarios/UsuariosPage.jsx'
 import HomePage from './src/components/public/HomePage.jsx'
@@ -59,6 +61,9 @@ const rt = (
       <Route path="/admin/relatorios/controle" component={RelatorioControlePage} />
       <Route path="/admin/relatorios/locacao" component={RelatorioLocacaoPage} />
       <Route path="/admin/relatorios/proprietarios" component={RelatorioResumoProprietarios} />
+      <Route path="/admin/relatorios/contas/contas-a-pagar" component={RelatorioContasAPagar} />
+
+      <Route path="/admin/relatorios/contas/contas-a-receber" component={RelatorioContasAReceber} />
       <Route path="/admin/sistema" component={SistemaPage} />
       <Route path="/admin/sistema/usuarios" component={UsuariosPage} />
       

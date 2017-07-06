@@ -76,7 +76,8 @@ export const styles =
       border:true
     },
     tablePrincipal: {
-      margin:[50,15,50,30]
+      margin:[50,15,50,30],
+      fontSize:10
     },
     informacoes: {
       fontSize:14,
@@ -96,6 +97,10 @@ export const styles =
       marginTop:200
     },
     total: {
+      marginLeft:50
+    },
+    texto: {
+      fontSize:10,
       marginLeft:50
     }
   }

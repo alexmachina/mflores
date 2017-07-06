@@ -7,11 +7,15 @@ export default class ReceitasPageStore {
   @observable selectedReceita = {
     descricao: '',
     data: '',
+    dataVencimento: '',
     valor: '',
     observacao: '',
     modoPagamento: '',
     imovel: ''
   }
+
+  @observable totalRecebido = 0
+  @observable totalAReceber = 0
 
   @observable receitas = []
   @observable totalReceitas = null
@@ -33,7 +37,8 @@ export default class ReceitasPageStore {
       response => { 
         this.receitas = response.receitas
         this.items = Math.ceil(response.count/10)
-        this.totalReceitas = response.soma
+        this.totalRecebido = response.totalRecebido
+        this.totalAReceber = response.totalAReceber
       })
   }
 
@@ -56,6 +61,7 @@ export default class ReceitasPageStore {
     this.selectedReceita = {
       descricao: '',
       data: '',
+      dataVencimento: '',
       valor: '',
       observacao: '',
       modoPagamento: '',
@@ -69,6 +75,8 @@ export default class ReceitasPageStore {
   getJson(config.url + '/imovel/' + imovelId + '/receita/' + receitaId).then(
     receita => {
       receita.data = moment(receita.data)
+      receita.dataVencimento = moment(receita.dataVencimento)
+      console.log(receita)
       this.selectedReceita = receita
 
     })

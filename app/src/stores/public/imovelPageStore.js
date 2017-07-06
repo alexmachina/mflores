@@ -17,7 +17,7 @@ export default class ImovelPageStore {
       complemento: '',
 
     }
-    
+
   }
 
   @action getImovel(idImovel) {

@@ -13,7 +13,9 @@ class ImovelController {
   }
 
   getImovel(req, res) {
-    let findOne = imovelModel.findById(req.params.id).exec()
+    let findOne = imovelModel.findById(req.params.id)
+      .populate('endereco.cidade endereco.estado')
+      .exec()
     findOne.then(imovel => {
      return res.json(imovel)
     }
@@ -189,6 +191,8 @@ class ImovelController {
   }
   getDestaques(req, res) {
     let find = imovelModel.find({destaqueWebsite: true, disponivelWebsite: true})
+      .populate('endereco.cidade endereco.estado')
+      .exec()
 
     find.then(imoveis => res.json(imoveis))
     find.catch(err => res.status(500).send(err))
@@ -197,6 +201,7 @@ class ImovelController {
 
   getCarrossel(req, res) {
     let find = imovelModel.find({'website.carrossel':true, 'website.disponivel':true})
+                  .populate('cidade estado').exec()
     find.then(imoveis => {
       res.json(imoveis)
     })
@@ -205,6 +210,7 @@ class ImovelController {
 
   getHomepage(req, res){
     let find = imovelModel.find({'website.homepage':true, 'website.disponivel':true})
+      .populate('endereco.cidade endereco.estado').exec()
     find.then(imoveis => res.json(imoveis))
     find.catch(err => res.send(err))
   }
@@ -269,7 +275,8 @@ class ImovelController {
   buscarImoveisDisponiveis(req, res) {
     let query = {'website.disponivel' : true},
       page = req.param('page'),
-      findImoveis = imovelModel.find(query).skip((page -1) * 12).limit(12).exec(),
+      findImoveis = imovelModel.find(query).skip((page -1) * 12).limit(12)
+      .populate('endereco.cidade').exec(),
       findCount = imovelModel.count(query),
       operations = [findImoveis, findCount]
 

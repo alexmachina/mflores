@@ -10,16 +10,26 @@ class ReceitaController {
       .exec(),
 
       findCount = receitaModel.count({imovel: req.params.imovelId}),
-      findSoma = receitaModel.aggregate([
+      findTotalAReceber = receitaModel.aggregate([
         {$match: {'imovel': new ObjectId(req.params.imovelId)}},
         {$group : { _id: null,count: { $sum: '$valor'}}}
       ]),
 
-      operations = [findReceitas, findCount, findSoma]
+      findTotalRecebido = receitaModel.aggregate([
+        {$match: {$and : [
+          { imovel: new ObjectId(req.params.imovelId)},
+          { data : { $ne : null } } ]
+        }},
+        {$group: { _id: null, count: { $sum: '$valor' } }}
+      ]),
+      operations = [findReceitas, findCount, findTotalAReceber, findTotalRecebido]
 
     Promise.all(operations).then(results => {
-      let [receitas, count, soma] = results
-      res.json({receitas, count, soma:soma[0].count})
+      let [receitas, count, totalAReceber, totalRecebido] = results
+      console.log(totalRecebido)
+      totalAReceber = totalAReceber[0].count
+      totalRecebido = totalRecebido[0] ? totalRecebido[0].count : 0 
+      res.json({receitas, count, totalAReceber, totalRecebido })
     })
   }
 

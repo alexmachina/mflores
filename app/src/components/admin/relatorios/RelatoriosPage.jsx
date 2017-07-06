@@ -39,7 +39,20 @@ export default () => (
             </Button>
           </Link>
         </Col>
-
+        <Col xs={12} sm={6}>
+          <Link to="/admin/relatorios/contas/contas-a-pagar">
+            <Button className="relatorio-button" bsSize="large" block>
+              <Glyphicon glyph="list" /> Contas á Pagar
+            </Button>
+          </Link>
+        </Col>
+        <Col xs={12} sm={6}>
+          <Link to="/admin/relatorios/contas/contas-a-receber">
+            <Button className="relatorio-button" bsSize="large" block>
+              <Glyphicon glyph="list" /> Contas á Receber
+            </Button>
+          </Link>
+        </Col>
       </Col>
     </Row>
   </div>

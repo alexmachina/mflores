@@ -26,10 +26,16 @@ export default class ReceitasForm extends React.Component {
                 value={this.props.selectedReceita.valor}
                 onChange={this.props.onValorChange}
               />
-              <label>Data</label>
+              <label>Data de Recebimento</label>
               <DatePicker 
                 selected={this.props.selectedReceita.data}
                 onChange={this.props.onDataChange}
+                className="date-picker form-control"
+              />
+              <label>Data de Vencimento</label>
+              <DatePicker
+                selected={this.props.selectedReceita.dataVencimento}
+                onChange={this.props.onDataVencimentoChange}
                 className="date-picker form-control"
               />
 

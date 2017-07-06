@@ -10,6 +10,10 @@ let contratoController = require('./controllers/contratoController')
 let estadoController = require('./controllers/estadoController')
 let relatorioProprietariosController =
   require('./controllers/relatorios/relatorioProprietariosController')
+let relatorioContasAPagarController = 
+  require('./controllers/relatorios/relatorioContasAPagarController')
+let relatorioContasAReceberController = 
+  require('./controllers/relatorios/relatorioContasAReceberController')
 let proprietarioController = require('./controllers/proprietarioController')
 let multer = require('multer')
 let upload = multer({dest: 'app/img/imoveis'})
@@ -68,6 +72,10 @@ router.get('/proprietario/:id/imoveis', proprietarioController.getImoveis)
 
 router.get('/imoveis/relatorios/proprietarios/:proprietarioId/:dataInicial/:dataFinal/:cidadeId',
   relatorioProprietariosController.getRelatorio)
+router.get('/imoveis/relatorios/contas-a-pagar/:proprietarioId/:dataVencimentoInicial/:dataVencimentoFinal/:cidadeId',
+  relatorioContasAPagarController.getRelatorio)
+router.get('/imoveis/relatorios/contas-a-receber/:proprietarioId/:dataRecebimentoInicial/:dataRecebimentoFinal/:cidadeId',
+  relatorioContasAReceberController.getRelatorio)
 
 router.get('/contrato/:id', contratoController.getContrato)
 router.post('/contrato', contratoController.addContrato)

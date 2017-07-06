@@ -29,8 +29,10 @@ export default class ReceitasPage extends React.Component {
               onSearchFormSubmit={this.onSearchSubmit.bind(this)}
               onDataInicialChange={this.onDataInicialChange.bind(this)}
               onDataFinalChange={this.onDataFinalChange.bind(this)}
+              
               onEditClick={this.onEditClick.bind(this)}
-              totalReceitas={this.store.totalReceitas}
+              totalRecebido={this.store.totalRecebido}
+              totalAReceber={this.store.totalAReceber}
               items={this.store.items}
               activePage={this.store.activePage}
               onSelect={this.onSelect.bind(this)}
@@ -49,6 +51,7 @@ export default class ReceitasPage extends React.Component {
               <ReceitasForm 
                 onDescricaoChange={this.onDescricaoChange.bind(this)}
                 onDataChange={this.onDataChange.bind(this)}
+                onDataVencimentoChange={this.onDataVencimentoChange.bind(this)}
                 onValorChange={this.onValorChange.bind(this)}
                 onModoPagamentoChange={this.onModoPagamentoChange.bind(this)}
                 onObservacaoChange={this.onObservacaoChange.bind(this)}
@@ -98,6 +101,11 @@ export default class ReceitasPage extends React.Component {
   onDataChange(e) {
     this.store.selectedReceita.data = e
   }
+
+  onDataVencimentoChange(e) {
+    this.store.selectedReceita.dataVencimento = e
+  }
+
   onValorChange(e, f) {
     this.store.selectedReceita.valor = f
   }
