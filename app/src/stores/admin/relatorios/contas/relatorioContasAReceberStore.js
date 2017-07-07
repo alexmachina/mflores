@@ -104,7 +104,8 @@ export default class RelatorioContasAReceberStore {
           table: {
             body: tableContent
           }
-        }, {text: `Total: ${formatToReal(results.total)}`, style:'texto'}]
+        }, {text:
+          `Total a Receber: ${formatToReal(results.totalAReceber)} | Total Recebido: ${formatToReal(results.totalRecebido)}`, style:'texto'}]
 
         resolve(table)
 

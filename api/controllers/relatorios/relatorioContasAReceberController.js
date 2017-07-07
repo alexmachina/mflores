@@ -71,11 +71,19 @@ class RelatorioContasAReceberController {
 
           plinio = _.sortBy(plinio, o => o.data)
 
-          let total = plinio.reduce((a, b) => {
+          let totalAReceber = plinio.reduce((a, b) => {
             return a + b.valor
           },0)
 
-          res.json({receitas:plinio, total})
+          let totalRecebido = plinio.reduce((a, b) => {
+            if(b.data) {
+              return a + b.valor
+            } else {
+              return a
+            }
+          },0)
+
+          res.json({receitas:plinio, totalAReceber, totalRecebido})
         })
       })
   }
