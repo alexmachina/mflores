@@ -7,3 +7,42 @@ background-color:#005e9e;
 color:white;
 font-weight:bolder;
 }
+
+.theNavItem {
+  background-color:white;
+}
+
+#imovel-nav{
+  background-color:#f8f8f8;
+  position:relative;
+    z-index:2;
+
+}
+
+#imovel-nav li a {
+  color:#005e9e;
+}
+
+.active {
+  background-color:#005e9e !important;
+  color:white;
+}
+
+.imovel-navbar {
+  background-color:inherit;
+  border:0;
+}
+
+#main-nav {
+  position:relative;
+  z-index:2;
+  background-color:#005e9e;
+}
+
+#navbar {
+  height:initial;
+  border:0;
+}
+
+.vem-pra-ca {
+}

@@ -21,8 +21,13 @@ import RelatorioLocacaoPage from './src/components/admin/relatorios/locacao/Rela
 import RelatorioResumoProprietarios from './src/components/admin/relatorios/proprietarios/RelatorioResumoProprietarios.jsx'
 import RelatorioContasAReceber from './src/components/admin/relatorios/contas/RelatorioContasAReceber.jsx'
 import RelatorioContasAPagar from './src/components/admin/relatorios/contas/RelatorioContasAPagar.jsx'
+
+import ContratoPage from './src/components/admin/contrato/ContratoPage.jsx'
+import ModelosTable from './src/components/admin/contrato/modelo/ModelosTable.jsx'
+import ModelosForm from './src/components/admin/contrato/modelo/ModelosForm.jsx'
 import SistemaPage from './src/components/admin/sistema/SistemaPage.jsx'
 import UsuariosPage from './src/components/admin/sistema/usuarios/UsuariosPage.jsx'
+import UsuariosFormPage from './src/components/admin/sistema/usuarios/UsuariosFormPage.jsx'
 import HomePage from './src/components/public/HomePage.jsx'
 import ContactPage from './src/components/public/ContactPage.jsx'
 import EmpresaPage from './src/components/public/EmpresaPage.jsx'
@@ -63,9 +68,15 @@ const rt = (
       <Route path="/admin/relatorios/proprietarios" component={RelatorioResumoProprietarios} />
       <Route path="/admin/relatorios/contas/contas-a-pagar" component={RelatorioContasAPagar} />
 
+      <Route path="/admin/contrato" component={ContratoPage} />
+      <Route path="/admin/contrato/modelos" component={ModelosTable} />
+      <Route path="/admin/contrato/modelo" component={ModelosForm} />
+
       <Route path="/admin/relatorios/contas/contas-a-receber" component={RelatorioContasAReceber} />
       <Route path="/admin/sistema" component={SistemaPage} />
       <Route path="/admin/sistema/usuarios" component={UsuariosPage} />
+      <Route path="/admin/sistema/usuario/:username" component={UsuariosFormPage} />
+      <Route path="/admin/sistema/usuario" component={UsuariosFormPage} />
       
     </Route>
     

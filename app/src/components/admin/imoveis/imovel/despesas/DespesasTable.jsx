@@ -47,7 +47,8 @@ export default class DespesasTable extends React.Component {
           <thead>
             <tr>
               <th>Descrição</th>
-              <th>Mes/Ano</th>
+              <th>Data de Pagamento</th>
+              <th>Data de Vencimento</th>
               <th>Valor</th>
               <th>Observação</th>
               <th>Ações</th>
@@ -57,12 +58,14 @@ export default class DespesasTable extends React.Component {
             {this.props.despesas.map(d => (
               <tr key={d._id}>
                 <td>{d.descricao}</td>
-                <td>{moment(d.data).format('DD/MM/YYYY')}</td>
+                <td>{d.data ? moment(d.data).format('DD/MM/YYYY') : ''}</td>
+                <td>{d.dataVencimento ? moment(d.dataVencimento).format('DD/MM/YYYY') : ''}</td>
                 <td>{formatToReal(d.valor)}</td>
                 <td>{d.observacao}</td>
                 <td>
                   <Button onClick={() => {
-                    d.data = moment(d.data)
+                    d.data = d.data ? moment(d.data) : null
+                    d.dataVencimento = d.dataVencimento ? moment(d.dataVencimento) : null
                     this.props.onEditClick(d)
                   }}>
                   <Glyphicon glyph="edit" />

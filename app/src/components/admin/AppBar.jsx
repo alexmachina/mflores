@@ -22,14 +22,13 @@ export default class AppBar extends React.Component {
                 <Navbar.Toggle />
               </Navbar.Header>
               <Navbar.Collapse>
-                <Nav>
-                 
+                <Nav id="main-nav">
                   <NavItem eventKey={1} href="/#/admin/imoveis">Imoveis</NavItem>
                   <NavItem eventKey={2} href="/#/admin/proprietarios">Proprietários</NavItem>
                   <NavItem eventKey={3} href="/#/admin/relatorios">Relatorios</NavItem>
                   <NavItem eventKey={4} href="/#/admin/sistema">Sistema</NavItem>
                 </Nav>
-                <Nav pullRight>
+                <Nav pullRight id="main-nav">
                   <NavItem eventKey={2} href="#">
                     <span onClick={this.onLogoutClick.bind(this)}>
                       Logout</span>

@@ -23,7 +23,7 @@ export default class RelatorioContasAReceber extends React.Component {
     return(
       <div>
         <Jumbotron className="admin-jumbotron text-center">
-          <h1>Contas á Pagar</h1>
+          <h1>Contas á Receber</h1>
         </Jumbotron>
         <div className="container">
         <form onSubmit={this.onSubmit.bind(this)}>
@@ -37,7 +37,7 @@ export default class RelatorioContasAReceber extends React.Component {
           <div>
             <label>Data de Recebimento Inicial</label>
             <DatePicker
-              selected={this.store.dataRecebimentoInicial}
+              selected={this.store.dataVencimentoInicial}
               onChange={this.onDataRecebimentoInicialChange.bind(this)}
               className="date-picker"
             />
@@ -45,7 +45,7 @@ export default class RelatorioContasAReceber extends React.Component {
           <div>
             <label>Data de Recebimento Final</label>
             <DatePicker
-              selected={this.store.dataRecebimentoFinal}
+              selected={this.store.dataVencimentoFinal}
               onChange={this.onDataRecebimentoFinalChange.bind(this)}
               className="date-picker"
             />
@@ -83,11 +83,11 @@ export default class RelatorioContasAReceber extends React.Component {
     this.store.nomeProprietario = e.target[e.target.selectedIndex].innerText
   }
   onDataRecebimentoInicialChange(e) {
-    this.store.dataRecebimentoInicial = e
+    this.store.dataVencimentoInicial = e
   }
 
   onDataRecebimentoFinalChange(e) {
-    this.store.dataRecebimentoFinal = e
+    this.store.dataVencimentoFinal = e
   }
 
   onEstadoChange(e) {

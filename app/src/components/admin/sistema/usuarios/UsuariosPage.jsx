@@ -3,6 +3,7 @@ import { Col, Row, Jumbotron, Modal } from 'react-bootstrap'
 import UsuariosPageStore from '../../../../stores/admin/usuarios/usuariosPageStore.js'
 import { observer } from 'mobx-react'
 import UsuariosTable from './UsuariosTable.jsx'
+import Loader from 'react-loader'
 
 @observer
 export default class UsuariosPage extends React.Component {
@@ -15,14 +16,13 @@ export default class UsuariosPage extends React.Component {
   }
 
   onCellClick(user) {
-    alert(user.fullName)
+    this.props.router.push(`/admin/sistema/usuario/${user.username}`)
+  }
+
+  onNewItemClick() {
+    this.props.router.push('/admin/sistema/usuario')
   }
   render() {
-    let msgCarregando = null
-    if (this.store.fetching) {
-      msgCarregando = <h3 id="loading">Carregando...</h3>
-    }
-    console.log(msgCarregando)
     return(
       <div className="container-fluid">
         <Jumbotron className="admin-jumbotron text-center">
@@ -32,8 +32,12 @@ export default class UsuariosPage extends React.Component {
           <Col xs={12}>
             {this.store.erro ? (<span id="erro">Erro: {this.store.erro}</span> ) : (
               <div>
-                {msgCarregando}
-                <UsuariosTable usuarios={this.store.usuarios} onCellClick={this.onCellClick.bind(this)} />
+                <Loader loaded={this.store.loaded} >
+                  <UsuariosTable usuarios={this.store.usuarios} 
+                    onCellClick={this.onCellClick.bind(this)} 
+                    onNewItemClick={this.onNewItemClick.bind(this)}
+                  />
+                </Loader>
               </div>
             )}
           </Col>
@@ -41,5 +45,6 @@ export default class UsuariosPage extends React.Component {
       </div>
     )
   }
+
 }
 

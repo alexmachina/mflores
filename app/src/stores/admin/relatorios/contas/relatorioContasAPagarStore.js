@@ -52,6 +52,7 @@ export default class RelatorioContasAPagarStore {
       let [ header, footer, table ] = results
 
       let content = [
+        {text: 'Contas á Pagar', style:'texto'},
         {text: `Período de: ${moment(this.dataVencimentoInicial).format('DD/MM/YYYY')} á ${moment(this.dataVencimentoFinal).format('DD/MM/YYYY')}`,
           style:'texto'},
         {text: `Proprietário: ${this.nomeProprietario}`,style: 'texto'},
@@ -90,7 +91,7 @@ export default class RelatorioContasAPagarStore {
         let tableBody = []
         console.log(results.despesas)
         tableBody = results.despesas.map(r => [
-          r.titulo, moment(r.dataVencimento).format('DD/MM/YYYY'), formatToReal(r.valor), r.observacao
+          r.titulo, r.dataVencimento ? moment(r.dataVencimento).format('DD/MM/YYYY') : '', formatToReal(r.valor), r.observacao
         ])
 
         let tableContent = [tableHeader, ...tableBody]
@@ -98,6 +99,8 @@ export default class RelatorioContasAPagarStore {
         let table = [{
           style: 'tablePrincipal',
           table: {
+
+            widths: ['*',60,75,'*'],
             body: tableContent
           }
         }, {text: `Total: ${formatToReal(results.total)}`, style:'texto'}]

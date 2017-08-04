@@ -4,12 +4,12 @@ class ContactController {
   sendMessage(req, res) {
     function createHtml(body) {
       let html = `
-    <div>
-      <p>Nome: ${body.nome}</p>
-      <p>Email: ${body.email}</p>
-      <p>Mensagem: ${body.mensagem}</p>
-    </div>
-    `
+                      <div>
+                            <p>Nome: ${body.nome}</p>
+                                  <p>Email: ${body.email}</p>
+                                        <p>Mensagem: ${body.mensagem}</p>
+                                            </div>
+                                                `
 
       return html
     }

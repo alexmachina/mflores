@@ -5,6 +5,8 @@ import { observable, action } from 'mobx'
 export default class ImovelHeaderStore {
   @observable titulo
 
+  @observable activeKey
+
 
   @action
   getTitulo (id) {

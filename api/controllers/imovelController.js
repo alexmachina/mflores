@@ -73,18 +73,23 @@ class ImovelController {
 
   }
 
+  //Try-Catch = paranóia total nesse método.
   addImages(req, res) {
-    setTimeout(function () {
-    let images = []
-    req.files.forEach(file => {
-      images.push({arquivo: file.filename})
-    })
-
-    imovelModel.findByIdAndUpdate(req.params.id,
-      {$push: {'imagens' : {$each: images}}}).then(() => {
-        return res.send()
+    try{
+      let images = []
+      req.files.forEach(file => {
+        images.push({arquivo: file.filename})
       })
-    },5000)
+
+      imovelModel.findByIdAndUpdate(req.params.id,
+        {$push: {'imagens' : {$each: images}}}).then(() => {
+          return res.send()
+        }).catch(err => {
+          return res.status(500).send(err)
+        })
+    } catch(ex) {
+      return res.status(500).send(ex.message)
+    }
   }
 
   deleteImage(req, res) {
@@ -201,7 +206,7 @@ class ImovelController {
 
   getCarrossel(req, res) {
     let find = imovelModel.find({'website.carrossel':true, 'website.disponivel':true})
-                  .populate('cidade estado').exec()
+      .populate('cidade estado').exec()
     find.then(imoveis => {
       res.json(imoveis)
     })
@@ -288,7 +293,7 @@ class ImovelController {
 
   getTitulo(req, res) {
     let query = imovelModel.findById(req.params.id).select('titulo').exec()
-    
+
 
     query.then(imovel => {
       return res.json({titulo: imovel.titulo})

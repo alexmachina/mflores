@@ -5,8 +5,8 @@ import config from '../config.js'
 
 export default class EnderecoFormStore {
   @observable endereco = {
-    estado: null,
-    cidade: null,
+    estado: {},
+    cidade: {},
     bairro: '',
     rua: '',
     numero: '',
@@ -56,7 +56,7 @@ export default class EnderecoFormStore {
   @action getEndereco(id) {
     getJson(config.url + '/imovel/' + id).then(imovel => {
       this.endereco = observable(imovel.endereco)
-      getJson(`${config.url}/cidades/${imovel.endereco.estado}`).then(cidades => {
+      getJson(`${config.url}/cidades/${imovel.endereco.estado._id}`).then(cidades => {
         this.cidades = cidades.map(c => {
           return {value: c._id, option: c.nome}
         })

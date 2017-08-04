@@ -13,6 +13,7 @@ export default class ImagemFormStore {
   @observable error = ''
   @observable capa = ''
   @observable loading = false
+  @observable loaded = true
 
   @action submitCapa(id) {
     let form_data = new FormData()
@@ -26,7 +27,7 @@ export default class ImagemFormStore {
   }
 
   @action saveImages(images, id) {
-    this.loading = true
+    this.loaded = false
     let form_data = new FormData()
     for(let i = 0; i < images.length; i++)
       form_data.append(`arquivos`, images[i], 'arquivos'+i)
@@ -35,9 +36,19 @@ export default class ImagemFormStore {
     fetch(url, {
       method:'POST',
       body: form_data
-    }).then(() => {
-      this.loading = false
-      this.getImagens(id)
+    }).then(response => {
+      response.text().then(text => {
+        if(response.status == 500){
+          this.loaded = true
+          this.error = text
+        } else {
+          this.loaded = true
+          this.getImagens(id)
+        }
+      })
+    }).catch(err => {
+      this.error = err
+      this.loaded = true
     })
   }
   @action saveImagem(id) {

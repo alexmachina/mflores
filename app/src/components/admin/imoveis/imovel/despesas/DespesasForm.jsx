@@ -28,9 +28,14 @@ export default class DespesasForm extends React.Component {
             value={this.props.selectedDespesa.valor}
             onChange={this.props.onValorChange}
           />
-          <label>Data</label>
+          <label>Data de Pagamento</label>
           <DatePicker selected={this.props.selectedDespesa.data}
             onChange={this.props.onDataChange}
+            className="date-picker"
+          />
+          <label> Data de Vencimento</label>
+          <DatePicker selected={this.props.selectedDespesa.dataVencimento}
+            onChange={this.props.onDataVencimentoChange}
             className="date-picker"
           />
           <Input label="Observação" 

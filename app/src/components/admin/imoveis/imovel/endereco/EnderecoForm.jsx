@@ -24,14 +24,14 @@ export default class EnderecoForm extends React.Component {
               <Select 
                 label="Estado"
                 options={this.store.estados}
-                value={this.store.endereco.estado}
+                value={this.store.endereco.estado._id}
                 onChange={this.onEstadoChange.bind(this)}
                 validationMessage="Campo invalido"
               />
               <Select
                 label="cidade"
                 options={this.store.cidades}
-                value={this.store.endereco.cidade}
+                value={this.store.endereco.cidade._id}
                 onChange={this.onCidadeChange.bind(this)}
                 validationMessage="Escolha uma cidade"
               />

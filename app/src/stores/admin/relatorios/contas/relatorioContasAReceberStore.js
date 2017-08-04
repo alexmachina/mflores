@@ -8,8 +8,8 @@ import formatToReal from '../../../../components/utils/formatToReal.js'
 export default class RelatorioContasAReceberStore {
   @observable proprietarios = []
   @observable proprietario = null
-  @observable dataRecebimentoInicial = null
-  @observable dataRecebimentoFinal = null
+  @observable dataVencimentoInicial = null
+  @observable dataVencimentoFinal = null
   @observable cidades = []
   @observable cidade = null
   @observable nomeCidade = ''
@@ -52,7 +52,8 @@ export default class RelatorioContasAReceberStore {
       let [ header, footer, table ] = results
 
       let content = [
-        {text: `Período de: ${moment(this.dataRecebimentoInicial).format('DD/MM/YYYY')} á ${moment(this.dataRecebimentoFinal).format('DD/MM/YYYY')}`,
+        {text: 'Contas á Receber', style:'texto'},
+        {text: `Período de: ${moment(this.dataVencimentoInicial).format('DD/MM/YYYY')} á ${moment(this.dataVencimentoFinal).format('DD/MM/YYYY')}`,
           style:'texto'},
         {text: `Proprietário: ${this.nomeProprietario}`,style: 'texto'},
         {text: `Cidade: ${this.nomeCidade}`, style: 'texto'},
@@ -76,7 +77,7 @@ export default class RelatorioContasAReceberStore {
   @action getRelatorioContasAReceber() {
     return new Promise((resolve, reject) => {
       let url = 
-        `${config.url}/imoveis/relatorios/contas-a-receber/${this.proprietario}/${this.dataRecebimentoInicial}/${this.dataRecebimentoFinal}/${this.cidade}`
+        `${config.url}/imoveis/relatorios/contas-a-receber/${this.proprietario}/${this.dataVencimentoInicial}/${this.dataVencimentoFinal}/${this.cidade}`
       console.log('fetching report... ')
       getJson(url).then(results => {
         console.log('report fetched')
@@ -91,8 +92,8 @@ export default class RelatorioContasAReceberStore {
 
         let tableBody = []
         tableBody = results.receitas.map(r => [
-          r.titulo, moment(r.dataRecebimento).format('DD/MM/YYYY'),
-          moment(r.data).format('DD/MM/YYYY'),
+          r.titulo, r.data ? moment(r.data).format('DD/MM/YYYY') : '',
+          r.dataVencimento ? moment(r.dataVencimento).format('DD/MM/YYYY') : '',
           formatToReal(r.valor), r.descricao,
           r.observacao
         ])
@@ -102,6 +103,7 @@ export default class RelatorioContasAReceberStore {
         let table = [{
           style: 'tablePrincipal',
           table: {
+            widths: ['*',60,60,'*','auto','*'],
             body: tableContent
           }
         }, {text:

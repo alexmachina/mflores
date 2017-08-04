@@ -1,12 +1,11 @@
 const express = require('express');
 let router = new express.Router();
-let imovelController = require('./controllers/imovelController')
+let imovelController = require('./controllers/imovelController') 
 let loginController = require('./controllers/loginController')
 let despesaController = require('./controllers/despesaController')
 let receitaController = require('./controllers/receitaController')
 let contactController = require('./controllers/contactController')
 let userController = require('./controllers/userController')
-let contratoController = require('./controllers/contratoController')
 let estadoController = require('./controllers/estadoController')
 let relatorioProprietariosController =
   require('./controllers/relatorios/relatorioProprietariosController')
@@ -15,6 +14,8 @@ let relatorioContasAPagarController =
 let relatorioContasAReceberController = 
   require('./controllers/relatorios/relatorioContasAReceberController')
 let proprietarioController = require('./controllers/proprietarioController')
+let modeloController = require('./controllers/modeloController')
+let contratoController = require('./controllers/contratoController')
 let multer = require('multer')
 let upload = multer({dest: 'app/img/imoveis'})
 
@@ -59,9 +60,10 @@ router.delete('/receita/:id', receitaController.deleteReceita)
 router.post('/contact/sendMessage', contactController.sendMessage)
 
 router.get('/usuarios', userController.getUsers)
-router.get('/usuario/:id', userController.getUser)
+router.get('/usuario/:username', userController.getUser)
 router.post('/usuario', userController.addUser)
 router.put('/usuario/:id', userController.updateUser)
+router.delete('/usuario/:id', userController.deleteUser)
 
 router.get('/proprietarios', proprietarioController.getProprietarios)
 router.post('/proprietario', proprietarioController.addProprietario)
@@ -74,18 +76,27 @@ router.get('/imoveis/relatorios/proprietarios/:proprietarioId/:dataInicial/:data
   relatorioProprietariosController.getRelatorio)
 router.get('/imoveis/relatorios/contas-a-pagar/:proprietarioId/:dataVencimentoInicial/:dataVencimentoFinal/:cidadeId',
   relatorioContasAPagarController.getRelatorio)
-router.get('/imoveis/relatorios/contas-a-receber/:proprietarioId/:dataRecebimentoInicial/:dataRecebimentoFinal/:cidadeId',
+router.get('/imoveis/relatorios/contas-a-receber/:proprietarioId/:dataVencimentoInicial/:dataVencimentoFinal/:cidadeId',
   relatorioContasAReceberController.getRelatorio)
-
-router.get('/contrato/:id', contratoController.getContrato)
-router.post('/contrato', contratoController.addContrato)
-router.post('/contrato/:id/clausula', contratoController.addClausula)
-router.get('/contratos', contratoController.getContratos)
-router.get('/imovel/:imovelId/contrato/:contratoId', contratoController.getContratoImovel)
-
 
 router.get('/estados',estadoController.getEstados)
 router.get('/cidades/:estadoId',estadoController.getCidades)
+
+router.get('/modelos', modeloController.getModelos)
+router.get('/modelos/page/:page', modeloController.getPage)
+router.get('/modelos/count', modeloController.getCount)
+router.get('/modelo/:modeloId', modeloController.getModelo)
+router.get('/modelo/:modeloId/contratos', modeloController.getContratos)
+router.post('/modelo', modeloController.addModelo)
+router.put('/modelo/:modeloId',modeloController.updateModelo)
+router.delete('/modelo/:modeloId', modeloController.deleteModelo)
+
+router.get('/contratos/page/:page', contratoController.getContratosPage)
+router.get('/contrato/:contratoId', contratoController.getContrato)
+router.get('/contratos/count', contratoController.getCount)
+router.post('/contrato', contratoController.addContrato)
+router.put('/contrato/:contratoId', contratoController.updateContrato)
+router.delete('/contrato/:contratoId', contratoController.deleteContrato)
 
 
 module.exports = router;

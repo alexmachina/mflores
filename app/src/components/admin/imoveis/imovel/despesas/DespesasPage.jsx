@@ -37,7 +37,7 @@ export default class DespesasPage extends React.Component {
                 onSelect={this.onSelect.bind(this)}
               />
               <div>
-                <Modal show={this.store.showModal} onHide={() => {
+                <Modal show={this.store.showModal}  className="vem-pra-ca" onHide={() => {
                   this.store.showModal = false
                   }}>
                   <Modal.Header closeButton>
@@ -49,6 +49,7 @@ export default class DespesasPage extends React.Component {
                       onDescricaoChange={this.onDescricaoChange.bind(this)} 
                       onValorChange={this.onValorChange.bind(this)}
                       onDataChange={this.onDataChange.bind(this)}
+                      onDataVencimentoChange={this.onDataVencimentoChange.bind(this)}
                       onObservacaoChange={this.onObservacaoChange.bind(this)}
                       selectedDespesa={this.store.selectedDespesa} 
                       onSubmit={this.onSubmit.bind(this)} 
@@ -96,7 +97,8 @@ export default class DespesasPage extends React.Component {
 
   onNewClick() {
     this.store.selectedDespesa = {
-data: null
+      data: null,
+      dataVencimento: null
     }
     this.store.showModal = true
   }
@@ -135,6 +137,10 @@ data: null
   }
   onDataChange(e) {
     this.store.selectedDespesa.data = e
+  }
+
+  onDataVencimentoChange(e) {
+    this.store.selectedDespesa.dataVencimento = e
   }
   onObservacaoChange(e) {
     this.store.selectedDespesa.observacao = e.target.value

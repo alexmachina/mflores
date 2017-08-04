@@ -3,6 +3,7 @@ import {Row, Modal, Col, Button, Image} from 'react-bootstrap'
 import ImagemFormStore from '../../../../../stores/admin/imagemFormStore.js'
 import {observer} from 'mobx-react'
 import Input from '../../../../utils/Input.jsx'
+import Loader from 'react-loader'
 
 
 @observer
@@ -62,13 +63,14 @@ export default class ImagemForm extends React.Component {
             </Button>
       </Col>
       <Col xs={12} md={6}>
+        <Loader loaded={this.store.loaded}>
             <label>Inserir multiplas imagens</label>
             <input 
                type="file"
                name="arquivos"
                onChange={this.onMultipleChange.bind(this)}
                multiple />
-      {loading}
+           </Loader>
       </Col>
           </Col>
         </Row>

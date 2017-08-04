@@ -8,6 +8,7 @@ export default class DespesasPageStore {
     descricao: '',
     valor: 0,
     data: null,
+    dataVencimento: null,
     observacao: ''
   }
   @observable despesas= []

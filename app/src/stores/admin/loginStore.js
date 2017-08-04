@@ -21,6 +21,10 @@ export default class LoginStore {
     )
       .then(token => {
         Cookies.set('token', token)
+        if (obj.username == 'miria')
+          Cookies.set('role','admin')
+        else
+          Cookies.set('role','user')
         hashHistory.push('/admin/imoveis')
       })
       .catch(err => this.message = err)
@@ -29,6 +33,7 @@ export default class LoginStore {
 
   @action logout() {
     Cookies.remove('token')
+    Cookies.remove('role')
     hashHistory.push('/admin')
 
   }
