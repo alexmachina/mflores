@@ -20,7 +20,7 @@ export default class ContactPage extends React.Component {
           <h4>Rua Professor Valdecir Campestre, 364, sala 1.</h4>
           <h4>Centro - Vargem Grande Paulista.</h4>
           <h4>Cep: 06730-000</h4>
-          <h4>Telefones: 11 41592625 | 11 7703 4683  |  11 956399063</h4>
+          <h4>Telefones: 11 41592625 | 11 956399063</h4>
           <h4>Email: miriaflores@creci.org.br | rbb.adm@gmail.com </h4>
         </div>
 

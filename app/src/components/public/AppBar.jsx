@@ -30,7 +30,7 @@ return(
             <li><a href="/#/contato"> Contato</a></li>
             <li className="pull-right" id="telefones">
               <a href="">
-                (11) 4159-2625 |  (11) 95639-9063 | (11) 7703-4683
+                (11) 4159-2625 |  (11) 95639-9063 
               </a>
             </li>
           </ul>

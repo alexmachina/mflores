@@ -8,8 +8,8 @@ import formatToReal from '../../../../components/utils/formatToReal.js'
 export default class RelatorioContasAReceberStore {
   @observable proprietarios = []
   @observable proprietario = null
-  @observable dataVencimentoInicial = null
-  @observable dataVencimentoFinal = null
+  @observable dataPagamentoInicial = null
+  @observable dataPagamentoFinal = null
   @observable cidades = []
   @observable cidade = null
   @observable nomeCidade = ''
@@ -53,7 +53,7 @@ export default class RelatorioContasAReceberStore {
 
       let content = [
         {text: 'Contas á Receber', style:'texto'},
-        {text: `Período de: ${moment(this.dataVencimentoInicial).format('DD/MM/YYYY')} á ${moment(this.dataVencimentoFinal).format('DD/MM/YYYY')}`,
+        {text: `Período de: ${moment(this.dataPagamentoInicial).format('DD/MM/YYYY')} á ${moment(this.dataPagamentoFinal).format('DD/MM/YYYY')}`,
           style:'texto'},
         {text: `Proprietário: ${this.nomeProprietario}`,style: 'texto'},
         {text: `Cidade: ${this.nomeCidade}`, style: 'texto'},
@@ -77,7 +77,7 @@ export default class RelatorioContasAReceberStore {
   @action getRelatorioContasAReceber() {
     return new Promise((resolve, reject) => {
       let url = 
-        `${config.url}/imoveis/relatorios/contas-a-receber/${this.proprietario}/${this.dataVencimentoInicial}/${this.dataVencimentoFinal}/${this.cidade}`
+        `${config.url}/imoveis/relatorios/contas-a-receber/${this.proprietario}/${this.dataPagamentoInicial}/${this.dataPagamentoFinal}/${this.cidade}`
       console.log('fetching report... ')
       getJson(url).then(results => {
         console.log('report fetched')
@@ -93,7 +93,7 @@ export default class RelatorioContasAReceberStore {
         let tableBody = []
         tableBody = results.receitas.map(r => [
           r.titulo, r.data ? moment(r.data).format('DD/MM/YYYY') : '',
-          r.dataVencimento ? moment(r.dataVencimento).format('DD/MM/YYYY') : '',
+          r.dataPagamento ? moment(r.dataPagamento).format('DD/MM/YYYY') : '',
           formatToReal(r.valor), r.descricao,
           r.observacao
         ])

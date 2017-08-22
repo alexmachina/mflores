@@ -18,6 +18,7 @@ function getDespesas(imovel,dataVencimentoInicial, dataVencimentoFinal) {
           return {
             titulo: imovel.titulo,
             dataVencimento: d.dataVencimento,
+            dataPagamento: d.data,
             valor: d.valor ? d.valor : 0,
             observacao: d.observacao ? d.observacao : ''
           }

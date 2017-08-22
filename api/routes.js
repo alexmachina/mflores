@@ -76,7 +76,7 @@ router.get('/imoveis/relatorios/proprietarios/:proprietarioId/:dataInicial/:data
   relatorioProprietariosController.getRelatorio)
 router.get('/imoveis/relatorios/contas-a-pagar/:proprietarioId/:dataVencimentoInicial/:dataVencimentoFinal/:cidadeId',
   relatorioContasAPagarController.getRelatorio)
-router.get('/imoveis/relatorios/contas-a-receber/:proprietarioId/:dataVencimentoInicial/:dataVencimentoFinal/:cidadeId',
+router.get('/imoveis/relatorios/contas-a-receber/:proprietarioId/:dataRecebimentoInicial/:dataRecebimentoFinal/:cidadeId',
   relatorioContasAReceberController.getRelatorio)
 
 router.get('/estados',estadoController.getEstados)

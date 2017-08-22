@@ -4,12 +4,15 @@ const receitaModel = require('../../models/receitaModel')
 const ObjectId = require('mongoose').Types.ObjectId
 const _ = require('underscore')
 
-function getReceitas(imovel,dataVencimentoInicial, dataVencimentoFinal) {
-  return new Promise((resolve, reject) => {
-    let query = {dataVencimento:{$gte: dataVencimentoInicial, $lte: dataVencimentoFinal},
-      imovel: new ObjectId(imovel._id)
-    }
-    let queryReceitas = receitaModel.find(query).sort({dataVencimento: 1}).exec()
+function getReceitas(imovel, dataRecebimentoInicial, dataRecebimentoFinal) {
+    return new Promise((resolve, reject) => {
+	
+	let query = {
+	    data : {$gte: dataRecebimentoInicial, $lte: dataRecebimentoFinal},
+	    imovel: new ObjectId(imovel._id)
+	}
+	console.log('passow')
+    let queryReceitas = receitaModel.find(query).sort({data: 1}).exec()
 
     queryReceitas.then(receitas => {
       if(receitas.length) {
@@ -45,16 +48,13 @@ class RelatorioContasAReceberController {
     imovelModel.find({'proprietario': req.params.proprietarioId, 'endereco.cidade':req.params.cidadeId})
       .populate('proprietario')
       .then(imoveis => {
-        let operations = []
-        const dataVencimentoInicial = new Date(parseInt(req.params.dataVencimentoInicial))
-        const dataVencimentoFinal = new Date(parseInt(req.params.dataVencimentoFinal))
-
-        console.log(dataVencimentoInicial)
-        console.log(dataVencimentoFinal)
-
+          let operations = []
+	 
+        const dataRecebimentoInicial = new Date(parseInt(req.params.dataRecebimentoInicial))
+        const dataRecebimentoFinal = new Date(parseInt(req.params.dataRecebimentoFinal))
 
         imoveis.forEach(i => {
-            operations.push(getReceitas(i, dataVencimentoInicial, dataVencimentoFinal))
+            operations.push(getReceitas(i, dataRecebimentoInicial, dataRecebimentoFinal))
         })
 
         Promise.all(operations).then(results => {

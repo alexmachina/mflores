@@ -37,7 +37,7 @@ export default class RelatorioContasAReceber extends React.Component {
           <div>
             <label>Data de Recebimento Inicial</label>
             <DatePicker
-              selected={this.store.dataVencimentoInicial}
+              selected={this.store.dataPagamentoInicial}
               onChange={this.onDataRecebimentoInicialChange.bind(this)}
               className="date-picker"
             />
@@ -45,7 +45,7 @@ export default class RelatorioContasAReceber extends React.Component {
           <div>
             <label>Data de Recebimento Final</label>
             <DatePicker
-              selected={this.store.dataVencimentoFinal}
+              selected={this.store.dataPagamentoFinal}
               onChange={this.onDataRecebimentoFinalChange.bind(this)}
               className="date-picker"
             />
@@ -83,11 +83,11 @@ export default class RelatorioContasAReceber extends React.Component {
     this.store.nomeProprietario = e.target[e.target.selectedIndex].innerText
   }
   onDataRecebimentoInicialChange(e) {
-    this.store.dataVencimentoInicial = e
+    this.store.dataPagamentoInicial = e
   }
 
   onDataRecebimentoFinalChange(e) {
-    this.store.dataVencimentoFinal = e
+    this.store.dataPagamentoFinal = e
   }
 
   onEstadoChange(e) {

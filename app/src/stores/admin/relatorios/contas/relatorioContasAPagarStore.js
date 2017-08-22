@@ -27,6 +27,7 @@ export default class RelatorioContasAPagarStore {
       })
     })
   }
+
   @action getCidades(estado) {
     const url = `${config.url}/cidades/${estado}`
     getJson(url).then(cidades => {
@@ -84,6 +85,7 @@ export default class RelatorioContasAPagarStore {
         let tableHeader = [
           {text: 'Imóvel', style: 'tableHeader'},
           {text: 'Vencimento', style:'tableHeader'},
+          {text: 'Pagamento', style: 'tableHeader'},
           {text: 'Valor', style:'tableHeader'},
           {text: 'Observação', style: 'tableHeader'}
         ]
@@ -91,7 +93,11 @@ export default class RelatorioContasAPagarStore {
         let tableBody = []
         console.log(results.despesas)
         tableBody = results.despesas.map(r => [
-          r.titulo, r.dataVencimento ? moment(r.dataVencimento).format('DD/MM/YYYY') : '', formatToReal(r.valor), r.observacao
+          r.titulo,
+          r.dataVencimento ? moment(r.dataVencimento).format('DD/MM/YYYY') : '',
+          r.dataPagamento ? moment(r.dataPagamento).format('DD/MM/YYYY') : '',
+          formatToReal(r.valor),
+          r.observacao
         ])
 
         let tableContent = [tableHeader, ...tableBody]
@@ -100,7 +106,7 @@ export default class RelatorioContasAPagarStore {
           style: 'tablePrincipal',
           table: {
 
-            widths: ['*',60,75,'*'],
+            widths: ['*',60,60,75,'*'],
             body: tableContent
           }
         }, {text: `Total: ${formatToReal(results.total)}`, style:'texto'}]
