@@ -76,7 +76,7 @@ export default class RelatorioContasAReceberStore {
   }
   @action getRelatorioContasAReceber() {
     return new Promise((resolve, reject) => {
-      let url = 
+      let url =
         `${config.url}/imoveis/relatorios/contas-a-receber/${this.proprietario}/${this.dataPagamentoInicial}/${this.dataPagamentoFinal}/${this.cidade}`
       console.log('fetching report... ')
       getJson(url).then(results => {
@@ -119,5 +119,3 @@ export default class RelatorioContasAReceberStore {
 
 
 }
-
-

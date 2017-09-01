@@ -14,7 +14,7 @@ class EstadoController {
   }
 
   getCidades(req, res) {
-    const query = cidadeModel.find({estado: req.params.estadoId}).exec()
+      const query = cidadeModel.find({estado: req.params.estadoId}).sort('nome').exec()
     query.then(cidades => {
       if(!cidades.length)
         return res.status(404).send('Not found')

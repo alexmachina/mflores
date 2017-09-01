@@ -8,8 +8,8 @@ import formatToReal from '../../../../components/utils/formatToReal.js'
 export default class RelatorioContasAPagarStore {
   @observable proprietarios = []
   @observable proprietario = null
-  @observable dataVencimentoInicial = null
-  @observable dataVencimentoFinal = null
+  @observable dataRecebimentoInicial = null
+  @observable dataRecebimentoFinal = null
   @observable cidades = []
   @observable cidade = null
   @observable nomeCidade = ''
@@ -77,11 +77,11 @@ export default class RelatorioContasAPagarStore {
   }
   @action getRelatorioContasAPagar() {
     return new Promise((resolve, reject) => {
-      let url = 
-        `${config.url}/imoveis/relatorios/contas-a-pagar/${this.proprietario}/${this.dataVencimentoInicial}/${this.dataVencimentoFinal}/${this.cidade}`
-      console.log('fetching report... ')
+      let url =
+          `${config.url}/imoveis/relatorios/contas-a-pagar/${this.proprietario}/${this.dataRecebimentoInicial}/${this.dataRecebimentoFinal}/${this.cidade}`
+
       getJson(url).then(results => {
-        console.log('report fetched')
+
         let tableHeader = [
           {text: 'Imóvel', style: 'tableHeader'},
           {text: 'Vencimento', style:'tableHeader'},
@@ -121,5 +121,3 @@ export default class RelatorioContasAPagarStore {
 
 
 }
-
-

@@ -6,12 +6,12 @@ const _ = require('underscore')
 
 function getReceitas(imovel, dataRecebimentoInicial, dataRecebimentoFinal) {
     return new Promise((resolve, reject) => {
-	
+
 	let query = {
 	    data : {$gte: dataRecebimentoInicial, $lte: dataRecebimentoFinal},
 	    imovel: new ObjectId(imovel._id)
 	}
-	console.log('passow')
+
     let queryReceitas = receitaModel.find(query).sort({data: 1}).exec()
 
     queryReceitas.then(receitas => {
@@ -49,7 +49,7 @@ class RelatorioContasAReceberController {
       .populate('proprietario')
       .then(imoveis => {
           let operations = []
-	 
+
         const dataRecebimentoInicial = new Date(parseInt(req.params.dataRecebimentoInicial))
         const dataRecebimentoFinal = new Date(parseInt(req.params.dataRecebimentoFinal))
 

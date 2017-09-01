@@ -13,23 +13,29 @@ export default class ProprietariosFormContainer extends React.Component {
     if(this.props.params.id)
       this.store.getProprietario(this.props.params.id)
 
+      this.store.getEstados()
   }
-  render() {
-    return (
-      <ProprietariosForm 
-        selectedProprietario={this.store.selectedProprietario}
-        schema={this.store.schema}
-        onChange={this.onChange.bind(this)}
-        onSubmit={this.onSubmit.bind(this)}
-        loaded={this.store.loaded}
-        buttonText={this.store.buttonText}
-        buttonStyle={this.store.buttonStyle}
-        error_message={this.store.error_message}
-        showDeleteModal={this.store.showDeleteModal}
-        onDelete={() => this.store.showDeleteModal = true}
-        onDeleteConfirm={this.onDeleteConfirm.bind(this)}
-        onDeleteDeny={() => this.store.showDeleteModal = false}
-        
+    render() {
+      return (
+        <ProprietariosForm
+          selectedProprietario={this.store.selectedProprietario}
+            setProp={this.store.setProp.bind(this.store)}
+            getCidades={this.store.getCidades.bind(this.store)}
+        setEndProp={this.store.setEndProp.bind(this.store)}
+          estados={this.store.estados}
+          cidades={this.store.cidades}
+          setEndProp={this.store.setEndProp.bind(this.store)}
+          onChange={this.onChange.bind(this)}
+          onSubmit={this.onSubmit.bind(this)}
+          loaded={this.store.loaded}
+          buttonText={this.store.buttonText}
+          buttonStyle={this.store.buttonStyle}
+          error_message={this.store.error_message}
+          showDeleteModal={this.store.showDeleteModal}
+          onDelete={() => this.store.showDeleteModal = true}
+          onDeleteConfirm={this.onDeleteConfirm.bind(this)}
+          onDeleteDeny={() => this.store.showDeleteModal = false}
+
       />
     )
 
@@ -58,5 +64,5 @@ export default class ProprietariosFormContainer extends React.Component {
   onDeleteConfirm() {
     this.store.deleteProprietario()
   }
-  
+
 }

@@ -5,8 +5,8 @@ import config from '../config.js'
 
 export default class EnderecoFormStore {
   @observable endereco = {
-    estado: {},
-    cidade: {},
+    estado: null,
+    cidade: null,
     bairro: '',
     rua: '',
     numero: '',
@@ -17,7 +17,7 @@ export default class EnderecoFormStore {
   @observable cidades = []
   @observable estados = []
 
-  
+
   @observable buttonText = 'Salvar'
   @observable buttonStyle = {}
 

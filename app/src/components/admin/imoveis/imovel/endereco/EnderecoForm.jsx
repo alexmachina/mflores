@@ -21,17 +21,17 @@ export default class EnderecoForm extends React.Component {
         <Row>
           <Col md={8} mdOffset={2}>
             <form onSubmit={this.onSubmit.bind(this)}>
-              <Select 
+              <Select
                 label="Estado"
                 options={this.store.estados}
-                value={this.store.endereco.estado._id}
+                value={this.store.endereco.estado ? this.store.endereco.estado._id : null}
                 onChange={this.onEstadoChange.bind(this)}
                 validationMessage="Campo invalido"
               />
               <Select
                 label="cidade"
                 options={this.store.cidades}
-                value={this.store.endereco.cidade._id}
+                value={this.store.endereco.cidade ? this.store.endereco.cidade._id : null}
                 onChange={this.onCidadeChange.bind(this)}
                 validationMessage="Escolha uma cidade"
               />
@@ -59,7 +59,7 @@ export default class EnderecoForm extends React.Component {
                 value={this.store.endereco.pontoDeReferencia}
                 onChange={this.onPontoDeReferenciaChange.bind(this)}
               />
-              <Button style={this.store.buttonStyle} type="submit" 
+              <Button style={this.store.buttonStyle} type="submit"
                 className="save-button"
               >{this.store.buttonText}</Button>
 
@@ -84,7 +84,7 @@ export default class EnderecoForm extends React.Component {
   }
   onBairroChange(e) {
     this.store.endereco.bairro = e.target.value
-  } 
+  }
   onCepChange(e) {
     this.store.endereco.cep = e.target.value
   }
